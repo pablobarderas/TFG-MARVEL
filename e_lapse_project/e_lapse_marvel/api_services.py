@@ -101,6 +101,7 @@ def get_data_list(url, args):
     return data_list
 
 
+# GET HASH OF URL
 def getHash(ts):
 
     # CLAVES Y HASH NECESARIOS PARA LA PETICION
