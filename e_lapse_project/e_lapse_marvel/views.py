@@ -7,7 +7,6 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from .api_services import get_characters_list, get_comics_list
-# Create your views here.
 
 
 class HomeView(TemplateView):
