@@ -5,7 +5,7 @@ Este es un proyecto Django desarrollado en Python que utiliza la API de Marvel p
 # Requisitos previos
 
 - Python (versión 3.10)
-- Django (versión 3.x)
+- Django (versión 4.2.1)
 - Git 
 
 # Uso del proyecto
