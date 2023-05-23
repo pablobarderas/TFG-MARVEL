@@ -1,3 +1,4 @@
+{% extends 'base.html' %} 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,39 +13,22 @@
 
 <body>
 
-  <header class="bg-dark">
-    <h1 class="text-white text-lg-center font-monospace">{{ title }}</h1>
-  </header>
-
-  <div><a class="btn-link table-hover" href="{% url 'home' %}">Home</a></div>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex w-100" method="POST"> {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="nameCharacter">
-          <button class="btn btn-outline-danger" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
+  {% block content %}
   <!-- Characters -->
   <div>
     <h2 class="card-header font-monospace">Characters</h2>
     <ul>
       {% for character in characters.object_list %}
       <li class="text-black card-header">
-        {{forloop.counter}} {{character.name}}
+        {{forloop.counter}} {{character.name}} 
         <img src="{{character.thumbnail.path}}.jpg" width="200" height="200" class="img-thumbnail" />
+        -- {{character.id}}
+        {{character.description}}
       </li>
       {% endfor %}
 
     </ul>
+    <button type="button" class="btn btn-danger">More</button>
   </div>
 
   <!-- Comics -->
@@ -59,7 +43,8 @@
       {% endfor %}
 
     </ul>
+    <button type="button" class="btn btn-danger">More</button>
   </div>
+  {% endblock %}
 </body>
-
 </html>

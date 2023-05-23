@@ -81,3 +81,28 @@ class SearchView(View):
             messages.error(
                 request, 'No se proporcionó ningún parámetro de búsqueda.')
         return redirect('search')
+
+    # Los comento, porque no se como direccionarlos
+# class CharacterView(View):
+#     template_name = 'characterView.html'
+#     paginate_by = 2
+
+# class ComicView(View):
+#     template_name = 'comicView.html'
+#     paginate_by = 2
+
+# class CreatorView(View):
+#     template_name = 'creatorView.html'
+#     paginate_by = 2
+
+# class EventView(View):
+#     template_name = 'eventView.html'
+#     paginate_by = 2
+
+# class SerieView(View):
+#     template_name = 'serieView.html'
+#     paginate_by = 2
+
+# class CreatorView(View):
+#     template_name = 'creatorView.html'
+#     paginate_by = 2
