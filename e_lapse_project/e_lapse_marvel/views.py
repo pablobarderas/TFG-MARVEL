@@ -7,9 +7,9 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from .api_services import get_characters_list, get_comics_list
+
+
 # Create your views here.
-
-
 class HomeView(TemplateView):
     template_name = 'homeView.html'
     paginate_by = 2
@@ -82,8 +82,8 @@ class SearchView(View):
             messages.error(
                 request, 'No se proporcionó ningún parámetro de búsqueda.')
         return redirect('search')
-    
-    #Los comento, porque no se como direccionarlos
+
+    # Los comento, porque no se como direccionarlos
 # class CharacterView(View):
 #     template_name = 'characterView.html'
 #     paginate_by = 2
