@@ -60,6 +60,9 @@ class SearchView(View):
 
     def post(self, request, *args, **kwargs):
         name_character = request.POST.get('nameCharacter')
+        id_character = request.POST.get('idCharacter')
+
+        print(id_character)
 
         if name_character:
             request.session['search_query'] = name_character
@@ -75,20 +78,12 @@ class CharacterView(View):
     template_name = 'characterView.html'
 
     def get(self, request, *args, **kwargs):
-        name_character = kwargs.get(
-            'character')
-
-        characters_list = get_characters_list(name_character)
-        if characters_list is None:
-            characters_list = []
-        comics_list = get_comics_list(name_character)
-        if comics_list is None:
-            comics_list = []
+        character_id = kwargs.get(
+            'character_id')
 
         context = {
             'title': 'E_Lapse',
-            'characters': characters_list,
-            'comics': comics_list
+            'characterId': character_id,
         }
         return render(request, 'characterView.html', context)
 

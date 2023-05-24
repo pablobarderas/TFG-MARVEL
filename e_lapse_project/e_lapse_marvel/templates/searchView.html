@@ -7,8 +7,9 @@
     <li class="text-black card-header">
       {{forloop.counter}} 
       
-      <a href="character" onclick="submitForm(event)">{{character.name}}</a>
-
+     
+      <a href="{% url 'character' character.id %}">{{character.name}}</a>
+     
 
       <img
         src="{{character.thumbnail.path}}.jpg"
