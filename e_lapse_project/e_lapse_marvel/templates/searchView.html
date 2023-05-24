@@ -8,7 +8,7 @@
       {{forloop.counter}} 
       
      
-      <a href="{% url 'character' character.id %}">{{character.name}}</a>
+      <a href="{% url 'character' %}?character_id={{ character.id }}">{{character.name}}</a>
      
 
       <img
