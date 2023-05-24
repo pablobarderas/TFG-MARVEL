@@ -7,12 +7,8 @@
     <li class="text-black card-header">
       {{forloop.counter}} 
       
-      <a href="#" onclick="submitForm(event)">{{character.name}}</a>
+      <a href="characterView" onclick="submitForm(event)">{{character.name}}</a>
 
-      <form id="myForm" action="{% url 'searchView.html' %}" method="post">
-        {% csrf_token %}
-        <!-- Otros campos del formulario -->
-      </form>
 
       <img
         src="{{character.thumbnail.path}}.jpg"

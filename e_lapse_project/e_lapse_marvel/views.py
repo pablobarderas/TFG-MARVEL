@@ -74,6 +74,26 @@ class SearchView(View):
 class CharacterView(View):
     template_name = 'characterView.html'
 
+    def get(self, request, *args, **kwargs):
+        name_character = kwargs.get(
+            'character') or request.session.get('search_query')
+
+        if not name_character:
+            return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
+
+        characters_list = get_characters_list(name_character)
+        if characters_list is None:
+            characters_list = []
+        comics_list = get_comics_list(name_character)
+        if comics_list is None:
+            comics_list = []
+
+        context = {
+            'title': 'E_Lapse',
+            'characters': characters_list,
+            'comics': comics_list
+        }
+        return render(request, 'characterView.html', context)
 
 # class ComicView(View):
 #     template_name = 'comicView.html'
