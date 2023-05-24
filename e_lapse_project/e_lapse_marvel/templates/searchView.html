@@ -5,14 +5,22 @@
   <ul>
     {% for character in characters %}
     <li class="text-black card-header">
-      {{forloop.counter}} {{character.name}}
+      {{forloop.counter}} 
+      
+      <a href="#" onclick="submitForm(event)">{{character.name}}</a>
+
+      <form id="myForm" action="{% url 'searchView.html' %}" method="post">
+        {% csrf_token %}
+        <!-- Otros campos del formulario -->
+      </form>
+
       <img
         src="{{character.thumbnail.path}}.jpg"
         width="200"
         height="200"
         class="img-thumbnail"
       />
-      -- {{character.id}} {{character.description}}
+      {{character.id}} {{character.description}}
     </li>
     {% endfor %}
   </ul>
