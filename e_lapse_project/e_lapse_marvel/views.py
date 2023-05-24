@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
+from django.urls import reverse
 from .api_services import get_characters_list, get_comics_list
 
 
@@ -26,8 +27,7 @@ class HomeView(TemplateView):
         name_character = request.POST.get('nameCharacter')
 
         if name_character:
-            request.session['search_query'] = name_character
-            return redirect('search')
+            return redirect(reverse('search', kwargs={'character': name_character}))
         else:
             messages.error(
                 request, 'No se proporcionó ningún parámetro de búsqueda.')
@@ -36,10 +36,10 @@ class HomeView(TemplateView):
 
 class SearchView(View):
     template_name = 'searchView.html'
-    paginate_by = 2
 
     def get(self, request, *args, **kwargs):
-        name_character = request.session.get('search_query')
+        name_character = kwargs.get(
+            'character') or request.session.get('search_query')
 
         if not name_character:
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
@@ -51,24 +51,10 @@ class SearchView(View):
         if comics_list is None:
             comics_list = []
 
-        # Configuración de la paginación
-        # Mostrar 10 personajes por página
-        characters_paginator = Paginator(characters_list, 4)
-        # Mostrar 5 cómics por página
-        comics_paginator = Paginator(comics_list, 5)
-
-        # Obtener el número de página solicitada (por defecto es la primera página)
-        characters_page_number = request.GET.get('characters_page')
-        comics_page_number = request.GET.get('comics_page')
-
-        # Obtener las páginas solicitadas
-        characters_page = characters_paginator.get_page(characters_page_number)
-        comics_page = comics_paginator.get_page(comics_page_number)
-
         context = {
             'title': 'E_Lapse',
-            'characters': characters_page,
-            'comics': comics_page
+            'characters': characters_list,
+            'comics': comics_list
         }
         return render(request, 'searchView.html', context)
 
@@ -83,9 +69,11 @@ class SearchView(View):
         return redirect('search')
 
     # Los comento, porque no se como direccionarlos
-# class CharacterView(View):
-#     template_name = 'characterView.html'
-#     paginate_by = 2
+
+
+class CharacterView(View):
+    template_name = 'characterView.html'
+
 
 # class ComicView(View):
 #     template_name = 'comicView.html'
