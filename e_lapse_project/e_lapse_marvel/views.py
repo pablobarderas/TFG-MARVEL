@@ -79,7 +79,7 @@ class CharacterView(View):
 
     def get(self, request, *args, **kwargs):
         character_id = kwargs.get(
-            'character_id')
+            'character')
 
         context = {
             'title': 'E_Lapse',
