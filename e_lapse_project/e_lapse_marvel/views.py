@@ -27,7 +27,7 @@ class HomeView(TemplateView):
         name_character = request.POST.get('nameCharacter')
 
         if name_character:
-            return redirect(reverse('search', kwargs={'character': name_character}))
+            return redirect(reverse('search') + f"?character_name={name_character}")
         else:
             messages.error(
                 request, 'No se proporcionó ningún parámetro de búsqueda.')
@@ -38,16 +38,16 @@ class SearchView(View):
     template_name = 'searchView.html'
 
     def get(self, request, *args, **kwargs):
-        name_character = kwargs.get(
-            'character') or request.session.get('search_query')
+        name_characters = request.GET.get(
+            'character_name') or request.session.get('search_query')
 
-        if not name_character:
+        if not name_characters:
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
-        characters_list = get_characters_list(name_character)
+        characters_list = get_characters_list(name_characters)
         if characters_list is None:
             characters_list = []
-        comics_list = get_comics_list(name_character)
+        comics_list = get_comics_list(name_characters)
         if comics_list is None:
             comics_list = []
 
@@ -60,16 +60,13 @@ class SearchView(View):
 
     def post(self, request, *args, **kwargs):
         name_character = request.POST.get('nameCharacter')
-        id_character = request.POST.get('idCharacter')
-
-        print(id_character)
 
         if name_character:
-            request.session['search_query'] = name_character
+            return redirect(reverse('search') + f"?character_name={name_character}")
         else:
             messages.error(
                 request, 'No se proporcionó ningún parámetro de búsqueda.')
-        return redirect('search')
+            return redirect('search')
 
 
 class CharacterView(View):
