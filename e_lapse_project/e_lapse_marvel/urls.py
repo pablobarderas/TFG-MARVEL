@@ -7,8 +7,10 @@ urlpatterns = [
     path('search/', SearchView.as_view(), name='search'),
     path('search/<str:character>/', SearchView.as_view(), name='search'),
     # COmentados por que no se dirijen
-    path('character/', CharacterView.as_view(), name='character'),
-    path('character/<int:id>', CharacterView.as_view(), name='character'),
+    path('search/<str:character>/character',
+         CharacterView.as_view(), name='character'),
+    path('search/<str:character>/character/<int:id>',
+         CharacterView.as_view(), name='character'),
     # path('comic/', ComicView.as_view(), name='comic'),
     # path('creator/', CreatorView.as_view(), name='creator'),
     # path('event/', EventView.as_view(), name='event'),

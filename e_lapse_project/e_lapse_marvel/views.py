@@ -76,10 +76,7 @@ class CharacterView(View):
 
     def get(self, request, *args, **kwargs):
         name_character = kwargs.get(
-            'character') or request.session.get('search_query')
-
-        if not name_character:
-            return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
+            'character')
 
         characters_list = get_characters_list(name_character)
         if characters_list is None:
