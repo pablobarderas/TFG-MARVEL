@@ -71,15 +71,13 @@ class SearchView(View):
                 request, 'No se proporcionó ningún parámetro de búsqueda.')
         return redirect('search')
 
-    # Los comento, porque no se como direccionarlos
-
 
 class CharacterView(View):
     template_name = 'characterView.html'
 
     def get(self, request, *args, **kwargs):
         character_id = kwargs.get(
-            'character_id')
+            'character')
 
         context = {
             'title': 'E_Lapse',
