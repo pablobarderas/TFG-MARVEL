@@ -7,7 +7,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from django.urls import reverse
-from .api_services import get_characters_list, get_comics_list
+from .api_services import get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id
 
 
 class HomeView(TemplateView):
@@ -74,10 +74,12 @@ class CharacterView(View):
 
     def get(self, request, *args, **kwargs):
         character_id = request.GET.get('character_id')
+        character = get_character_by_id(character_id)
 
         context = {
             'title': 'E_Lapse',
             'characterId': character_id,
+            'character': character
         }
         return render(request, 'characterView.html', context)
 
@@ -87,10 +89,12 @@ class ComicView(View):
 
     def get(self, request, *args, **kwargs):
         comic_id = request.GET.get('comic_id')
-
+        comic = get_comic_by_id(comic_id)
+        print(comic)
         context = {
             'title': 'E_Lapse',
             'comicId': comic_id,
+            'comic': comic,
         }
         return render(request, 'comicView.html', context)
 # class ComicView(View):

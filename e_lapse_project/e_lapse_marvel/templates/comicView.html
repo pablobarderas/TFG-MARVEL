@@ -1,4 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 <h2>One Comic view</h2>
-<h2>This character has: {{comicId}} </h2>
+<h2>This comic has: {{comicId}} </h2>
+
+{% for atribute in comic %}
+<h3 class="card-title">{{atribute.title}}</h3>
+<img
+    src="{{atribute.thumbnail.path}}.jpg"
+        width="400"
+        height="400"
+        class="img-thumbnail"
+      />
+{% endfor %}
 {% endblock %}

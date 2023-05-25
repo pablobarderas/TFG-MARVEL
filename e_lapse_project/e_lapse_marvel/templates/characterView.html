@@ -2,4 +2,15 @@
     <h2>One Character view</h2>
 
     <h2>This character has: {{characterId}} </h2>
+
+    {% for atribute in character %}
+    <h3 class="card-title">{{atribute.name}}</h3>
+    <img
+    src="{{atribute.thumbnail.path}}.jpg"
+        width="400"
+        height="400"
+        class="img-thumbnail"
+      />
+    <p class="card-title">Description: {{atribute.description}}</p>
+    {% endfor %}
 {% endblock %}
