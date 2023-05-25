@@ -81,6 +81,18 @@ class CharacterView(View):
         }
         return render(request, 'characterView.html', context)
 
+
+class ComicView(View):
+    template_name = 'comicView.html'
+
+    def get(self, request, *args, **kwargs):
+        comic_id = request.GET.get('comic_id')
+
+        context = {
+            'title': 'E_Lapse',
+            'comicId': comic_id,
+        }
+        return render(request, 'comicView.html', context)
 # class ComicView(View):
 #     template_name = 'comicView.html'
 #     paginate_by = 2
