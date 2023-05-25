@@ -1,31 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <title>{% block title %} {% endblock %}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="nicepage.css" media="screen">
-  <link rel="stylesheet" href="Inicio.css" media="screen">
-</head>
-<body class="u-body u-xl-mode" data-lang="es"><header class="u-clearfix u-header u-header" id="sec-22f3"><div class="u-clearfix u-sheet u-sheet-1">
-  <a href="Inicio.html" class="u-image u-logo u-image-1" data-image-width="777" data-image-height="416">
-    <img src="images/logo.jpg" class="u-logo-image u-logo-image-1">
-  </a>
-  <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
-    <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
-      <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
-      </g></svg>
-      </a>
-    </div>>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block css %}{% endblock %}
+  </head>
+<body>
+  <header>
+    <img src="{% static 'img/logo.jpg' %}" />
+    <nav>
+      <form class="d-flex"  method="POST"> {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="nameCharacter">
+        <button class="btn btn-dark" type="submit">Search</button>
+      </form>
+  </nav>
+  </header>
 
   {% block content %}
 
   {% endblock %}
 
   
-  <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-88cf"><div class="u-clearfix u-sheet u-sheet-1">
+  <footer>
     <p>&copy; 2023 E-LAPSE. Todos los derechos reservados.</p>
-    <p><i>With great power comes great responsability. Stan Lee</i></p>
-  </div></footer>
+    <p><em>"With great power comes great responsibility" - Stan Lee</em></p>
+  </footer>
+  
+  <!-- <script type="text/javascript" src="{% static 'js/base.js' %}"></script> -->
 </body>
 </html>
