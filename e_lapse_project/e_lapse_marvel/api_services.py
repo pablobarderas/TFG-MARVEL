@@ -81,7 +81,7 @@ def get_comics_list(titleStartsWith):
     return get_data_list(BASE_URL, args)
 
 
-# GET ONE CHARACTER
+# GET CHARACTER BY ID
 def get_character_by_id(character_id):
     BASE_URL = "https://gateway.marvel.com/v1/public/characters/" + character_id
     hash = getHash(1000)
@@ -93,7 +93,7 @@ def get_character_by_id(character_id):
     return get_data_list(BASE_URL, args)
 
 
-# GET ONE COMIC
+# GET ONE COMIC BY ID
 def get_comic_by_id(id_comic):
     BASE_URL = "https://gateway.marvel.com/v1/public/comics/" + id_comic
     hash = getHash(1000)
