@@ -1,18 +1,38 @@
-{% extends 'base.html' %} {% block content %}
-<!-- Tests -->
-<h2 class="card-header font-monospace">Characters Home</h2>
-<ul>
-  {% for character in spider %}
-  <li class="text-black card-header">
-    {{character.name}}
-    <img
-      src="{{character.thumbnail.path}}.jpg"
-      width="200"
-      height="200"
-      class="img-thumbnail"
-    />
-  </li>
-  {% endfor %}
-</ul>
+{% extends 'base.html' %}{% load static %}
+{% block content %}
+<!-- Tests --> 
+
+<div class="image-container">
+  <img id="frstImgH" src="{% static 'img/inicio.jpg' %}" />
+  <div class="text-container">
+    <h1>E-LAPSE</h1>
+    <p>Explora el emocionante universo cinematográfico de Marvel Studios y
+       descubre todo sobre tus películas y personajes favoritos.</p>
+    <button id="btnLeer" type="button" class="btn btn-danger">Leer más...</button>
+  </div>
+</div>
+
+<div class="description">
+  <h1>E-LAPSE</h1>
+  <div class="linea"></div>
+  <p>¡Bienvenido a nuestra increíble página web dedicada al universo Marvel! Aquí encontrarás todo lo que necesitas saber sobre tus superhéroes y supervillanos favoritos de Marvel. Sumérgete en un mundo 
+    lleno de emocionantes aventuras, personajes icónicos y tramas fascinantes.</p>
+  <p>Nuestro sitio web está repleto de información detallada sobre cada uno de los héroes y villanos del universo Marvel. Desde los Vengadores hasta los X-Men, pasando por los Guardianes de la Galaxia, Spider-Man y muchos más, te proporcionaremos perfiles
+     completos que abarcan su origen, habilidades, aliados y enemigos.</p>
+</div>
+
+<div class="excelsior">
+  <img id="thanos" src="{% static 'img/inicio02.jpg' %}">
+  <img id="spider" src="{% static 'img/inicio03.jpg' %}">
+  <h1>¡Bienvenido a la comunidad de Marvel! ¡Excelsior!</h1>
+  <p>Además, podrás disfrutar de artículos especiales
+     que exploran eventos destacados en la historia de Marvel, como las sagas cósmicas,
+      las diferentes encarnaciones de los personajes y los crossovers más épicos.
+       Estamos aquí para alimentar tu pasión por el mundo de Marvel y ofrecerte un contenido entretenido y de calidad.</p>
+  <p>No importa si eres un fanático de toda la vida o estás comenzando a adentrarte en el universo Marvel, nuestra web es el lugar perfecto para encontrar todo lo que necesitas. Únete a nosotros en este viaje emocionante mientras exploramos juntos las historias
+     y los personajes que han cautivado a millones alrededor del mundo. </p>
+</div>
+
+
 
 {% endblock %}

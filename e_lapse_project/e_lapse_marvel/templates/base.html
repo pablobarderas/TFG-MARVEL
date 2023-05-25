@@ -1,66 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <title>{% block title %} {% endblock %}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  
-</head>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block css %}{% endblock %}
+  </head>
 <body>
-  <header class="bg-dark">
-    <h1 class="text-white text-lg-center font-monospace">{{ title }}</h1>
-  </header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex" method="POST"> {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="nameCharacter">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
+  <header>
+    <img src="{% static 'img/logo.jpg' %}" />
+    <nav>
+      <form class="d-flex"  method="POST"> {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="nameCharacter">
+        <button class="btn btn-dark" type="submit">Search</button>
+      </form>
   </nav>
+  </header>
 
   {% block content %}
 
   {% endblock %}
 
   
-  <footer style="background-color: #212529; color: white; text-align: center;">
-    <p>&copy; <span id="currentYear"></span> E-LAPSE. Todos los derechos reservados.</p>
-    <p><em>"un gran poder, conlleva una gran responsabilidad" - Stan Lee</em></p>
+  <footer>
+    <p>&copy; 2023 E-LAPSE. Todos los derechos reservados.</p>
+    <p><em>"With great power comes great responsibility" - Stan Lee</em></p>
   </footer>
   
-  <script>
-    document.getElementById("currentYear").innerHTML = new Date().getFullYear();
-  </script>
+  <!-- <script type="text/javascript" src="{% static 'js/base.js' %}"></script> -->
 </body>
 </html>
