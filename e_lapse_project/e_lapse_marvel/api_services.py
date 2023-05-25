@@ -81,6 +81,57 @@ def get_comics_list(titleStartsWith):
     return get_data_list(BASE_URL, args)
 
 
+# GET CREATORS LIST
+def get_creators_list(nameStartsWith):
+    BASE_URL = "https://gateway.marvel.com/v1/public/creators"
+    hash = getHash(1000)
+    args = {
+        'nameStartsWith': nameStartsWith,
+        'ts': 1000,
+        'apikey': 'dbc203265f84033afd469a493cec6b27',
+        'hash': hash,
+        'limit': 20,
+        'offset': 0
+    }
+    return get_data_list(BASE_URL, args)
+
+
+# GET CREATOR BY ID
+def get_creator_by_id(creator_id):
+    BASE_URL = "https://gateway.marvel.com/v1/public/creators/" + creator_id
+    hash = getHash(1000)
+    args = {
+        'ts': 1000,
+        'apikey': 'dbc203265f84033afd469a493cec6b27',
+        'hash': hash,
+    }
+    return get_data_list(BASE_URL, args)
+
+
+# GET CHARACTER BY ID
+def get_character_by_id(character_id):
+    BASE_URL = "https://gateway.marvel.com/v1/public/characters/" + character_id
+    hash = getHash(1000)
+    args = {
+        'ts': 1000,
+        'apikey': 'dbc203265f84033afd469a493cec6b27',
+        'hash': hash,
+    }
+    return get_data_list(BASE_URL, args)
+
+
+# GET ONE COMIC BY ID
+def get_comic_by_id(id_comic):
+    BASE_URL = "https://gateway.marvel.com/v1/public/comics/" + id_comic
+    hash = getHash(1000)
+    args = {
+        'ts': 1000,
+        'apikey': 'dbc203265f84033afd469a493cec6b27',
+        'hash': hash,
+    }
+    return get_data_list(BASE_URL, args)
+
+
 # GET RESULTS OF JSON
 def getJsonList(responseJson):
     json_List = []

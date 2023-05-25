@@ -7,7 +7,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from django.urls import reverse
-from .api_services import get_characters_list, get_comics_list
+from .api_services import get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id
 
 
 class HomeView(TemplateView):
@@ -27,7 +27,7 @@ class HomeView(TemplateView):
         name_character = request.POST.get('nameCharacter')
 
         if name_character:
-            return redirect(reverse('search', kwargs={'character': name_character}))
+            return redirect(reverse('search') + f"?character_name={name_character}")
         else:
             messages.error(
                 request, 'No se proporcionó ningún parámetro de búsqueda.')
@@ -38,16 +38,16 @@ class SearchView(View):
     template_name = 'searchView.html'
 
     def get(self, request, *args, **kwargs):
-        name_character = kwargs.get(
-            'character') or request.session.get('search_query')
+        name_characters = request.GET.get(
+            'character_name') or request.session.get('search_query')
 
-        if not name_character:
+        if not name_characters:
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
-        characters_list = get_characters_list(name_character)
+        characters_list = get_characters_list(name_characters)
         if characters_list is None:
             characters_list = []
-        comics_list = get_comics_list(name_character)
+        comics_list = get_comics_list(name_characters)
         if comics_list is None:
             comics_list = []
 
@@ -60,33 +60,43 @@ class SearchView(View):
 
     def post(self, request, *args, **kwargs):
         name_character = request.POST.get('nameCharacter')
-        id_character = request.POST.get('idCharacter')
-
-        print(id_character)
 
         if name_character:
-            request.session['search_query'] = name_character
+            return redirect(reverse('search') + f"?character_name={name_character}")
         else:
             messages.error(
                 request, 'No se proporcionó ningún parámetro de búsqueda.')
-        return redirect('search')
-
-    # Los comento, porque no se como direccionarlos
+            return redirect('search')
 
 
 class CharacterView(View):
     template_name = 'characterView.html'
 
     def get(self, request, *args, **kwargs):
-        character_id = kwargs.get(
-            'character_id')
+        character_id = request.GET.get('character_id')
+        character = get_character_by_id(character_id)
 
         context = {
             'title': 'E_Lapse',
             'characterId': character_id,
+            'character': character
         }
         return render(request, 'characterView.html', context)
 
+
+class ComicView(View):
+    template_name = 'comicView.html'
+
+    def get(self, request, *args, **kwargs):
+        comic_id = request.GET.get('comic_id')
+        comic = get_comic_by_id(comic_id)
+        print(comic)
+        context = {
+            'title': 'E_Lapse',
+            'comicId': comic_id,
+            'comic': comic,
+        }
+        return render(request, 'comicView.html', context)
 # class ComicView(View):
 #     template_name = 'comicView.html'
 #     paginate_by = 2
