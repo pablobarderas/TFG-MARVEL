@@ -96,7 +96,7 @@ def get_creators_list(nameStartsWith):
     return get_data_list(BASE_URL, args)
 
 
-# GET CREATORS BY ID
+# GET CREATOR BY ID
 def get_creator_by_id(creator_id):
     BASE_URL = "https://gateway.marvel.com/v1/public/creators/" + creator_id
     hash = getHash(1000)
@@ -109,8 +109,6 @@ def get_creator_by_id(creator_id):
 
 
 # GET CHARACTER BY ID
-
-
 def get_character_by_id(character_id):
     BASE_URL = "https://gateway.marvel.com/v1/public/characters/" + character_id
     hash = getHash(1000)
