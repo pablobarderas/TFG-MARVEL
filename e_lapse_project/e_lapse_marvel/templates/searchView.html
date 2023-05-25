@@ -9,7 +9,7 @@
       {{forloop.counter}} 
       
      
-      <a href="{% url 'character' character.id %}">{{character.name}}</a>
+      <a href="{% url 'character' %}?character_id={{ character.id }}">{{character.name}}</a>
      
 
       <img
@@ -31,7 +31,9 @@
   <ul>
     {% for comic in comics %}
     <li class="text-black card-header">
-       {{forloop.counter}} <a href="">{{comic.title}}</a>
+
+       <a href="{% url 'comic' %}?comic_id={{ comic.id }}">{{comic.title}}</a>
+       
       <img
         src="{{comic.thumbnail.path}}.jpg"
         width="200"
