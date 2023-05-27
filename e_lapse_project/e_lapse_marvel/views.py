@@ -90,7 +90,6 @@ class ComicView(View):
     def get(self, request, *args, **kwargs):
         comic_id = request.GET.get('comic_id')
         comic = get_comic_by_id(comic_id)
-        print(comic)
         context = {
             'title': 'E_Lapse',
             'comicId': comic_id,
