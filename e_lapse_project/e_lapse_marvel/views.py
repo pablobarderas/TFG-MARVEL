@@ -7,7 +7,9 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from django.urls import reverse
-from .api_services import get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id
+from .api_services import get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
+
+# HOME
 
 
 class HomeView(TemplateView):
@@ -32,6 +34,8 @@ class HomeView(TemplateView):
             messages.error(
                 request, 'No se proporcionó ningún parámetro de búsqueda.')
             return redirect('home')
+
+# SEARCH
 
 
 class SearchView(View):
@@ -69,6 +73,7 @@ class SearchView(View):
             return redirect('search')
 
 
+# CHARACTER
 class CharacterView(View):
     template_name = 'characterView.html'
 
@@ -84,35 +89,76 @@ class CharacterView(View):
         return render(request, 'characterView.html', context)
 
 
+# COMIC
 class ComicView(View):
     template_name = 'comicView.html'
 
     def get(self, request, *args, **kwargs):
         comic_id = request.GET.get('comic_id')
         comic = get_comic_by_id(comic_id)
-        print(comic)
         context = {
             'title': 'E_Lapse',
             'comicId': comic_id,
             'comic': comic,
         }
         return render(request, 'comicView.html', context)
-# class ComicView(View):
-#     template_name = 'comicView.html'
-#     paginate_by = 2
 
-# class CreatorView(View):
-#     template_name = 'creatorView.html'
-#     paginate_by = 2
 
-# class EventView(View):
-#     template_name = 'eventView.html'
-#     paginate_by = 2
+# CREATOR
+class CreatorView(View):
+    template_name = 'creatorView.html'
 
-# class SerieView(View):
-#     template_name = 'serieView.html'
-#     paginate_by = 2
+    def get(self, request, *args, **kwargs):
+        creator_id = request.GET.get('creator_id')
+        creator = get_creator_by_id(creator_id)
+        context = {
+            'title': 'E_Lapse',
+            'creatorId': creator_id,
+            'creator': creator,
+        }
+        return render(request, 'creatorView.html', context)
 
-# class CreatorView(View):
-#     template_name = 'creatorView.html'
-#     paginate_by = 2
+
+# EVENT
+class EventView(View):
+    template_name = 'eventView.html'
+
+    def get(self, request, *args, **kwargs):
+        event_id = request.GET.get('event_id')
+        event = get_event_by_id(event_id)
+        context = {
+            'title': 'E_Lapse',
+            'eventId': event_id,
+            'event': event,
+        }
+        return render(request, 'eventView.html', context)
+
+
+# SERIE
+class SerieView(View):
+    template_name = 'serieView.html'
+
+    def get(self, request, *args, **kwargs):
+        serie_id = request.GET.get('serie_id')
+        serie = get_serie_by_id(serie_id)
+        context = {
+            'title': 'E_Lapse',
+            'serieId': serie_id,
+            'serie': serie,
+        }
+        return render(request, 'serieView.html', context)
+
+
+# STORY
+class StoryView(View):
+    template_name = 'storyView.html'
+
+    def get(self, request, *args, **kwargs):
+        story_id = request.GET.get('story_id')
+        story = get_story_by_id(story_id)
+        context = {
+            'title': 'E_Lapse',
+            'storyId': story_id,
+            'story': story,
+        }
+        return render(request, 'storyView.html', context)
