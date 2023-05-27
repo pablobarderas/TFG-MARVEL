@@ -1,32 +1,54 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block content %}
-<!-- Characters -->
-<div>
-  <h2 class="card-header font-monospace">Characters</h2>
-  <ul>
-    {% for character in characters %}
-    <li class="text-black card-header">
-      {{forloop.counter}} 
-      
-     
-      <a href="{% url 'character' %}?character_id={{ character.id }}">{{character.name}}</a>
-     
 
-      <img
-        src="{{character.thumbnail.path}}.jpg"
-        width="200"
-        height="200"
-        class="img-thumbnail"
-      />
-      {{character.id}} {{character.description}}
-    </li>
-    {% endfor %}
-  </ul>
-  <button type="button" class="btn btn-danger">More</button>
+<h1 id="h1per">PERSONAJES</h1>
+<br>
+<div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  {% for character in characters %}
+  <div class="col">
+    <div class="card shadow-sm d-flex flex-column h-100">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ character.thumbnail.path }}.jpg" class="card-img-top" alt="Personaje">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title text-center"><a href="{% url 'character' %}?character_id={{ character.id }}">{{character.name}}</a></h5>
+            <p class="card-text text-center">{{ character.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<br>
+
+<h1 id="h1per">COMICS</h1>
+<br>
+<div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  {% for comic in comics %}
+  <div class="col">
+    <div class="card shadow-sm d-flex flex-column h-100">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ comic.thumbnail.path }}.jpg" class="card-img-top" alt="Personaje">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title text-center"><a href="{% url 'comic' %}?comic_id={{ comic.id }}">{{comic.title}}</a></h5>
+            <p class="card-text text-center">{{ comic.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
 
 <!-- Comics -->
-<div>
+<!-- <div>
   <h2 class="card-header font-monospace">Comics</h2>
   <ul>
     {% for comic in comics %}
@@ -44,5 +66,6 @@
     {% endfor %}
   </ul>
   <button type="button" class="btn btn-danger">More</button>
-</div>
+</div> -->
+<p></p>
 {% endblock %}

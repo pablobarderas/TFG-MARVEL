@@ -1,38 +1,106 @@
 {% extends 'base.html' %}{% load static %}
 {% block content %}
-<!-- Tests --> 
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+        <img src="../static/img/inicio.jpg" />
+        <rect width="100%" height="100%" fill="#777" /></svg>
 
-<div class="image-container">
-  <img id="frstImgH" src="{% static 'img/inicio.jpg' %}" />
-  <div class="text-container">
-    <h1>E-LAPSE</h1>
-    <p>Explora el emocionante universo cinematográfico de Marvel Studios y
-       descubre todo sobre tus películas y personajes favoritos.</p>
-    <button id="btnLeer" type="button" class="btn btn-danger">Leer más...</button>
+      <div class="container">
+        <div class="carousel-caption text-left">
+          <h1>E-LAPSE</h1>
+          <p>Explora el emocionante universo cinematográfico de Marvel Studios y descubre todo sobre tus películas y personajes favoritos.</p>
+          <p><a class="btn btn-lg btn-danger" href="#" role="button">Leer más...</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+        <img src="../static/img/inicio06.jpg">
+        <rect width="100%" height="100%" fill="#777" /></svg>
+
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>¡Bienvenido a la comunidad de Marvel! ¡Excelsior!</h1>
+          <p>Además, podrás disfrutar de artículos especiales que exploran eventos destacados en la historia de Marvel, como las sagas cósmicas, las diferentes encarnaciones de los personajes y los crossovers más épicos.
+             Estamos aquí para alimentar tu pasión por el mundo de Marvel y ofrecerte un contenido entretenido y de calidad.</p>
+        </div>
+      </div>
+    </div>
+<div class="carousel-item">
+  <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+    <rect width="100%" height="100%" fill="#777" /></svg>
+    <img src="../static/img/inicio05.jpg">
+  <div class="container">
+    <div class="carousel-caption text-right">
+      <h1>E-LAPSE</h1>
+      <p>¡Bienvenido a nuestra increíble página web dedicada al universo Marvel! Aquí encontrarás todo lo que necesitas saber sobre tus superhéroes y supervillanos favoritos de Marvel.
+          Sumérgete en un mundo lleno de emocionantes aventuras, personajes icónicos y tramas fascinantes.</p>
+    </div>
   </div>
 </div>
-
-<div class="description">
-  <h1>E-LAPSE</h1>
-  <div class="linea"></div>
-  <p>¡Bienvenido a nuestra increíble página web dedicada al universo Marvel! Aquí encontrarás todo lo que necesitas saber sobre tus superhéroes y supervillanos favoritos de Marvel. Sumérgete en un mundo 
-    lleno de emocionantes aventuras, personajes icónicos y tramas fascinantes.</p>
-  <p>Nuestro sitio web está repleto de información detallada sobre cada uno de los héroes y villanos del universo Marvel. Desde los Vengadores hasta los X-Men, pasando por los Guardianes de la Galaxia, Spider-Man y muchos más, te proporcionaremos perfiles
-     completos que abarcan su origen, habilidades, aliados y enemigos.</p>
 </div>
-
-<div class="excelsior">
-  <img id="thanos" src="{% static 'img/inicio02.jpg' %}">
-  <img id="spider" src="{% static 'img/inicio03.jpg' %}">
-  <h1>¡Bienvenido a la comunidad de Marvel! ¡Excelsior!</h1>
-  <p>Además, podrás disfrutar de artículos especiales
-     que exploran eventos destacados en la historia de Marvel, como las sagas cósmicas,
-      las diferentes encarnaciones de los personajes y los crossovers más épicos.
-       Estamos aquí para alimentar tu pasión por el mundo de Marvel y ofrecerte un contenido entretenido y de calidad.</p>
-  <p>No importa si eres un fanático de toda la vida o estás comenzando a adentrarte en el universo Marvel, nuestra web es el lugar perfecto para encontrar todo lo que necesitas. Únete a nosotros en este viaje emocionante mientras exploramos juntos las historias
-     y los personajes que han cautivado a millones alrededor del mundo. </p>
+<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+<span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+<span class="carousel-control-next-icon" aria-hidden="true"></span>
+<span class="sr-only">Next</span>
+</a>
 </div>
 
 
 
+<!--PERSONAJES;HISTORIAS;COMICS-->
+<div class="container marketing">
+  <div id="phc" class="row">
+    <div class="col-lg-4">
+      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
+        aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" role="img" focusable="false" >
+        <title>Placeholder</title>
+        <img class="custom-img" src="../static/img/per.png">
+        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em"></text>
+      </svg>
+
+      <h2>PERSONAJES</h2>
+      <p>Los personajes de Marvel son la esencia misma de la heroicidad y la intriga. Desde el icónico Iron Man hasta el increíble Hulk, cada héroe y villano tiene su propia historia fascinante. .</p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
+        aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+        <img class="custom-img" src="../static/img/cine.png">
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em"></text>
+      </svg>
+
+      <h2>HISTORIAS</h2>
+      <p>Las películas y series de Marvel son una experiencia cinematográfica inigualable. Desde el emocionante "Iron Man" hasta el épico "Avengers: Endgame",
+          cada entrega te sumerge en un universo de acción, emoción y sorpresas. </p>
+    </div><!-- /.col-lg-4 -->
+    <div class="col-lg-4">
+      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg"
+        aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+        <title>Placeholder</title>
+        <img class="custom-img" src="../static/img/wow.png">
+      </svg>
+
+      <h2>COMICS</h2>
+      <p>Los cómics de Marvel son puertas de entrada a mundos extraordinarios.
+          Desde las páginas vibrantes de "The Amazing Spider-Man" hasta los épicos eventos de "Infinity Gauntlet",
+          cada cómic te sumerge en historias llenas de acción, intriga y personajes inolvidables. 
+          Con ilustraciones impresionantes y narrativas cautivadoras, 
+        los cómics de Marvel te llevan a través de aventuras inolvidables en cada viñeta.</p>
+    </div><!-- /.col-lg-4 -->
+  </div><!-- /.row -->
+</div>
 {% endblock %}
