@@ -88,6 +88,16 @@ class CharacterView(View):
         }
         return render(request, 'characterView.html', context)
 
+    def post(self, request, *args, **kwargs):
+        name_character = request.POST.get('nameCharacter')
+
+        if name_character:
+            return redirect(reverse('search') + f"?character_name={name_character}")
+        else:
+            messages.error(
+                request, 'No se proporcionó ningún parámetro de búsqueda.')
+            return redirect('search')
+
 
 # COMIC
 class ComicView(View):
@@ -102,6 +112,16 @@ class ComicView(View):
             'comic': comic,
         }
         return render(request, 'comicView.html', context)
+
+    def post(self, request, *args, **kwargs):
+        name_character = request.POST.get('nameCharacter')
+
+        if name_character:
+            return redirect(reverse('search') + f"?character_name={name_character}")
+        else:
+            messages.error(
+                request, 'No se proporcionó ningún parámetro de búsqueda.')
+            return redirect('search')
 
 
 # CREATOR
@@ -118,6 +138,16 @@ class CreatorView(View):
         }
         return render(request, 'creatorView.html', context)
 
+    def post(self, request, *args, **kwargs):
+        name_character = request.POST.get('nameCharacter')
+
+        if name_character:
+            return redirect(reverse('search') + f"?character_name={name_character}")
+        else:
+            messages.error(
+                request, 'No se proporcionó ningún parámetro de búsqueda.')
+            return redirect('search')
+
 
 # EVENT
 class EventView(View):
@@ -132,6 +162,16 @@ class EventView(View):
             'event': event,
         }
         return render(request, 'eventView.html', context)
+
+    def post(self, request, *args, **kwargs):
+        name_character = request.POST.get('nameCharacter')
+
+        if name_character:
+            return redirect(reverse('search') + f"?character_name={name_character}")
+        else:
+            messages.error(
+                request, 'No se proporcionó ningún parámetro de búsqueda.')
+            return redirect('search')
 
 
 # SERIE
@@ -148,6 +188,16 @@ class SerieView(View):
         }
         return render(request, 'serieView.html', context)
 
+    def post(self, request, *args, **kwargs):
+        name_character = request.POST.get('nameCharacter')
+
+        if name_character:
+            return redirect(reverse('search') + f"?character_name={name_character}")
+        else:
+            messages.error(
+                request, 'No se proporcionó ningún parámetro de búsqueda.')
+            return redirect('search')
+
 
 # STORY
 class StoryView(View):
@@ -162,3 +212,13 @@ class StoryView(View):
             'story': story,
         }
         return render(request, 'storyView.html', context)
+
+    def post(self, request, *args, **kwargs):
+        name_character = request.POST.get('nameCharacter')
+
+        if name_character:
+            return redirect(reverse('search') + f"?character_name={name_character}")
+        else:
+            messages.error(
+                request, 'No se proporcionó ningún parámetro de búsqueda.')
+            return redirect('search')
