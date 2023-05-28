@@ -182,6 +182,7 @@ class StoryView(View):
         return search_by_name(self, request, *args, **kwargs)
 
 
+# LISTENER FOR SEARCH BY NAVEGATION BAR
 def search_by_name(self, request, *args, **kwargs):
     name_character = request.POST.get('nameCharacter')
 
