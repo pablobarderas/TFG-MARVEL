@@ -51,151 +51,79 @@ import json
 '''
 
 
-# GET CHARACTERS LIST
+def get_data(endpoint, params):
+    BASE_URL = "https://gateway.marvel.com/v1/public/"
+    hash = getHash(1000)
+    args = {
+        'ts': 1000,
+        'apikey': 'dbc203265f84033afd469a493cec6b27',
+        'hash': hash,
+        'limit': 20,
+        'offset': 0
+    }
+    args.update(params)
+    url = BASE_URL + endpoint
+    return get_data_list(url, args)
+
+
 def get_characters_list(nameStartsWith):
-    BASE_URL = "https://gateway.marvel.com/v1/public/characters"
-    hash = getHash(1000)
-    args = {
-        'nameStartsWith': nameStartsWith,
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-        'limit': 20,
-        'offset': 0
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "characters"
+    params = {'nameStartsWith': nameStartsWith}
+    return get_data(endpoint, params)
 
 
-# GET COMICS LIST
 def get_comics_list(titleStartsWith):
-    BASE_URL = "https://gateway.marvel.com/v1/public/comics"
-    hash = getHash(1000)
-    args = {
-        'titleStartsWith': titleStartsWith,
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-        'limit': 20,
-        'offset': 0
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "comics"
+    params = {'titleStartsWith': titleStartsWith}
+    return get_data(endpoint, params)
 
 
-# GET CREATORS LIST
 def get_creators_list(nameStartsWith):
-    BASE_URL = "https://gateway.marvel.com/v1/public/creators"
-    hash = getHash(1000)
-    args = {
-        'nameStartsWith': nameStartsWith,
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-        'limit': 20,
-        'offset': 0
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "creators"
+    params = {'nameStartsWith': nameStartsWith}
+    return get_data(endpoint, params)
 
 
-# GET EVENTS LIST
 def get_events_list(nameStartsWith):
-    BASE_URL = "https://gateway.marvel.com/v1/public/events"
-    hash = getHash(1000)
-    args = {
-        'nameStartsWith': nameStartsWith,
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-        'limit': 20,
-        'offset': 0
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "events"
+    params = {'nameStartsWith': nameStartsWith}
+    return get_data(endpoint, params)
 
 
-# GET SERIES LIST
 def get_series_list(titleStartsWith):
-    BASE_URL = "https://gateway.marvel.com/v1/public/series"
-    hash = getHash(1000)
-    args = {
-        'titleStartsWith': titleStartsWith,
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-        'limit': 20,
-        'offset': 0
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "series"
+    params = {'titleStartsWith': titleStartsWith}
+    return get_data(endpoint, params)
 
 
-# GET STORY BY ID
 def get_story_by_id(story_id):
-    BASE_URL = "https://gateway.marvel.com/v1/public/stories/" + story_id
-    hash = getHash(1000)
-    args = {
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "stories/" + story_id
+    return get_data(endpoint, {})
 
 
-# GET SERIE BY ID
 def get_serie_by_id(serie_id):
-    BASE_URL = "https://gateway.marvel.com/v1/public/series/" + serie_id
-    hash = getHash(1000)
-    args = {
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "series/" + serie_id
+    return get_data(endpoint, {})
 
 
-# GET EVENT BY ID
 def get_event_by_id(event_id):
-    BASE_URL = "https://gateway.marvel.com/v1/public/events/" + event_id
-    hash = getHash(1000)
-    args = {
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "events/" + event_id
+    return get_data(endpoint, {})
 
 
-# GET CREATOR BY ID
 def get_creator_by_id(creator_id):
-    BASE_URL = "https://gateway.marvel.com/v1/public/creators/" + creator_id
-    hash = getHash(1000)
-    args = {
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "creators/" + creator_id
+    return get_data(endpoint, {})
 
 
-# GET CHARACTER BY ID
 def get_character_by_id(character_id):
-    BASE_URL = "https://gateway.marvel.com/v1/public/characters/" + character_id
-    hash = getHash(1000)
-    args = {
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "characters/" + character_id
+    return get_data(endpoint, {})
 
 
-# GET ONE COMIC BY ID
 def get_comic_by_id(comic_id):
-    BASE_URL = "https://gateway.marvel.com/v1/public/comics/" + comic_id
-    hash = getHash(1000)
-    args = {
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-    }
-    return get_data_list(BASE_URL, args)
+    endpoint = "comics/" + comic_id
+    return get_data(endpoint, {})
 
 
 # GET RESULTS OF JSON
