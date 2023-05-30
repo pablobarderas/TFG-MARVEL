@@ -23,15 +23,14 @@ class HomeView(TemplateView):
         }
         return context
 
-    def post(self, request, *args, **kwargs):
-        name_character = request.POST.get('nameCharacter')
+    def get(self, request, *args, **kwargs):
 
-        if name_character:
-            return redirect(reverse('search') + f"?character_name={name_character}")
-        else:
-            messages.error(
-                request, 'No se proporcionó ningún parámetro de búsqueda.')
-            return redirect('home')
+        if request.method == 'GET' and 'character_name' in request.GET:
+            character_name = request.GET['character_name']
+            return redirect(reverse('search') + f"?character_name={character_name}")
+
+        return super().get(request, *args, **kwargs)
+
 
 # SEARCH
 
@@ -40,20 +39,20 @@ class SearchView(View):
     template_name = 'searchView.html'
 
     def get(self, request, *args, **kwargs):
-        name_characters = request.GET.get(
+        character_name = request.GET.get(
             'character_name') or request.session.get('search_query')
-
-        if not name_characters:
+        page = request.GET.get('page')
+        if not character_name:
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
         # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
         page = 1
         characters_list, total_characters_results = get_characters_list(
-            name_characters, page)
+            character_name, page)
         if characters_list is None:
             characters_list = []
         comics_list, total_comics_results = get_comics_list(
-            name_characters, page)
+            character_name, page)
         if comics_list is None:
             comics_list = []
 
@@ -66,6 +65,7 @@ class SearchView(View):
         context = {
             'title': 'E_Lapse',
             'characters': characters_list,
+            'character_name': character_name,
             'comics': comics_list,
             'total_characters_results': total_characters_results,
             'total_comics_results': total_comics_results,
@@ -74,7 +74,7 @@ class SearchView(View):
         }
         return render(request, 'searchView.html', context)
 
-    def post(self, request, *args, **kwargs):
+    # def post(self, request, *args, **kwargs):
         name_character = request.POST.get('nameCharacter')
         page = request.GET.get("page")
 
@@ -101,9 +101,6 @@ class CharacterView(View):
         }
         return render(request, 'characterView.html', context)
 
-    def post(self, request, *args, **kwargs):
-        return search_by_name(self, request, *args, **kwargs)
-
 
 # COMIC
 class ComicView(View):
@@ -118,9 +115,6 @@ class ComicView(View):
             'comic': comic,
         }
         return render(request, 'comicView.html', context)
-
-    def post(self, request, *args, **kwargs):
-        return search_by_name(self, request, *args, **kwargs)
 
 
 # CREATOR
@@ -137,9 +131,6 @@ class CreatorView(View):
         }
         return render(request, 'creatorView.html', context)
 
-    def post(self, request, *args, **kwargs):
-        return search_by_name(self, request, *args, **kwargs)
-
 
 # EVENT
 class EventView(View):
@@ -154,9 +145,6 @@ class EventView(View):
             'event': event,
         }
         return render(request, 'eventView.html', context)
-
-    def post(self, request, *args, **kwargs):
-        return search_by_name(self, request, *args, **kwargs)
 
 
 # SERIE
@@ -173,9 +161,6 @@ class SerieView(View):
         }
         return render(request, 'serieView.html', context)
 
-    def post(self, request, *args, **kwargs):
-        return search_by_name(self, request, *args, **kwargs)
-
 
 # STORY
 class StoryView(View):
@@ -191,13 +176,10 @@ class StoryView(View):
         }
         return render(request, 'storyView.html', context)
 
-    def post(self, request, *args, **kwargs):
-        return search_by_name(self, request, *args, **kwargs)
-
 
 # LISTENER FOR SEARCH BY NAVEGATION BAR
 def search_by_name(self, request, *args, **kwargs):
-    name_character = request.POST.get('nameCharacter')
+    name_character = request.GET.get('nameCharacter')
 
     if name_character:
         return redirect(reverse('search') + f"?character_name={name_character}")
