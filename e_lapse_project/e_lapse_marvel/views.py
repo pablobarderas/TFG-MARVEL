@@ -190,15 +190,3 @@ class StoryView(View):
             'story': story,
         }
         return render(request, 'storyView.html', context)
-
-
-# LISTENER FOR SEARCH BY NAVEGATION BAR
-def search_by_name(self, request, *args, **kwargs):
-    name_character = request.GET.get('nameCharacter')
-
-    if name_character:
-        return redirect(reverse('search') + f"?character_name={name_character}")
-    else:
-        messages.error(
-            request, 'No se proporcionó ningún parámetro de búsqueda.')
-        return redirect('search')

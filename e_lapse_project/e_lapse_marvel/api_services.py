@@ -11,7 +11,7 @@ def get_data(endpoint, params, page):
         'ts': 1000,
         'apikey': 'dbc203265f84033afd469a493cec6b27',
         'hash': hash,
-        'limit': 20,
+        'limit': 21,
         'offset': 0
     }
     args.update(params)
@@ -113,11 +113,11 @@ def get_data_list(url, args, page):
 
 # GET ALL PAGES BY TOTAL RESULTS
 def get_all_pages(total_results):
-    return math.ceil(total_results/20)
+    return math.ceil(total_results/21)
 
 
 def page_selected(args, page):
-    offset = (page - 1) * 20
+    offset = (page - 1) * 21
     # PAGINATION
     if (page > 1):
         args.update({'offset': offset})

@@ -5,7 +5,6 @@ from .views import CreatorView, HomeView, SearchView, CharacterView, ComicView, 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('search/', SearchView.as_view(), name='search'),
-
     path('character/', CharacterView.as_view(), name='character'),
     path('comic/', ComicView.as_view(), name='comic'),
     path('creator/', CreatorView.as_view(), name='creator'),
