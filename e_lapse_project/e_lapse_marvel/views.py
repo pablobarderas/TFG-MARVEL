@@ -42,11 +42,19 @@ class SearchView(View):
         character_name = request.GET.get(
             'character_name') or request.session.get('search_query')
         page = request.GET.get('page')
+
         if not character_name:
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
+        # PARSE PAGE TO INT
+        try:
+            page = int(page)
+        except (TypeError, ValueError):
+            # Si no se puede convertir a número, establecer el valor predeterminado de página
+            page = 1
+
         # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
-        page = 1
+        # page = 1
         characters_list, total_characters_results = get_characters_list(
             character_name, page)
         if characters_list is None:
