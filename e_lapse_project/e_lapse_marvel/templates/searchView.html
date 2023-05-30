@@ -32,7 +32,9 @@
     </li>
 
     {% for character_page in character_pages_range %}
-      <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#characters">{{ character_page }}</a></li>
+      {% if comic_page <= 5 %}
+        <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#characters">{{ character_page }}</a></li>
+      {% endif %}
     {% endfor %}
 
     <li class="page-item">
@@ -72,7 +74,9 @@
     </li>
 
     {% for comic_page in comic_pages_range %}
-      <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#comics">{{ comic_page }}</a></li>
+      {% if comic_page <= 5 %}
+        <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#comics">{{ comic_page }}</a></li>
+      {% endif %}  
     {% endfor %}
 
     <li class="page-item">
