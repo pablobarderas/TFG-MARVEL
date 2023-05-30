@@ -9,9 +9,8 @@ from django.contrib import messages
 from django.urls import reverse
 from .api_services import get_all_pages, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
 
+
 # HOME
-
-
 class HomeView(TemplateView):
     template_name = 'homeView.html'
 
@@ -33,41 +32,56 @@ class HomeView(TemplateView):
 
 
 # SEARCH
-
-
 class SearchView(View):
     template_name = 'searchView.html'
 
     def get(self, request, *args, **kwargs):
+
+        # GET CHARACTER NAME
         character_name = request.GET.get(
             'character_name') or request.session.get('search_query')
-        page = request.GET.get('page')
+
+        # GET CHARACTER PAGE
+        character_page = request.GET.get('character_page')
+
+        # GET CHARACTER PAGE
+        comic_page = request.GET.get('comic_page')
 
         if not character_name:
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
-        # PARSE PAGE TO INT
+         # Set page to 1 on first search
+        if not comic_page:
+            return redirect(reverse('search') + f"?character_name={character_name}&character_page=1&comic_page=1")
+
+        # Set page to 1 on first search
+        if not character_page:
+            return redirect(reverse('search') + f"?character_name={character_name}&character_page=1&comic_page=1")
+
+        # PARSE CHARACTER PAGE TO INT
         try:
-            page = int(page)
+            character_page = int(character_page)
+            comic_page = int(comic_page)
         except (TypeError, ValueError):
-            # Si no se puede convertir a número, establecer el valor predeterminado de página
-            page = 1
+            # If unable to convert to number, set default page value to 1
+            character_page = 1
+            character_page = 1
 
         # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
-        # page = 1
         characters_list, total_characters_results = get_characters_list(
-            character_name, page)
+            character_name, character_page)
         if characters_list is None:
             characters_list = []
         comics_list, total_comics_results = get_comics_list(
-            character_name, page)
+            character_name, comic_page)
         if comics_list is None:
             comics_list = []
 
-        print("Total comics:", total_comics_results,
-              "Total comics pages:", get_all_pages(total_comics_results))
-        print("Total characters:", total_characters_results,
-              "Total characters pages:", get_all_pages(total_characters_results))
+        character_pages_range = range(
+            1, get_all_pages(total_characters_results)+1)
+
+        comic_pages_range = range(
+            1, get_all_pages(total_comics_results)+1)
 
         # CONTEXT TO FRONT-END
         context = {
@@ -75,23 +89,15 @@ class SearchView(View):
             'characters': characters_list,
             'character_name': character_name,
             'comics': comics_list,
+            'character_page': character_page,
+            'comic_page': comic_page,
             'total_characters_results': total_characters_results,
             'total_comics_results': total_comics_results,
-            'total_characters_pages': get_all_pages(total_characters_results),
+            'character_pages_range': character_pages_range,
+            'comic_pages_range': comic_pages_range,
             'total_comics_pages': get_all_pages(total_comics_results),
         }
         return render(request, 'searchView.html', context)
-
-    # def post(self, request, *args, **kwargs):
-        name_character = request.POST.get('nameCharacter')
-        page = request.GET.get("page")
-
-        if name_character:
-            return redirect(reverse('search') + f"?character_name={name_character}")
-        else:
-            messages.error(
-                request, 'No se proporcionó ningún parámetro de búsqueda.')
-            return redirect('search')
 
 
 # CHARACTER

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<section id="characters">
 <h1 id="h1per">PERSONAJES</h1>
 <br>
 <div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -29,17 +30,19 @@
     <li class="page-item disabled">
       <span class="page-link">Previous</span>
     </li>
-    <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&page=1">1</a></li>
-    <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&page=2">2</a></li>
-    <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&page=3">3</a></li>
+
+    {% for character_page in character_pages_range %}
+      <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#characters">{{ character_page }}</a></li>
+    {% endfor %}
+
     <li class="page-item">
-      <a class="page-link" href="?page=next">Next</a>
+      <a class="page-link" href="?character_name={{ character_name }}&character_page=next">Next</a>
     </li>
   </ul>
 </nav>
+</section>
 
-<br>
-
+<section id="comics">
 <h1 id="h1per">COMICS</h1>
 <br>
 <div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -61,26 +64,21 @@
   </div>
   {% endfor %}
 </div>
-
-<!-- Comics -->
-<!-- <div>
-  <h2 class="card-header font-monospace">Comics</h2>
-  <ul>
-    {% for comic in comics %}
-    <li class="text-black card-header">
-
-       <a href="{% url 'comic' %}?comic_id={{ comic.id }}">{{comic.title}}</a>
-       
-      <img
-        src="{{comic.thumbnail.path}}.jpg"
-        width="200"
-        height="200"
-        class="img-thumbnail"
-      />
+<!-- PAGINATOR -->
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <span class="page-link">Previous</span>
     </li>
+
+    {% for comic_page in comic_pages_range %}
+      <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#comics">{{ comic_page }}</a></li>
     {% endfor %}
+
+    <li class="page-item">
+      <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#comics">next</a>
+    </li>
   </ul>
-  <button type="button" class="btn btn-danger">More</button>
-</div> -->
-<p></p>
+</nav>
+</section>
 {% endblock %}
