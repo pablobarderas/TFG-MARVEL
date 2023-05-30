@@ -47,7 +47,7 @@ class SearchView(View):
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
         # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
-        page = 2
+        page = 1
         characters_list, total_characters_results = get_characters_list(
             name_characters, page)
         if characters_list is None:
@@ -76,6 +76,7 @@ class SearchView(View):
 
     def post(self, request, *args, **kwargs):
         name_character = request.POST.get('nameCharacter')
+        page = request.GET.get("page")
 
         if name_character:
             return redirect(reverse('search') + f"?character_name={name_character}")
