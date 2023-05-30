@@ -7,7 +7,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from django.urls import reverse
-from .api_services import get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
+from .api_services import get_all_pages, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
 
 # HOME
 
@@ -49,16 +49,20 @@ class SearchView(View):
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
         # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
+        page = 1
         characters_list, total_characters_results = get_characters_list(
-            name_characters, 1)
+            name_characters, page)
         if characters_list is None:
             characters_list = []
-        comics_list, total_comics_results = get_comics_list(name_characters, 1)
+        comics_list, total_comics_results = get_comics_list(
+            name_characters, page)
         if comics_list is None:
             comics_list = []
 
         print("Total comics:", total_comics_results,
-              "Total characters:", total_characters_results)
+              "Total comics pages:", get_all_pages(total_comics_results))
+        print("Total characters:", total_characters_results,
+              "Total characters pages:", get_all_pages(total_characters_results))
 
         # CONTEXT TO FRONT-END
         context = {
@@ -66,7 +70,9 @@ class SearchView(View):
             'characters': characters_list,
             'comics': comics_list,
             'total_characters_results': total_characters_results,
-            'total_comics_results': total_comics_results
+            'total_comics_results': total_comics_results,
+            'total_characters_pages': get_all_pages(total_characters_results),
+            'total_comics_pages': get_all_pages(total_comics_results),
         }
         return render(request, 'searchView.html', context)
 
