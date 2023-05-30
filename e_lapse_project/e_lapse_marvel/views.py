@@ -96,6 +96,7 @@ class SearchView(View):
             'character_pages_range': character_pages_range,
             'comic_pages_range': comic_pages_range,
             'total_comics_pages': get_all_pages(total_comics_results),
+            'total_characters_pages': get_all_pages(total_characters_results),
         }
         return render(request, 'searchView.html', context)
 

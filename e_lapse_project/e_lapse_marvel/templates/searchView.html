@@ -31,15 +31,20 @@
       <span class="page-link">Previous</span>
     </li>
 
+    <!-- ALL PAGES -->
     {% for character_page in character_pages_range %}
-      {% if comic_page <= 5 %}
+      {% if character_page <= 5 %}
         <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#characters">{{ character_page }}</a></li>
       {% endif %}
     {% endfor %}
 
-    <li class="page-item">
-      <a class="page-link" href="?character_name={{ character_name }}&character_page=next">Next</a>
-    </li>
+    <!-- NEXT PAGE -->
+    {% if total_characters_results >= 5 %}
+      <li class="page-item">
+        <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page|add:1 }}&comic_page={{ comic_page }}#characters">Next</a>
+      </li>
+    {% endif %}
+
   </ul>
 </nav>
 </section>
@@ -73,15 +78,24 @@
       <span class="page-link">Previous</span>
     </li>
 
+    {% if comic_page <= comic_page|add:5 %}
     {% for comic_page in comic_pages_range %}
       {% if comic_page <= 5 %}
         <li class="page-item"><a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#comics">{{ comic_page }}</a></li>
       {% endif %}  
     {% endfor %}
 
-    <li class="page-item">
-      <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}#comics">next</a>
-    </li>
+    {% endif %}
+
+    
+
+
+    <!-- NEXT PAGE -->
+    {% if total_comics_results >= 5 %}
+      <li class="page-item">
+        <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page|add:1 }}#comics">Next</a>
+      </li>
+    {% endif %}
   </ul>
 </nav>
 </section>
