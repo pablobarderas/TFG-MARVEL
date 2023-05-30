@@ -14,14 +14,12 @@ from .api_services import get_all_pages, get_characters_list, get_comic_by_id, g
 
 class HomeView(TemplateView):
     template_name = 'homeView.html'
-    paginate_by = 2
 
     # **kargs: any significa que toma cualquier numero de argumentos
     def get_context_data(self, **kwargs):
 
         context = {
             'title': 'E_Lapse',
-            'spider': get_characters_list('spider')
         }
         return context
 

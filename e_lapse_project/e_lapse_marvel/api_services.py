@@ -40,49 +40,58 @@ def get_comics_list(titleStartsWith, page):
 def get_creators_list(nameStartsWith):
     endpoint = "creators"
     params = {'nameStartsWith': nameStartsWith}
+    creators, total_results, page = get_data(endpoint, params, page)
     return get_data(endpoint, params)
 
 
 def get_events_list(nameStartsWith):
     endpoint = "events"
     params = {'nameStartsWith': nameStartsWith}
-    return get_data(endpoint, params)
+    events, total_results, page = get_data(endpoint, params, page)
+    return events, total_results
 
 
-def get_series_list(titleStartsWith):
+def get_series_list(titleStartsWith, page):
     endpoint = "series"
     params = {'titleStartsWith': titleStartsWith}
-    return get_data(endpoint, params)
+    series, total_results, page = get_data(endpoint, params, page)
+    return series, total_results
 
 
 def get_story_by_id(story_id):
     endpoint = "stories/" + story_id
-    return get_data(endpoint, {})
+    story, args, page = get_data(endpoint, {}, 0)
+    return story
 
 
 def get_serie_by_id(serie_id):
     endpoint = "series/" + serie_id
-    return get_data(endpoint, {})
+    serie, args, page = get_data(endpoint, {}, 0)
+    return serie
 
 
 def get_event_by_id(event_id):
     endpoint = "events/" + event_id
-    return get_data(endpoint, {})
+    event, args, page = get_data(endpoint, {}, 0)
+    return event
 
 
 def get_creator_by_id(creator_id):
     endpoint = "creators/" + creator_id
-    return get_data(endpoint, {})
+    creator, args, page = get_data(endpoint, {}, 0)
+    return creator
 
 
 def get_character_by_id(character_id):
     endpoint = "characters/" + character_id
-    return get_data(endpoint, {})
+    character, args, page = get_data(endpoint, {}, 0)
+    return character
 
 
 def get_comic_by_id(comic_id):
     endpoint = "comics/" + comic_id
-    return get_data(endpoint, {})
+    comic, args, page = get_data(endpoint, {}, 0)
+    return comic
 
 
 # GET DATA LIST RESPONSE AND PARSE JSON
