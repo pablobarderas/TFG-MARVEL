@@ -48,17 +48,25 @@ class SearchView(View):
         if not name_characters:
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
-        characters_list = get_characters_list(name_characters)
+        # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
+        characters_list, total_characters_results = get_characters_list(
+            name_characters, 1)
         if characters_list is None:
             characters_list = []
-        comics_list = get_comics_list(name_characters)
+        comics_list, total_comics_results = get_comics_list(name_characters, 1)
         if comics_list is None:
             comics_list = []
 
+        print("Total comics:", total_comics_results,
+              "Total characters:", total_characters_results)
+
+        # CONTEXT TO FRONT-END
         context = {
             'title': 'E_Lapse',
             'characters': characters_list,
-            'comics': comics_list
+            'comics': comics_list,
+            'total_characters_results': total_characters_results,
+            'total_comics_results': total_comics_results
         }
         return render(request, 'searchView.html', context)
 

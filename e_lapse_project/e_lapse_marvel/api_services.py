@@ -63,21 +63,24 @@ def get_data(endpoint, params):
     }
     args.update(params)
     url = BASE_URL + endpoint
-    list = get_data_list(url, args)
-    print(list.count)
-    return list
+    page = 0
+    list, total_results, page = get_data_list(url, args, page)
+    print(total_results)
+    return list, total_results
 
 
-def get_characters_list(nameStartsWith):
+def get_characters_list(nameStartsWith, page):
     endpoint = "characters"
     params = {'nameStartsWith': nameStartsWith}
-    return get_data(endpoint, params)
+    characters, total_results = get_data(endpoint, params)
+    return characters, total_results
 
 
-def get_comics_list(titleStartsWith):
+def get_comics_list(titleStartsWith, page):
     endpoint = "comics"
     params = {'titleStartsWith': titleStartsWith}
-    return get_data(endpoint, params)
+    comics, total_results = get_data(endpoint, params)
+    return comics, total_results
 
 
 def get_creators_list(nameStartsWith):
@@ -129,15 +132,20 @@ def get_comic_by_id(comic_id):
 
 
 # GET DATA LIST RESPONSE AND PARSE JSON
-def get_data_list(url, args):
+def get_data_list(url, args, page):
     data_list = []
     response = requests.get(url, params=args)
+
+    # PARSE JSON TO DICTIONARY
     if response.status_code == 200:
         responseJson = json.loads(response.text)
         for json_element in responseJson['data']['results']:
             data_list.append(json_element)
 
-    return data_list
+        # GET TOTAL RESULTS OF THIS REQUEST
+        total_results = responseJson['data']['total']
+
+    return data_list, total_results, page
 
 
 # GET HASH OF URL
