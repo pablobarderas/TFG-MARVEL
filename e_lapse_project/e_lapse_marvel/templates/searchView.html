@@ -25,13 +25,13 @@
 
 </div>
 <!-- PAGINATOR -->
-<nav aria-label="...">
-  <ul class="pagination">
+<nav aria-label="..." class="bg-dark">
+  <ul class="pagination bg-dark">
     
     <!-- PREVIOUS PAGE -->
     {% if character_page > 1 %}
       <li class="page-item">
-        <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page|add:-1 }}&comic_page={{ comic_page }}#characters">Previous</a>
+        <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page|add:-1 }}&comic_page={{ comic_page }}#characters">Previous</a>
       </li>
     {% endif %}
 
@@ -40,7 +40,11 @@
     {% for page in character_pages_range %}
       {% if page >= character_page and page <= character_page|add:4 %}
         <li class="page-item">
-          <a class="page-link" href="?character_name={{ character_name }}&character_page={{ page }}&comic_page={{ comic_page }}#characters">{{ page }}</a>
+          {% if page == character_page%}
+            <a class="page-link active" href="?character_name={{ character_name }}&character_page={{ page }}&comic_page={{ comic_page }}#characters">{{ page }}</a>
+          {% else %}
+            <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ page }}&comic_page={{ comic_page }}#characters">{{ page }}</a>
+          {% endif %}
         </li>
       {% endif %}
     {% endfor %}
@@ -54,9 +58,8 @@
       </li>
     {% endif %}
     {% endif %}
-
+    <li>Actual page: {{character_page}} Total pages: {{total_characters_pages}}</li>
   </ul>
-  <h4>Total pages: {{total_characters_pages}}</h4>
 </nav>
 </section>
 
@@ -85,12 +88,12 @@
 
 <!-- PAGINATOR -->
 <nav aria-label="...">
-  <ul class="pagination">
+  <ul class="pagination bg-dark">
     
     <!-- PREVIOUS PAGE -->
     {% if comic_page > 1 %}
       <li class="page-item">
-        <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page|add:-1 }}#comics">Previous</a>
+        <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page|add:-1 }}#comics">Previous</a>
       </li>
     {% endif %}
 
@@ -98,7 +101,11 @@
     {% for page in comic_pages_range %}
       {% if page >= comic_page and page <= comic_page|add:4 %}
         <li class="page-item">
-          <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ page }}#comics">{{ page }}</a>
+          {% if page == comic_page %}
+            <a class="page-link active" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ page }}#comics">{{ page }}</a>
+            {% else %}
+            <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ page }}#comics">{{ page }}</a>
+          {% endif %}
         </li>
       {% endif %}
     {% endfor %}
@@ -109,12 +116,12 @@
      {% if comic_page < total_comics_pages %}
      {% if total_comics_results >= 5 %}
        <li class="page-item">
-         <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page|add:1 }}#comics">Next</a>
+         <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page|add:1 }}#comics">Next</a>
        </li>
      {% endif %}
      {% endif %}
+     <li>Actual page: {{comic_page}} Total pages: {{total_comics_pages}}</li>
   </ul>
-  <h4>Total pages: {{total_comics_pages}}</h4>
 </nav>
 </section>
 {% endblock %}
