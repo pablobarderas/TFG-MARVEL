@@ -1,57 +1,10 @@
 import hashlib
+import math
 import requests
 import json
 
 
-'''
-        # Get count of total results and request results
-        totalResults = responseJson['data']['total']
-        totalCount = responseJson['data']['count']
-        # IF THERE ARE COMICS LEFT TO PICK UP
-        while totalCount < totalResults:
-            # Actualizar el offset en cada iteración
-            args['offset'] += 100
-            responseRest = requests.get(BASE_URL, params=args)
-            responseJsonRest = json.loads(responseRest.text)
-
-            print("*******Total results:", totalResults,
-                  "\n*******Total count:", totalCount)
-
-            # ADD REST OF CHARACTERS
-            for character in responseJsonRest['data']['results']:
-                character_list.append(character)
-            totalCount += responseJsonRest['data']['count']
-'''
-'''
-    response = requests.get(BASE_URL, params=args)
-    # SI LA RESPUESTA ES CORRECTA, SE GUARDA UNA LISTA CON TODOS LOS PERSONAJES
-    if (response.status_code == 200):
-        responseJson = json.loads(response.text)
-        comics_list = getJsonList(responseJson)
-
-        # Get count of total results and request results
-        totalResults = responseJson['data']['total']
-        totalCount = responseJson['data']['count']
-
-        # IF THERE ARE COMICS LEFT TO PICK UP
-        
-        while totalCount < totalResults:
-            # Actualizar el offset en cada iteración
-            args['offset'] += 100
-            responseRest = requests.get(BASE_URL, params=args)
-            responseJsonRest = json.loads(responseRest.text)
-
-            print("*******Total comics results:", totalResults,
-                  "\n*******Total comics count:", totalCount)
-
-            # ADD REST OF CHARACTERS
-            for comic in responseJsonRest['data']['results']:
-                comics_list.append(comic)
-            totalCount += responseJsonRest['data']['count']
-'''
-
-
-def get_data(endpoint, params):
+def get_data(endpoint, params, page):
     BASE_URL = "https://gateway.marvel.com/v1/public/"
     hash = getHash(1000)
     args = {
@@ -65,14 +18,13 @@ def get_data(endpoint, params):
     url = BASE_URL + endpoint
     page = 0
     list, total_results, page = get_data_list(url, args, page)
-    print(total_results)
-    return list, total_results
+    return list, total_results, page
 
 
 def get_characters_list(nameStartsWith, page):
     endpoint = "characters"
     params = {'nameStartsWith': nameStartsWith}
-    characters, total_results = get_data(endpoint, params)
+    characters, total_results, page = get_data(endpoint, params, page)
     return characters, total_results
 
 
@@ -146,6 +98,11 @@ def get_data_list(url, args, page):
         total_results = responseJson['data']['total']
 
     return data_list, total_results, page
+
+
+# GET ALL PAGES BY TOTAL RESULTS
+def get_all_pages(total_results):
+    return math.ceil(total_results/20)
 
 
 # GET HASH OF URL
