@@ -49,7 +49,7 @@ class SearchView(View):
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
         # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
-        page = 1
+        page = 2
         characters_list, total_characters_results = get_characters_list(
             name_characters, page)
         if characters_list is None:

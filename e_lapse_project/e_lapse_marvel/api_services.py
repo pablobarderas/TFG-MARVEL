@@ -15,8 +15,10 @@ def get_data(endpoint, params, page):
         'offset': 0
     }
     args.update(params)
+
+    args = page_selected(args, page)
+
     url = BASE_URL + endpoint
-    page = 0
     list, total_results, page = get_data_list(url, args, page)
     return list, total_results, page
 
@@ -31,7 +33,7 @@ def get_characters_list(nameStartsWith, page):
 def get_comics_list(titleStartsWith, page):
     endpoint = "comics"
     params = {'titleStartsWith': titleStartsWith}
-    comics, total_results = get_data(endpoint, params)
+    comics, total_results, page = get_data(endpoint, params, page)
     return comics, total_results
 
 
@@ -105,7 +107,16 @@ def get_all_pages(total_results):
     return math.ceil(total_results/20)
 
 
+def page_selected(args, page):
+    offset = (page - 1) * 20
+    # PAGINATION
+    if (page > 1):
+        args.update({'offset': offset})
+    return args
+
 # GET HASH OF URL
+
+
 def getHash(ts):
 
     # CLAVES Y HASH NECESARIOS PARA LA PETICION
