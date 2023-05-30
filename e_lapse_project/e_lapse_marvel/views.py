@@ -7,70 +7,98 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from django.urls import reverse
-from .api_services import get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
+from .api_services import get_all_pages, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
+
 
 # HOME
-
-
 class HomeView(TemplateView):
     template_name = 'homeView.html'
-    paginate_by = 2
 
     # **kargs: any significa que toma cualquier numero de argumentos
     def get_context_data(self, **kwargs):
 
         context = {
             'title': 'E_Lapse',
-            'spider': get_characters_list('spider')
         }
         return context
 
-    def post(self, request, *args, **kwargs):
-        name_character = request.POST.get('nameCharacter')
+    def get(self, request, *args, **kwargs):
 
-        if name_character:
-            return redirect(reverse('search') + f"?character_name={name_character}")
-        else:
-            messages.error(
-                request, 'No se proporcionó ningún parámetro de búsqueda.')
-            return redirect('home')
+        if request.method == 'GET' and 'character_name' in request.GET:
+            character_name = request.GET['character_name']
+            return redirect(reverse('search') + f"?character_name={character_name}")
+
+        return super().get(request, *args, **kwargs)
+
 
 # SEARCH
-
-
 class SearchView(View):
     template_name = 'searchView.html'
 
     def get(self, request, *args, **kwargs):
-        name_characters = request.GET.get(
+
+        # GET CHARACTER NAME
+        character_name = request.GET.get(
             'character_name') or request.session.get('search_query')
 
-        if not name_characters:
+        # GET CHARACTER PAGE
+        character_page = request.GET.get('character_page')
+
+        # GET CHARACTER PAGE
+        comic_page = request.GET.get('comic_page')
+
+        if not character_name:
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
-        characters_list = get_characters_list(name_characters)
+         # Set page to 1 on first search
+        if not comic_page:
+            return redirect(reverse('search') + f"?character_name={character_name}&character_page=1&comic_page=1")
+
+        # Set page to 1 on first search
+        if not character_page:
+            return redirect(reverse('search') + f"?character_name={character_name}&character_page=1&comic_page=1")
+
+        # PARSE CHARACTER PAGE TO INT
+        try:
+            character_page = int(character_page)
+            comic_page = int(comic_page)
+        except (TypeError, ValueError):
+            # If unable to convert to number, set default page value to 1
+            character_page = 1
+            character_page = 1
+
+        # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
+        characters_list, total_characters_results = get_characters_list(
+            character_name, character_page)
         if characters_list is None:
             characters_list = []
-        comics_list = get_comics_list(name_characters)
+        comics_list, total_comics_results = get_comics_list(
+            character_name, comic_page)
         if comics_list is None:
             comics_list = []
 
+        character_pages_range = range(
+            1, get_all_pages(total_characters_results)+1)
+
+        comic_pages_range = range(
+            1, get_all_pages(total_comics_results)+1)
+
+        # CONTEXT TO FRONT-END
         context = {
             'title': 'E_Lapse',
             'characters': characters_list,
-            'comics': comics_list
+            'character_name': character_name,
+            'comics': comics_list,
+            'character_page': character_page,
+            'comic_page': comic_page,
+            'total_characters_results': total_characters_results,
+            'total_comics_results': total_comics_results,
+            'character_pages_range': character_pages_range,
+            'comic_pages_range': comic_pages_range,
+            'total_comics_pages': get_all_pages(total_comics_results),
+            'total_characters_pages': get_all_pages(total_characters_results),
         }
         return render(request, 'searchView.html', context)
-
-    def post(self, request, *args, **kwargs):
-        name_character = request.POST.get('nameCharacter')
-
-        if name_character:
-            return redirect(reverse('search') + f"?character_name={name_character}")
-        else:
-            messages.error(
-                request, 'No se proporcionó ningún parámetro de búsqueda.')
-            return redirect('search')
 
 
 # CHARACTER
