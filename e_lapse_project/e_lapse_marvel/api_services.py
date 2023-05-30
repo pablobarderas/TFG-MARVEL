@@ -63,7 +63,9 @@ def get_data(endpoint, params):
     }
     args.update(params)
     url = BASE_URL + endpoint
-    return get_data_list(url, args)
+    list = get_data_list(url, args)
+    print(list.count)
+    return list
 
 
 def get_characters_list(nameStartsWith):
@@ -126,21 +128,14 @@ def get_comic_by_id(comic_id):
     return get_data(endpoint, {})
 
 
-# GET RESULTS OF JSON
-def getJsonList(responseJson):
-    json_List = []
-    for json_element in responseJson['data']['results']:
-        json_List.append(json_element)
-    return json_List
-
-
-# GET DATA LIST RESPONSE
+# GET DATA LIST RESPONSE AND PARSE JSON
 def get_data_list(url, args):
     data_list = []
     response = requests.get(url, params=args)
     if response.status_code == 200:
         responseJson = json.loads(response.text)
-        data_list = getJsonList(responseJson)
+        for json_element in responseJson['data']['results']:
+            data_list.append(json_element)
 
     return data_list
 
