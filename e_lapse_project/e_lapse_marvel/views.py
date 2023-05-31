@@ -108,7 +108,7 @@ class CharacterView(View):
     def get(self, request, *args, **kwargs):
         character_id = request.GET.get('character_id')
         character = get_character_by_id(character_id)
-        comics_atribute = []
+
         events_atribute = []
         series_atribute = []
 
@@ -146,13 +146,13 @@ class CharacterView(View):
 
         # GET ALL COMICS OF THIS CHARACTER BY COLLECTION URI ATRIBUTE
         for atribute in character:
-            total_comics_results = atribute['comics']['available']
+            # total_comics_results = atribute['comics']['available']
             total_events_results = atribute['events']['available']
             total_series_results = atribute['series']['available']
 
             # Comics atribute
-            comics_atribute.append(
-                get_atribute_data(atribute['comics']['collectionURI'], comic_page))
+            # comics_atribute.append(
+            #   get_atribute_data(atribute['comics']['collectionURI'], comic_page))
 
             # Events atribute
             events_atribute.append(
@@ -161,6 +161,10 @@ class CharacterView(View):
             # Series atribute
             series_atribute.append(
                 get_atribute_data(atribute['series']['collectionURI'], serie_page))
+
+        # GET COMICS ATRIBUTE AND TOTAL RESULTS
+        comics_atribute, total_comics_results = Atributes.get_atribute_data(
+            character, comic_page, 'comics')
 
         # GET RANGE FOR ITERATE ON TEMPLATE
         comic_pages_range = range(
@@ -200,6 +204,7 @@ class ComicView(View):
     def get(self, request, *args, **kwargs):
         comic_id = request.GET.get('comic_id')
         comic = get_comic_by_id(comic_id)
+
         context = {
             'title': 'E_Lapse',
             'comicId': comic_id,
@@ -230,10 +235,18 @@ class EventView(View):
     def get(self, request, *args, **kwargs):
         event_id = request.GET.get('event_id')
         event = get_event_by_id(event_id)
+
+        # GET COMICS ATRIBUTE AND TOTAL RESULTS
+        comic_page = 1
+        comics_atribute, total_comics_results = Atributes.get_atribute_data(
+            event, comic_page, 'comics')
+
         context = {
             'title': 'E_Lapse',
             'eventId': event_id,
             'event': event,
+            'comics_atribute': comics_atribute,
+            'total_comics_results': total_comics_results
         }
         return render(request, 'eventView.html', context)
 
@@ -266,3 +279,17 @@ class StoryView(View):
             'story': story,
         }
         return render(request, 'storyView.html', context)
+
+
+# GET ATRIBUTES
+class Atributes():
+
+    # GET DATA OF SPECIFIC ATRIBUTE
+    def get_atribute_data(entity, page, type_atribute):
+        atribute_list = []
+        for atribute in entity:
+            total_results = atribute[type_atribute]['available']
+            # Comics atribute
+        atribute_list.append(
+            get_atribute_data(atribute[type_atribute]['collectionURI'], page))
+        return atribute_list, total_results
