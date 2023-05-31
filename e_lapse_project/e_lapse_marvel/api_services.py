@@ -111,11 +111,26 @@ def get_data_list(url, args, page):
     return data_list, total_results, page
 
 
+# GET JSON DATA OF ATRIBUTES
+def get_atribute_data(url, page):
+    hash = getHash(1000)
+    args = {
+        'ts': 1000,
+        'apikey': 'dbc203265f84033afd469a493cec6b27',
+        'hash': hash,
+        'limit': 21,
+        'offset': 0
+    }
+    data, total_results, page = get_data_list(url, args, page)
+    return data
+
+
 # GET ALL PAGES BY TOTAL RESULTS
 def get_all_pages(total_results):
     return math.ceil(total_results/21)
 
 
+# OFFSET BY PAGE SELECTED
 def page_selected(args, page):
     offset = (page - 1) * 21
     # PAGINATION
@@ -123,9 +138,8 @@ def page_selected(args, page):
         args.update({'offset': offset})
     return args
 
+
 # GET HASH OF URL
-
-
 def getHash(ts):
 
     # CLAVES Y HASH NECESARIOS PARA LA PETICION

@@ -7,7 +7,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from django.urls import reverse
-from .api_services import get_all_pages, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
+from .api_services import get_all_pages, get_atribute_data, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
 
 
 # HOME
@@ -109,10 +109,20 @@ class CharacterView(View):
         character_id = request.GET.get('character_id')
         character = get_character_by_id(character_id)
 
+        # comics_atribute = get_comics_atribute()
+        comics_atribute = []
+
+        for atribute in character:
+            for comic in atribute['comics']['items']:
+                comics_atribute.append(
+                    get_atribute_data(comic['resourceURI'], 1))
+
+        # print(comics_atribute)
         context = {
             'title': 'E_Lapse',
             'characterId': character_id,
-            'character': character
+            'character': character,
+            'comics_atribute': comics_atribute
         }
         return render(request, 'characterView.html', context)
 
