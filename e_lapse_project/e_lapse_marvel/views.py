@@ -112,17 +112,19 @@ class CharacterView(View):
         # comics_atribute = get_comics_atribute()
         comics_atribute = []
 
+        # GET ALL COMICS OF THIS CHARACTER
         for atribute in character:
+            total_comics_results = atribute['comics']['available']
             for comic in atribute['comics']['items']:
                 comics_atribute.append(
                     get_atribute_data(comic['resourceURI'], 1))
 
-        # print(comics_atribute)
         context = {
             'title': 'E_Lapse',
             'characterId': character_id,
             'character': character,
-            'comics_atribute': comics_atribute
+            'comics_atribute': comics_atribute,
+            'total_comics_results': total_comics_results,
         }
         return render(request, 'characterView.html', context)
 
