@@ -4,6 +4,23 @@ import requests
 import json
 
 
+# GET JSON DATA OF ATRIBUTES BY URI
+def get_atribute_data(url, page):
+    hash = getHash(1000)
+    args = {
+        'ts': 1000,
+        'apikey': 'dbc203265f84033afd469a493cec6b27',
+        'hash': hash,
+        'limit': 21,
+        'offset': 0
+    }
+    args = page_selected(args, page)
+    # print(args)
+    data, total_results, page = get_data_list(url, args, page)
+    return data
+
+
+# GET DATA BY ENDPOINT
 def get_data(endpoint, params, page):
     BASE_URL = "https://gateway.marvel.com/v1/public/"
     hash = getHash(1000)
@@ -109,20 +126,6 @@ def get_data_list(url, args, page):
         total_results = responseJson['data']['total']
 
     return data_list, total_results, page
-
-
-# GET JSON DATA OF ATRIBUTES
-def get_atribute_data(url, page):
-    hash = getHash(1000)
-    args = {
-        'ts': 1000,
-        'apikey': 'dbc203265f84033afd469a493cec6b27',
-        'hash': hash,
-        'limit': 21,
-        'offset': 0
-    }
-    data, total_results, page = get_data_list(url, args, page)
-    return data
 
 
 # GET ALL PAGES BY TOTAL RESULTS

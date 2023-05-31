@@ -20,7 +20,7 @@
   <div class="bg-gradient">
     <h3>Comics</h3>
     <ul>
-      <li class="link">Comics disponibles: {{total_comics_results}}</li>
+      <li class="link">Comics disponibles: {{total_comics_results}} | Total pages: {{total_comics_pages}}</li>
       <li class="link">{{atribute.comics}}</li>
 
       <div class="row row-cols-2 row-cols-md-6 g-6">
@@ -33,18 +33,57 @@
               <img src="{{comics_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">{{comics_atribute.title}}</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text">{{comics_atribute.description}}</p>
               </div>
             </div>
 
+          {% endfor %}
         {% endfor %}
-      {% endfor %}
 
-        </div>
-    </div>
+          </div>
+      </div>
 
     </ul>
   </div>
+    <!--PAGINATOR-->
+<nav aria-label="...">
+  <ul class="pagination bg-dark">
+    
+    <!-- PREVIOUS PAGE -->
+    {% if comic_page > 1 %}
+      <li class="page-item">
+        <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page|add:-1 }}#comics">Previous</a>
+      </li>
+    {% endif %}
+
+    {% if comic_page <= comic_page|add:5 %}
+    {% for page in comic_pages_range %}
+      {% if page >= comic_page and page <= comic_page|add:4 %}
+        <li class="page-item">
+          {% if page == comic_page %}
+            <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ page }}#comics">{{ page }}</a>
+            {% else %}
+            <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ page }}#comics">{{ page }}</a>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+
+     <!-- NEXT PAGE -->
+     {% if comic_page < total_comics_pages %}
+     {% if total_comics_results >= 5 %}
+       <li class="page-item">
+         <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page|add:1 }}#comics">Next</a>
+       </li>
+     {% endif %}
+     {% endif %}
+     <li>Actual page: {{comic_page}} Total pages: {{total_comics_pages}}</li>
+  </ul>
+</nav>
+
+  
   </section>
 
 

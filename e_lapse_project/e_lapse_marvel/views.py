@@ -44,7 +44,7 @@ class SearchView(View):
         # GET CHARACTER PAGE
         character_page = request.GET.get('character_page')
 
-        # GET CHARACTER PAGE
+        # GET COMIC PAGE
         comic_page = request.GET.get('comic_page')
 
         if not character_name:
@@ -65,7 +65,7 @@ class SearchView(View):
         except (TypeError, ValueError):
             # If unable to convert to number, set default page value to 1
             character_page = 1
-            character_page = 1
+            comic_page = 1
 
         # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
         characters_list, total_characters_results = get_characters_list(
@@ -109,22 +109,40 @@ class CharacterView(View):
         character_id = request.GET.get('character_id')
         character = get_character_by_id(character_id)
 
-        # comics_atribute = get_comics_atribute()
+        # GET COMIC PAGE
+        comic_page = request.GET.get('comic_page')
+
+        # Set page to 1 on first search
+        if not comic_page:
+            return redirect(reverse('character') + f"?character_id={character_id}&comic_page=1")
+
+        # PARSE CHARACTER PAGE TO INT
+        try:
+            comic_page = int(comic_page)
+        except (TypeError, ValueError):
+            # If unable to convert to number, set default page value to 1
+            comic_page = 1
+
         comics_atribute = []
 
-        # GET ALL COMICS OF THIS CHARACTER
+        # GET ALL COMICS OF THIS CHARACTER BY COLLECTION URI ATRIBUTE
         for atribute in character:
             total_comics_results = atribute['comics']['available']
-            for comic in atribute['comics']['items']:
-                comics_atribute.append(
-                    get_atribute_data(comic['resourceURI'], 1))
+            comics_atribute.append(
+                get_atribute_data(atribute['comics']['collectionURI'], comic_page))
+
+        comic_pages_range = range(
+            1, get_all_pages(total_comics_results)+1)
 
         context = {
             'title': 'E_Lapse',
-            'characterId': character_id,
+            'character_id': character_id,
             'character': character,
             'comics_atribute': comics_atribute,
             'total_comics_results': total_comics_results,
+            'comic_page': comic_page,
+            'comic_pages_range': comic_pages_range,
+            'total_comics_pages': get_all_pages(total_comics_results),
         }
         return render(request, 'characterView.html', context)
 
