@@ -1,4 +1,15 @@
 {% extends 'base.html' %} {% block content %}
+
+<nav class="navbar bg-gradient">
+  <div class="container-fluid justify-content-start bg-opacity-100">
+    <a class="btn me-2 btn-outline-danger" href="#comics" >Comics</a>
+    <a class="btn me-2 btn-outline-danger" href="#events">Eventos</a>
+    <a class="btn me-2 btn-outline-danger" href="#series">Series</a>
+    <a class="btn me-2 btn-outline-danger" href="#stories">Stories</a>
+  </div>
+</nav>
+
+<section id="character_info" class="m-3 bg-gradient">
     <h2>One Character view</h2>
 
     <h2>This character has: {{characterId}} </h2>
@@ -13,4 +24,257 @@
       />
     <p class="card-subtitle">Description: {{atribute.description}}</p>
     {% endfor %}
+  </section>
+
+  <!--COMICS-->
+  <section id="comics" class="m-3">
+  <div class="bg-gradient">
+    <h3>Comics</h3>
+    <ul>
+      <li class="link">Comics disponibles: {{total_comics_results}} | Total pages: {{total_comics_pages}}</li>
+      <li class="link">{{atribute.comics}}</li>
+
+      <div class="row row-cols-2 row-cols-md-6 g-6">
+        <div class="col">
+      {% for comics in comics_atribute %}
+        {% for comics_atribute in comics %}
+
+            <!--EACH COMIC-->
+            <div class="card">
+              <img src="{{comics_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a class="link-danger" href="{% url 'comic' %}?comic_id={{ comics_atribute.id }}">{{comics_atribute.title}}</a>
+                </h5>
+                <p class="card-text">{{comics_atribute.description}}</p>
+              </div>
+            </div>
+
+          {% endfor %}
+        {% endfor %}
+
+          </div>
+      </div>
+
+    </ul>
+  </div>
+    <!--COMICS PAGINATOR-->
+<nav aria-label="comics paginator" class="m-3">
+  <ul class="pagination bg-dark">
+    
+    <!-- PREVIOUS PAGE -->
+    {% if comic_page > 1 %}
+      <li class="page-item">
+        <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page|add:-1 }}&event_page={{ event_page }}&serie_page={{ serie_page }}#comics">Previous</a>
+      </li>
+    {% endif %}
+
+    {% if comic_page <= comic_page|add:5 %}
+    {% for page in comic_pages_range %}
+      {% if page >= comic_page and page <= comic_page|add:4 %}
+        <li class="page-item">
+          {% if page == comic_page %}
+            <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ page }}&event_page={{ event_page }}&serie_page={{ serie_page }}#comics">{{ page }}</a>
+            {% else %}
+            <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ page }}&event_page={{ event_page }}&serie_page={{ serie_page }}#comics">{{ page }}</a>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+
+     <!-- NEXT PAGE -->
+     {% if comic_page < total_comics_pages %}
+     {% if total_comics_results >= 5 %}
+       <li class="page-item">
+         <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page|add:1 }}&event_page={{ event_page }}&serie_page={{ serie_page }}#comics">Next</a>
+       </li>
+     {% endif %}
+     {% endif %}
+     <li>Actual page: {{comic_page}} Total pages: {{total_comics_pages}}</li>
+  </ul>
+</nav>
+  </section>
+
+  <!--EVENTS-->
+  <section id="events" class="m-3">
+    <div class="bg-gradient">
+      <h3>Events</h3>
+      <ul>
+        <li class="link">Eventos disponibles: {{total_events_results}} | Total pages: {{total_events_pages}}</li>
+        <li class="link">{{atribute.events}}</li>
+  
+        <div class="row row-cols-2 row-cols-md-6 g-6">
+          <div class="row">
+        {% for events in events_atribute %}
+          {% for events_atribute in events %}
+  
+              <!--EACH EVENT-->
+              <div class="card">
+                <img src="{{events_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <a class="link-danger" href="{% url 'event' %}?event_id={{ events_atribute.id }}">{{events_atribute.title}}</a>
+                  </h5>
+                  <p class="card-text">{{events_atribute.description}}</p>
+                </div>
+              </div>
+  
+            {% endfor %}
+          {% endfor %}
+  
+            </div>
+        </div>
+  
+      </ul>
+    </div>
+
+       <!--EVENTS PAGINATOR-->
+<nav aria-label="events paginator" class="m-3">
+  <ul class="pagination bg-dark">
+    
+    <!-- PREVIOUS PAGE -->
+    {% if event_page > 1 %}
+      <li class="page-item">
+        <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page|add:-1 }}&serie_page={{ serie_page }}#events">Previous</a>
+      </li>
+    {% endif %}
+
+    {% if event_page <= event_page|add:5 %}
+    {% for page in event_pages_range %}
+      {% if page >= event_page and page <= event_page|add:4 %}
+        <li class="page-item">
+          {% if page == event_page %}
+            <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ page }}&serie_page={{ serie_page }}#events">{{ page }}</a>
+            {% else %}
+            <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ page }}&serie_page={{ serie_page }}#events">{{ page }}</a>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+
+     <!-- NEXT PAGE -->
+     {% if event_page < total_events_pages %}
+     {% if total_events_results >= 5 %}
+       <li class="page-item">
+         <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page|add:1 }}&serie_page={{ serie_page }}#events">Next</a>
+       </li>
+     {% endif %}
+     {% endif %}
+     <li>Actual page: {{event_page}} Total pages: {{total_events_pages}}</li>
+  </ul>
+</nav>
+  </section>
+
+
+  <!--SERIES-->
+  <section id="series" class="m-3">
+    <div class="bg-gradient">
+      <h3>Series</h3>
+      <ul>
+        <li class="link">Series disponibles: {{total_series_results}} | Total pages: {{total_series_pages}}</li>
+        <li class="link">{{atribute.series}}</li>
+  
+        <div class="row row-cols-2 row-cols-md-6 g-6">
+          <div class="col">
+        {% for series in series_atribute %}
+          {% for series_atribute in series %}
+  
+              <!--EACH SERIE-->
+              <div class="card">
+                {% if series_atribute.thumbnail.path %}
+                <img src="{{series_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <a class="link-danger" href="{% url 'serie' %}?serie_id={{ series_atribute.id }}">{{series_atribute.title}}</a>
+                  </h5>
+                  <p class="card-text">{{series_atribute.description}}</p>
+                </div>
+              </div>
+  
+            {% endfor %}
+          {% endfor %}
+  
+            </div>
+        </div>
+  
+      </ul>
+    </div>
+      <!-- SERIES PAGINATOR-->
+  <nav aria-label="series paginator" class="m-3">
+    <ul class="pagination bg-dark">
+      
+      <!-- PREVIOUS PAGE -->
+      {% if serie_page > 1 %}
+        <li class="page-item">
+          <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ serie_page|add:-1 }}#series">Previous</a>
+        </li>
+      {% endif %}
+  
+      {% if serie_page <= serie_page|add:5 %}
+      {% for page in serie_pages_range %}
+        {% if page >= serie_page and page <= serie_page|add:4 %}
+          <li class="page-item">
+            {% if page == serie_page %}
+              <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ page }}#series">{{ page }}</a>
+              {% else %}
+              <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ page }}#series">{{ page }}</a>
+            {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    
+  
+       <!-- NEXT PAGE -->
+       {% if serie_page < total_series_pages %}
+       {% if total_series_results >= 5 %}
+         <li class="page-item">
+           <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ serie_page|add:1 }}#series">Next</a>
+         </li>
+       {% endif %}
+       {% endif %}
+       <li>Actual page: {{serie_page}} Total pages: {{total_series_pages}}</li>
+    </ul>
+  </nav>
+    </section>
+  
+    <section id="stories" class="m-3">
+    <div class="bg-gradient" class="m-3">
+      <h3>Stories</h3>
+      <ul class="m-3">
+        <li class="link">Stories disponibles: {{total_stories_results}} | Total pages: {{total_stories_pages}}</li>
+        <li class="link">{{atribute.stories}}</li>
+  
+        <div class="row row-cols-2 row-cols-md-6 g-6">
+          <div class="col">
+        {% for stories in stories_atribute %}
+          {% for stories_atribute in stories %}
+  
+              <!--EACH STORY-->
+              <div class="card">
+                {% if stories_atribute.thumbnail.path %}
+                <img src="{{stories_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <a class="link-danger" href="{% url 'story' %}?story_id={{ stories_atribute.id }}">{{stories_atribute.title}}</a>
+                  </h5>
+                  <p class="card-text">{{stories_atribute.description}}</p>
+                </div>
+              </div>
+  
+            {% endfor %}
+          {% endfor %}
+  
+            </div>
+        </div>
+  
+      </ul>
+    </div>
+  </section>
 {% endblock %}
