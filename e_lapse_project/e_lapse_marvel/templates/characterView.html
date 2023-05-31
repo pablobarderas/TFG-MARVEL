@@ -184,7 +184,9 @@
   
               <!--EACH SERIE-->
               <div class="card">
+                {% if series_atribute.thumbnail.path %}
                 <img src="{{series_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                {% endif %}
                 <div class="card-body">
                   <h5 class="card-title">
                     <a class="link-danger" href="{% url 'serie' %}?serie_id={{ series_atribute.id }}">{{series_atribute.title}}</a>
@@ -240,5 +242,38 @@
   </nav>
     </section>
   
-
+    <section id="stories">
+    <div class="bg-gradient">
+      <h3>Stories</h3>
+      <ul>
+        <li class="link">Stories disponibles: {{total_stories_results}} | Total pages: {{total_stories_pages}}</li>
+        <li class="link">{{atribute.stories}}</li>
+  
+        <div class="row row-cols-2 row-cols-md-6 g-6">
+          <div class="col">
+        {% for stories in stories_atribute %}
+          {% for stories_atribute in stories %}
+  
+              <!--EACH STORY-->
+              <div class="card">
+                {% if stories_atribute.thumbnail.path %}
+                <img src="{{stories_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <a class="link-danger" href="{% url 'story' %}?story_id={{ stories_atribute.id }}">{{stories_atribute.title}}</a>
+                  </h5>
+                  <p class="card-text">{{stories_atribute.description}}</p>
+                </div>
+              </div>
+  
+            {% endfor %}
+          {% endfor %}
+  
+            </div>
+        </div>
+  
+      </ul>
+    </div>
+  </section>
 {% endblock %}

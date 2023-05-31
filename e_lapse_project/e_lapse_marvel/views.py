@@ -109,7 +109,6 @@ class CharacterView(View):
         character_id = request.GET.get('character_id')
         character = get_character_by_id(character_id)
 
-        events_atribute = []
         series_atribute = []
 
         # GET COMIC PAGE
@@ -144,27 +143,15 @@ class CharacterView(View):
             event_page = 1
             serie_page = 1
 
-        # GET ALL COMICS OF THIS CHARACTER BY COLLECTION URI ATRIBUTE
-        for atribute in character:
-            # total_comics_results = atribute['comics']['available']
-            total_events_results = atribute['events']['available']
-            total_series_results = atribute['series']['available']
-
-            # Comics atribute
-            # comics_atribute.append(
-            #   get_atribute_data(atribute['comics']['collectionURI'], comic_page))
-
-            # Events atribute
-            events_atribute.append(
-                get_atribute_data(atribute['events']['collectionURI'], event_page))
-
-            # Series atribute
-            series_atribute.append(
-                get_atribute_data(atribute['series']['collectionURI'], serie_page))
-
-        # GET COMICS ATRIBUTE AND TOTAL RESULTS
+        # GET COMICS, EVENTS, SERIES, STORIES ATRIBUTE AND TOTAL RESULTS
         comics_atribute, total_comics_results = Atributes.get_atribute_data(
             character, comic_page, 'comics')
+        events_atribute, total_events_results = Atributes.get_atribute_data(
+            character, event_page, 'events')
+        series_atribute, total_series_results = Atributes.get_atribute_data(
+            character, serie_page, 'series')
+        stories_atribute, total_stories_results = Atributes.get_atribute_data(
+            character, 1, 'stories')
 
         # GET RANGE FOR ITERATE ON TEMPLATE
         comic_pages_range = range(
@@ -181,9 +168,11 @@ class CharacterView(View):
             'comics_atribute': comics_atribute,
             'events_atribute': events_atribute,
             'series_atribute': series_atribute,
+            'stories_atribute': stories_atribute,
             'total_comics_results': total_comics_results,
             'total_events_results': total_events_results,
             'total_series_results': total_series_results,
+            'total_stories_results': total_stories_results,
             'comic_page': comic_page,
             'event_page': event_page,
             'serie_page': serie_page,
