@@ -13,4 +13,35 @@
     <p class="card-subtitle">Description: {{atribute.description}}</p>
     {% endfor %}
 
+    <div class="bg-gradient">
+        <h3>Comics</h3>
+        <ul>
+          <li class="link">Comics disponibles: {{total_comics_results}} | Total pages: {{total_comics_pages}}</li>
+          <li class="link">{{atribute.comics}}</li>
+    
+          <div class="row row-cols-2 row-cols-md-6 g-6">
+            <div class="col">
+          {% for comics in comics_atribute %}
+            {% for comics_atribute in comics %}
+    
+                <!--EACH COMIC-->
+                <div class="card">
+                  <img src="{{comics_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a class="link-danger" href="{% url 'comic' %}?comic_id={{ comics_atribute.id }}">{{comics_atribute.title}}</a>
+                    </h5>
+                    <p class="card-text">{{comics_atribute.description}}</p>
+                  </div>
+                </div>
+    
+              {% endfor %}
+            {% endfor %}
+    
+              </div>
+          </div>
+    
+        </ul>
+      </div>
+
 {% endblock %}
