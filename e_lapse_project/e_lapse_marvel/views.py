@@ -182,6 +182,7 @@ class CharacterView(View):
             'total_comics_pages': get_all_pages(total_comics_results),
             'total_events_pages': get_all_pages(total_events_results),
             'total_series_pages': get_all_pages(total_series_results),
+            'total_stories_pages': get_all_pages(total_stories_results),
         }
         return render(request, 'characterView.html', context)
 
