@@ -1,4 +1,16 @@
 {% extends 'base.html' %} {% block content %}
 
 <h2>One Event view</h2>
+
+{% for atribute in event %}
+    <h3 class="card-title">{{atribute.name}}</h3>
+    <img
+    src="{{atribute.thumbnail.path}}.jpg"
+        width="400"
+        height="400"
+        class="img-thumbnail"
+      />
+    <p class="card-subtitle">Description: {{atribute.description}}</p>
+    {% endfor %}
+
 {% endblock %}
