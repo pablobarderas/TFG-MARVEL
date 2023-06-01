@@ -437,10 +437,85 @@ class SerieView(View):
     def get(self, request, *args, **kwargs):
         serie_id = request.GET.get('serie_id')
         serie = get_serie_by_id(serie_id)
+
+        # GET COMIC PAGE
+        comic_page = request.GET.get('comic_page')
+
+        # GET CHARACTER PAGE
+        character_page = request.GET.get('character_page')
+
+        # GET EVENT PAGE
+        event_page = request.GET.get('event_page')
+
+        # GET STORY PAGE
+        story_page = request.GET.get('story_page')
+
+        # GET CREATORS PAGE
+        creator_page = request.GET.get('creator_page')
+
+        # Set page to 1 on first search
+        if not comic_page or not character_page or not event_page or not story_page or not creator_page:
+            return redirect(reverse('event') + f"?serie_id={serie_id}&comic_page=1&character_page=1&creator_page=1&event_page=1&story_page=1")
+
+        # PARSE PAGES TO INT
+        try:
+            comic_page = int(comic_page)
+            character_page = int(character_page)
+            event_page = int(event_page)
+            story_page = int(story_page)
+            creator_page = int(creator_page)
+        except (TypeError, ValueError):
+            # If unable to convert to number, set default page value to 1
+            comic_page = 1
+            character_page = 1
+            event_page = 1
+            story_page = 1
+            creator_page = 1
+
+         # GET COMICS, CHARACTERS, SERIES, STORIES, CREATORS ATRIBUTE, TOTAL RESULTS AND PAGES RANGE
+        comics_atribute, total_comics_results, comic_pages_range = Atributes.get_atribute_data(
+            serie, comic_page, 'comics')
+        characters_atribute, total_characters_results, character_pages_range = Atributes.get_atribute_data(
+            serie, character_page, 'characters')
+        events_atribute, total_events_results, event_pages_range = Atributes.get_atribute_data(
+            serie, event_page, 'events')
+        stories_atribute, total_stories_results, story_pages_range = Atributes.get_atribute_data(
+            serie, story_page, 'stories')
+        creators_atribute, total_creators_results, creator_pages_range = Atributes.get_atribute_data(
+            serie, creator_page, 'creators')
+
         context = {
             'title': 'E_Lapse',
             'serieId': serie_id,
             'serie': serie,
+            # ATRIBUTES
+            'comics_atribute': comics_atribute,
+            'characters_atribute': characters_atribute,
+            'events_atribute': events_atribute,
+            'stories_atibute': stories_atribute,
+            'creators_atribute': creators_atribute,
+            # TOTAL ATRIBUTE RESULTS
+            'total_comics_results': total_comics_results,
+            'total_characters_results': total_characters_results,
+            'total_events_results': total_events_results,
+            'total_stories_results': total_stories_results,
+            'total_creators_results': total_creators_results,
+            # ATRIBUTE PAGES
+            'comic_page': comic_page,
+            'character_page': character_page,
+            'event_page': event_page,
+            'story_page': story_page,
+            'creator_page': creator_page,
+            'comic_pages_range': comic_pages_range,
+            'character_pages_range': character_pages_range,
+            'event_pages_range': event_pages_range,
+            'story_pages_range': story_pages_range,
+            'creator_pages_range': creator_pages_range,
+            'total_comics_pages': get_all_pages(total_comics_results),
+            'total_characters_pages': get_all_pages(total_characters_results),
+            'total_events_pages': get_all_pages(total_events_results),
+            'total_stories_pages': get_all_pages(total_stories_results),
+            'total_creators_pages': get_all_pages(total_creators_results),
         }
         return render(request, 'serieView.html', context)
 
