@@ -9,55 +9,54 @@
   </div>
 </nav>
 
-<section id="character_info" class="m-3 bg-gradient">
-    <h2>One Character view</h2>
+  {% for attribute in character %}
+  <!-- CHARACTER WITH IMAGE AND DESCRIPTION -->
+<section class="row featurette" id="character_info">
+    <div class="col-md-7">
+      <h2 class="featurette-heading alig" style="margin-bottom: 40px;text-align: center;font-family: 'Lucida Sans', 'Lucida Sans Regular', 
+      'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: bold;">{{attribute.name}}</h2>
+      <hr>
+      <p class="lead" style="text-align: left; font-size: 28px;margin-left: 20px;">{{attribute.description}}</p>
+    </div>
+    <div class="col-md-5 d-flex justify-content-end">
+      <img src="{{attribute.thumbnail.path}}.jpg" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400"
+        height="400" xmlns="http://www.w3.org/2000/svg" aria-label="Character"
+        preserveAspectRatio="xMidYMid slice" role="img" focusable="false" style="margin-top: 40px; border:5px solid white; border-radius: 30px;">
+        <title>Character</title>
+        <rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa" dy=".3em"></text>
+    </img>
+</section>
 
-    <h2>This character has: {{characterId}} </h2>
+  <!-- COMICS OF CHARACTER -->
 
-    {% for atribute in character %}
-    <h3 class="card-title">{{atribute.name}}</h3>
-    <img
-    src="{{atribute.thumbnail.path}}.jpg"
-        width="400"
-        height="400"
-        class="img-thumbnail"
-      />
-    <p class="card-subtitle">Description: {{atribute.description}}</p>
-    {% endfor %}
-  </section>
-
-  <!--COMICS-->
-  <section id="comics" class="m-3">
-  <div class="bg-gradient">
-    <h3>Comics</h3>
-    <ul>
-      <li class="link">Comics disponibles: {{total_comics_results}} | Total pages: {{total_comics_pages}}</li>
-      <li class="link">{{atribute.comics}}</li>
-
-      <div class="row row-cols-2 row-cols-md-6 g-6">
-        <div class="col">
-      {% for comics in comics_atribute %}
-        {% for comics_atribute in comics %}
-
-            <!--EACH COMIC-->
-            <div class="card">
-              <img src="{{comics_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <a class="link-danger" href="{% url 'comic' %}?comic_id={{ comics_atribute.id }}">{{comics_atribute.title}}</a>
-                </h5>
-                <p class="card-text">{{comics_atribute.description}}</p>
+  <section id="comics" class="container marketing">
+    <h2 class="featurette-heading alig" style="margin-bottom: 40px;text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
+     'Trebuchet MS', sans-serif;">Comics de {{attribute.name}}</h2>
+     <ul>
+        <li class="link">Comics disponibles: {{total_comics_results}} | Total pages: {{total_comics_pages}}</li>
+     </ul>
+     <div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for comics in comics_attribute %}
+        {% for comics_attribute in comics %}
+          <div class="col">
+            <div class="d-flex flex-column h-100" style="border: 2px solid white">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="{{comics_attribute.thumbnail.path}}.jpg" class="card-img-top" alt="Personaje">
+                </div>
+                <div class="col-md-8">
+                  <div>
+                    <h4>{{comics_attribute.title}}</h4>
+                    <p><a class="btn btn-outline-danger" href="#" role="button">View details &raquo;</a></p>
+                  </div>
+                </div>
               </div>
             </div>
-
-          {% endfor %}
-        {% endfor %}
-
           </div>
-      </div>
+        {% endfor %}
+      {% endfor %}
 
-    </ul>
-  </div>
+
     <!--COMICS PAGINATOR-->
 <nav aria-label="comics paginator" class="m-3">
   <ul class="pagination bg-dark">
@@ -65,7 +64,7 @@
     <!-- PREVIOUS PAGE -->
     {% if comic_page > 1 %}
       <li class="page-item">
-        <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page|add:-1 }}&event_page={{ event_page }}&serie_page={{ serie_page }}#comics">Previous</a>
+        <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page|add:-1 }}&event_page={{ event_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">Previous</a>
       </li>
     {% endif %}
 
@@ -74,9 +73,9 @@
       {% if page >= comic_page and page <= comic_page|add:4 %}
         <li class="page-item">
           {% if page == comic_page %}
-            <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ page }}&event_page={{ event_page }}&serie_page={{ serie_page }}#comics">{{ page }}</a>
+            <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ page }}&event_page={{ event_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">{{ page }}</a>
             {% else %}
-            <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ page }}&event_page={{ event_page }}&serie_page={{ serie_page }}#comics">{{ page }}</a>
+            <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ page }}&event_page={{ event_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">{{ page }}</a>
           {% endif %}
         </li>
       {% endif %}
@@ -88,7 +87,7 @@
      {% if comic_page < total_comics_pages %}
      {% if total_comics_results >= 5 %}
        <li class="page-item">
-         <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page|add:1 }}&event_page={{ event_page }}&serie_page={{ serie_page }}#comics">Next</a>
+         <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page|add:1 }}&event_page={{ event_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">Next</a>
        </li>
      {% endif %}
      {% endif %}
@@ -103,21 +102,20 @@
       <h3>Events</h3>
       <ul>
         <li class="link">Eventos disponibles: {{total_events_results}} | Total pages: {{total_events_pages}}</li>
-        <li class="link">{{atribute.events}}</li>
   
         <div class="row row-cols-2 row-cols-md-6 g-6">
           <div class="row">
-        {% for events in events_atribute %}
-          {% for events_atribute in events %}
+        {% for events in events_attribute %}
+          {% for events_attribute in events %}
   
               <!--EACH EVENT-->
               <div class="card">
-                <img src="{{events_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                <img src="{{events_attribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">
-                    <a class="link-danger" href="{% url 'event' %}?event_id={{ events_atribute.id }}">{{events_atribute.title}}</a>
+                    <a class="link-danger" href="{% url 'event' %}?event_id={{ events_attribute.id }}">{{events_attribute.title}}</a>
                   </h5>
-                  <p class="card-text">{{events_atribute.description}}</p>
+                  <p class="card-text">{{events_attribute.description}}</p>
                 </div>
               </div>
   
@@ -137,7 +135,7 @@
     <!-- PREVIOUS PAGE -->
     {% if event_page > 1 %}
       <li class="page-item">
-        <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page|add:-1 }}&serie_page={{ serie_page }}#events">Previous</a>
+        <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page|add:-1 }}&serie_page={{ serie_page }}&story_page={{ story_page }}#events">Previous</a>
       </li>
     {% endif %}
 
@@ -146,9 +144,9 @@
       {% if page >= event_page and page <= event_page|add:4 %}
         <li class="page-item">
           {% if page == event_page %}
-            <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ page }}&serie_page={{ serie_page }}#events">{{ page }}</a>
+            <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#events">{{ page }}</a>
             {% else %}
-            <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ page }}&serie_page={{ serie_page }}#events">{{ page }}</a>
+            <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#events">{{ page }}</a>
           {% endif %}
         </li>
       {% endif %}
@@ -160,7 +158,7 @@
      {% if event_page < total_events_pages %}
      {% if total_events_results >= 5 %}
        <li class="page-item">
-         <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page|add:1 }}&serie_page={{ serie_page }}#events">Next</a>
+         <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page|add:1 }}&serie_page={{ serie_page }}&story_page={{ story_page }}#events">Next</a>
        </li>
      {% endif %}
      {% endif %}
@@ -176,23 +174,23 @@
       <h3>Series</h3>
       <ul>
         <li class="link">Series disponibles: {{total_series_results}} | Total pages: {{total_series_pages}}</li>
-        <li class="link">{{atribute.series}}</li>
+        <li class="link">{{attribute.series}}</li>
   
         <div class="row row-cols-2 row-cols-md-6 g-6">
           <div class="col">
-        {% for series in series_atribute %}
-          {% for series_atribute in series %}
+        {% for series in series_attribute %}
+          {% for series_attribute in series %}
   
               <!--EACH SERIE-->
               <div class="card">
-                {% if series_atribute.thumbnail.path %}
-                <img src="{{series_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                {% if series_attribute.thumbnail.path %}
+                <img src="{{series_attribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
                 {% endif %}
                 <div class="card-body">
                   <h5 class="card-title">
-                    <a class="link-danger" href="{% url 'serie' %}?serie_id={{ series_atribute.id }}">{{series_atribute.title}}</a>
+                    <a class="link-danger" href="{% url 'serie' %}?serie_id={{ series_attribute.id }}">{{series_attribute.title}}</a>
                   </h5>
-                  <p class="card-text">{{series_atribute.description}}</p>
+                  <p class="card-text">{{series_attribute.description}}</p>
                 </div>
               </div>
   
@@ -211,7 +209,7 @@
       <!-- PREVIOUS PAGE -->
       {% if serie_page > 1 %}
         <li class="page-item">
-          <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ serie_page|add:-1 }}#series">Previous</a>
+          <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ serie_page|add:-1 }}&story_page={{ story_page }}#series">Previous</a>
         </li>
       {% endif %}
   
@@ -220,9 +218,9 @@
         {% if page >= serie_page and page <= serie_page|add:4 %}
           <li class="page-item">
             {% if page == serie_page %}
-              <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ page }}#series">{{ page }}</a>
+              <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ page }}&story_page={{ story_page }}#series">{{ page }}</a>
               {% else %}
-              <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ page }}#series">{{ page }}</a>
+              <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ page }}&story_page={{ story_page }}#series">{{ page }}</a>
             {% endif %}
           </li>
         {% endif %}
@@ -234,7 +232,7 @@
        {% if serie_page < total_series_pages %}
        {% if total_series_results >= 5 %}
          <li class="page-item">
-           <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ serie_page|add:1 }}#series">Next</a>
+           <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ serie_page|add:1 }}&story_page={{ story_page }}#series">Next</a>
          </li>
        {% endif %}
        {% endif %}
@@ -248,23 +246,23 @@
       <h3>Stories</h3>
       <ul class="m-3">
         <li class="link">Stories disponibles: {{total_stories_results}} | Total pages: {{total_stories_pages}}</li>
-        <li class="link">{{atribute.stories}}</li>
+        <li class="link">{{attribute.stories}}</li>
   
         <div class="row row-cols-2 row-cols-md-6 g-6">
           <div class="col">
-        {% for stories in stories_atribute %}
-          {% for stories_atribute in stories %}
+        {% for stories in stories_attribute %}
+          {% for stories_attribute in stories %}
   
               <!--EACH STORY-->
               <div class="card">
-                {% if stories_atribute.thumbnail.path %}
-                <img src="{{stories_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                {% if stories_attribute.thumbnail.path %}
+                <img src="{{stories_attribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
                 {% endif %}
                 <div class="card-body">
                   <h5 class="card-title">
-                    <a class="link-danger" href="{% url 'story' %}?story_id={{ stories_atribute.id }}">{{stories_atribute.title}}</a>
+                    <a class="link-danger" href="{% url 'story' %}?story_id={{ stories_attribute.id }}">{{stories_attribute.title}}</a>
                   </h5>
-                  <p class="card-text">{{stories_atribute.description}}</p>
+                  <p class="card-text">{{stories_attribute.description}}</p>
                 </div>
               </div>
   
@@ -277,4 +275,5 @@
       </ul>
     </div>
   </section>
+  {% endfor %}
 {% endblock %}
