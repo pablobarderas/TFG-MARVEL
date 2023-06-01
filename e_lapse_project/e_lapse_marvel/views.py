@@ -455,7 +455,7 @@ class SerieView(View):
 
         # Set page to 1 on first search
         if not comic_page or not character_page or not event_page or not story_page or not creator_page:
-            return redirect(reverse('event') + f"?serie_id={serie_id}&comic_page=1&character_page=1&creator_page=1&event_page=1&story_page=1")
+            return redirect(reverse('serie') + f"?serie_id={serie_id}&comic_page=1&character_page=1&creator_page=1&event_page=1&story_page=1")
 
         # PARSE PAGES TO INT
         try:
