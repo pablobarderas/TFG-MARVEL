@@ -161,7 +161,7 @@ class CharacterView(View):
             'comics_atribute': comics_atribute,
             'events_atribute': events_atribute,
             'series_atribute': series_atribute,
-            'stories_atibute': stories_atribute,
+            'stories_atribute': stories_atribute,
             # TOTAL ATRIBUTE RESULTS
             'total_comics_results': total_comics_results,
             'total_events_results': total_events_results,
@@ -239,7 +239,7 @@ class ComicView(View):
             'characters_atribute': characters_atribute,
             'events_atribute': events_atribute,
             'creators_atribute': creators_atribute,
-            'stories_atibute': stories_atribute,
+            'stories_atribute': stories_atribute,
             # TOTAL ATRIBUTE RESULTS
             'total_characters_results': total_characters_results,
             'total_events_results': total_events_results,
@@ -317,7 +317,7 @@ class CreatorView(View):
             'comics_atribute': comics_atribute,
             'events_atribute': events_atribute,
             'series_atribute': series_atribute,
-            'stories_atibute': stories_atribute,
+            'stories_atribute': stories_atribute,
             # TOTAL ATRIBUTE RESULTS
             'total_comics_results': total_comics_results,
             'total_events_results': total_events_results,
@@ -402,7 +402,7 @@ class EventView(View):
             'comics_atribute': comics_atribute,
             'characters_atribute': characters_atribute,
             'series_atribute': series_atribute,
-            'stories_atibute': stories_atribute,
+            'stories_atribute': stories_atribute,
             'creators_atribute': creators_atribute,
             # TOTAL ATRIBUTE RESULTS
             'total_comics_results': total_comics_results,
@@ -492,7 +492,7 @@ class SerieView(View):
             'comics_atribute': comics_atribute,
             'characters_atribute': characters_atribute,
             'events_atribute': events_atribute,
-            'stories_atibute': stories_atribute,
+            'stories_atribute': stories_atribute,
             'creators_atribute': creators_atribute,
             # TOTAL ATRIBUTE RESULTS
             'total_comics_results': total_comics_results,
