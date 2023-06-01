@@ -142,28 +142,13 @@
 </nav>
 </section>
 
+<!--CREATORS INCLUDE-->
+{% include 'listTemplates/creatorsList.html' with entity='creator' entity_list=creators entities='CREATORS' title='fullName' description='suffix' %}
 
-<section id="creators">
-  <h1 id="h1per">CREATORS</h1>
-  <br>
-  <div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    {% for creator in creators %}
-    <div class="col">
-      <div class="card shadow-sm d-flex flex-column h-100">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="{{ creator.thumbnail.path }}.jpg" class="card-img-top" alt="Creador">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title text-center"><a href="{% url 'creator' %}?creator_id={{ creator.id }}">{{creator.fullName}}</a></h5>
-              <p class="card-text text-center">{{ creator.suffix }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+<!--EVENTS INCLUDE-->
+{% include 'listTemplates/baseList.html' with entity='event' entity_list=events entities='EVENTS' title='title' description='description' %}
+
+<!-- SERIES INCLUDE -->
+{% include 'listTemplates/baseList.html' with entity='serie' entity_list=series entities='SERIES' %}
 
 {% endblock %}

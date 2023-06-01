@@ -64,7 +64,7 @@ def get_creators_list(nameStartsWith, page):
     return creators, total_results
 
 
-def get_events_list(nameStartsWith):
+def get_events_list(nameStartsWith, page):
     endpoint = "events"
     params = {'nameStartsWith': nameStartsWith}
     events, total_results, page = get_data(endpoint, params, page)
