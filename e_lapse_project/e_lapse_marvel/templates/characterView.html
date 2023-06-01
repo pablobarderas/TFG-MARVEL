@@ -47,7 +47,7 @@
                 <div class="col-md-8">
                   <div>
                     <h4>{{comics_attribute.title}}</h4>
-                    <p><a class="btn btn-outline-danger" href="#" role="button">View details &raquo;</a></p>
+                    <p><a class="btn btn-outline-danger" href="{% url 'comic' %}?comic_id={{ comics_attribute.id }}" role="button">View details &raquo;</a></p>
                   </div>
                 </div>
               </div>
