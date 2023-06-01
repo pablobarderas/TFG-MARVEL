@@ -100,6 +100,7 @@ class SearchView(View):
             'characters': characters_list,
             'character_name': character_name,
             'comics': comics_list,
+            'creators': creators_list,
             'character_page': character_page,
             'comic_page': comic_page,
             'total_characters_results': total_characters_results,
