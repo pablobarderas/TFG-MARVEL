@@ -57,14 +57,14 @@ def get_comics_list(titleStartsWith, page):
     return comics, total_results
 
 
-def get_creators_list(nameStartsWith):
+def get_creators_list(nameStartsWith, page):
     endpoint = "creators"
     params = {'nameStartsWith': nameStartsWith}
     creators, total_results, page = get_data(endpoint, params, page)
-    return get_data(endpoint, params)
+    return creators, total_results
 
 
-def get_events_list(nameStartsWith):
+def get_events_list(nameStartsWith, page):
     endpoint = "events"
     params = {'nameStartsWith': nameStartsWith}
     events, total_results, page = get_data(endpoint, params, page)

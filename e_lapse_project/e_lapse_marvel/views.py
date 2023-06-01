@@ -7,7 +7,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from django.urls import reverse
-from .api_services import get_all_pages, get_attribute_data, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
+from .api_services import get_all_pages, get_attribute_data, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_creators_list, get_event_by_id, get_events_list, get_serie_by_id, get_series_list, get_story_by_id
 
 # Author: Pablo Barderas Fernández
 # Description: Views to render for use on html and provide all data to FRONT-END
@@ -80,6 +80,18 @@ class SearchView(View):
         if comics_list is None:
             comics_list = []
 
+        # TODO PAGESSS
+        creators_list, total_creators_results = get_creators_list(
+            character_name, 1)
+        if creators_list is None:
+            creators_list = []
+        events_list, total_events_results = get_events_list(character_name, 1)
+        if events_list is None:
+            events_list = []
+        series_list, total_series_results = get_series_list(character_name, 1)
+        if series_list is None:
+            series_list = []
+
         character_pages_range = range(
             1, get_all_pages(total_characters_results)+1)
 
@@ -92,6 +104,9 @@ class SearchView(View):
             'characters': characters_list,
             'character_name': character_name,
             'comics': comics_list,
+            'creators': creators_list,
+            'events': events_list,
+            'series': series_list,
             'character_page': character_page,
             'comic_page': comic_page,
             'total_characters_results': total_characters_results,
