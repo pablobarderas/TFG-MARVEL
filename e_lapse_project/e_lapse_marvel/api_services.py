@@ -8,7 +8,7 @@ import json
 
 
 # GET JSON DATA OF ATRIBUTES BY URI
-def get_atribute_data(url, page):
+def get_attribute_data(url, page):
     hash = getHash(1000)
     args = {
         'ts': 1000,

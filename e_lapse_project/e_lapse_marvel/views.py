@@ -7,7 +7,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from django.urls import reverse
-from .api_services import get_all_pages, get_atribute_data, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
+from .api_services import get_all_pages, get_attribute_data, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
 
 # Author: Pablo Barderas Fernández
 # Description: Views to render for use on html and provide all data to FRONT-END
@@ -142,13 +142,13 @@ class CharacterView(View):
             story_page = 1
 
         # GET COMICS, EVENTS, SERIES, STORIES ATRIBUTE, TOTAL RESULTS AND PAGES RANGE
-        comics_atribute, total_comics_results, comic_pages_range = Atributes.get_atribute_data(
+        comics_attribute, total_comics_results, comic_pages_range = Attributes.get_attribute_data(
             character, comic_page, 'comics')
-        events_atribute, total_events_results, event_pages_range = Atributes.get_atribute_data(
+        events_attribute, total_events_results, event_pages_range = Attributes.get_attribute_data(
             character, event_page, 'events')
-        series_atribute, total_series_results, serie_pages_range = Atributes.get_atribute_data(
+        series_attribute, total_series_results, serie_pages_range = Attributes.get_attribute_data(
             character, serie_page, 'series')
-        stories_atribute, total_stories_results, story_pages_range = Atributes.get_atribute_data(
+        stories_attribute, total_stories_results, story_pages_range = Attributes.get_attribute_data(
             character, story_page, 'stories')
 
         # GET CONTEXT
@@ -158,10 +158,10 @@ class CharacterView(View):
             'character_id': character_id,
             'character': character,
             # ATRIBUTES
-            'comics_atribute': comics_atribute,
-            'events_atribute': events_atribute,
-            'series_atribute': series_atribute,
-            'stories_atribute': stories_atribute,
+            'comics_attribute': comics_attribute,
+            'events_attribute': events_attribute,
+            'series_attribute': series_attribute,
+            'stories_attribute': stories_attribute,
             # TOTAL ATRIBUTE RESULTS
             'total_comics_results': total_comics_results,
             'total_events_results': total_events_results,
@@ -222,13 +222,13 @@ class ComicView(View):
             story_page = 1
 
         # GET CHARACTER, EVENTS, CREATORS, STORIES ATRIBUTE, TOTAL RESULTS AND PAGES RANGE
-        characters_atribute, total_characters_results, character_pages_range = Atributes.get_atribute_data(
+        characters_attribute, total_characters_results, character_pages_range = Attributes.get_attribute_data(
             comic, character_page, 'characters')
-        events_atribute, total_events_results, event_pages_range = Atributes.get_atribute_data(
+        events_attribute, total_events_results, event_pages_range = Attributes.get_attribute_data(
             comic, event_page, 'events')
-        creators_atribute, total_creators_results, creator_pages_range = Atributes.get_atribute_data(
+        creators_attribute, total_creators_results, creator_pages_range = Attributes.get_attribute_data(
             comic, creator_page, 'creators')
-        stories_atribute, total_stories_results, story_pages_range = Atributes.get_atribute_data(
+        stories_attribute, total_stories_results, story_pages_range = Attributes.get_attribute_data(
             comic, story_page, 'stories')
 
         context = {
@@ -236,10 +236,10 @@ class ComicView(View):
             'comicId': comic_id,
             'comic': comic,
             # ATRIBUTES
-            'characters_atribute': characters_atribute,
-            'events_atribute': events_atribute,
-            'creators_atribute': creators_atribute,
-            'stories_atribute': stories_atribute,
+            'characters_attribute': characters_attribute,
+            'events_attribute': events_attribute,
+            'creators_attribute': creators_attribute,
+            'stories_attribute': stories_attribute,
             # TOTAL ATRIBUTE RESULTS
             'total_characters_results': total_characters_results,
             'total_events_results': total_events_results,
@@ -300,13 +300,13 @@ class CreatorView(View):
             story_page = 1
 
         # GET COMICS, EVENTS, SERIES, STORIES ATRIBUTE, TOTAL RESULTS AND PAGES RANGE
-        comics_atribute, total_comics_results, comic_pages_range = Atributes.get_atribute_data(
+        comics_attribute, total_comics_results, comic_pages_range = Attributes.get_attribute_data(
             creator, comic_page, 'comics')
-        events_atribute, total_events_results, event_pages_range = Atributes.get_atribute_data(
+        events_attribute, total_events_results, event_pages_range = Attributes.get_attribute_data(
             creator, event_page, 'events')
-        series_atribute, total_series_results, serie_pages_range = Atributes.get_atribute_data(
+        series_attribute, total_series_results, serie_pages_range = Attributes.get_attribute_data(
             creator, serie_page, 'series')
-        stories_atribute, total_stories_results, story_pages_range = Atributes.get_atribute_data(
+        stories_attribute, total_stories_results, story_pages_range = Attributes.get_attribute_data(
             creator, 1, 'stories')
 
         context = {
@@ -314,10 +314,10 @@ class CreatorView(View):
             'creatorId': creator_id,
             'creator': creator,
             # ATRIBUTES
-            'comics_atribute': comics_atribute,
-            'events_atribute': events_atribute,
-            'series_atribute': series_atribute,
-            'stories_atribute': stories_atribute,
+            'comics_attribute': comics_attribute,
+            'events_attribute': events_attribute,
+            'series_attribute': series_attribute,
+            'stories_attribute': stories_attribute,
             # TOTAL ATRIBUTE RESULTS
             'total_comics_results': total_comics_results,
             'total_events_results': total_events_results,
@@ -383,15 +383,15 @@ class EventView(View):
             creator_page = 1
 
         # GET COMICS, CHARACTERS, SERIES, STORIES, CREATORS ATRIBUTE, TOTAL RESULTS AND PAGES RANGE
-        comics_atribute, total_comics_results, comic_pages_range = Atributes.get_atribute_data(
+        comics_attribute, total_comics_results, comic_pages_range = Attributes.get_attribute_data(
             event, comic_page, 'comics')
-        characters_atribute, total_characters_results, character_pages_range = Atributes.get_atribute_data(
+        characters_attribute, total_characters_results, character_pages_range = Attributes.get_attribute_data(
             event, character_page, 'characters')
-        series_atribute, total_series_results, serie_pages_range = Atributes.get_atribute_data(
+        series_attribute, total_series_results, serie_pages_range = Attributes.get_attribute_data(
             event, serie_page, 'series')
-        stories_atribute, total_stories_results, story_pages_range = Atributes.get_atribute_data(
+        stories_attribute, total_stories_results, story_pages_range = Attributes.get_attribute_data(
             event, story_page, 'stories')
-        creators_atribute, total_creators_results, creator_pages_range = Atributes.get_atribute_data(
+        creators_attribute, total_creators_results, creator_pages_range = Attributes.get_attribute_data(
             event, creator_page, 'creators')
 
         context = {
@@ -399,11 +399,11 @@ class EventView(View):
             'eventId': event_id,
             'event': event,
             # ATRIBUTES
-            'comics_atribute': comics_atribute,
-            'characters_atribute': characters_atribute,
-            'series_atribute': series_atribute,
-            'stories_atribute': stories_atribute,
-            'creators_atribute': creators_atribute,
+            'comics_attribute': comics_attribute,
+            'characters_attribute': characters_attribute,
+            'series_attribute': series_attribute,
+            'stories_attribute': stories_attribute,
+            'creators_attribute': creators_attribute,
             # TOTAL ATRIBUTE RESULTS
             'total_comics_results': total_comics_results,
             'total_characters_results': total_characters_results,
@@ -473,15 +473,15 @@ class SerieView(View):
             creator_page = 1
 
          # GET COMICS, CHARACTERS, SERIES, STORIES, CREATORS ATRIBUTE, TOTAL RESULTS AND PAGES RANGE
-        comics_atribute, total_comics_results, comic_pages_range = Atributes.get_atribute_data(
+        comics_attribute, total_comics_results, comic_pages_range = Attributes.get_attribute_data(
             serie, comic_page, 'comics')
-        characters_atribute, total_characters_results, character_pages_range = Atributes.get_atribute_data(
+        characters_attribute, total_characters_results, character_pages_range = Attributes.get_attribute_data(
             serie, character_page, 'characters')
-        events_atribute, total_events_results, event_pages_range = Atributes.get_atribute_data(
+        events_attribute, total_events_results, event_pages_range = Attributes.get_attribute_data(
             serie, event_page, 'events')
-        stories_atribute, total_stories_results, story_pages_range = Atributes.get_atribute_data(
+        stories_attribute, total_stories_results, story_pages_range = Attributes.get_attribute_data(
             serie, story_page, 'stories')
-        creators_atribute, total_creators_results, creator_pages_range = Atributes.get_atribute_data(
+        creators_attribute, total_creators_results, creator_pages_range = Attributes.get_attribute_data(
             serie, creator_page, 'creators')
 
         context = {
@@ -489,11 +489,11 @@ class SerieView(View):
             'serieId': serie_id,
             'serie': serie,
             # ATRIBUTES
-            'comics_atribute': comics_atribute,
-            'characters_atribute': characters_atribute,
-            'events_atribute': events_atribute,
-            'stories_atribute': stories_atribute,
-            'creators_atribute': creators_atribute,
+            'comics_attribute': comics_attribute,
+            'characters_attribute': characters_attribute,
+            'events_attribute': events_attribute,
+            'stories_attribute': stories_attribute,
+            'creators_attribute': creators_attribute,
             # TOTAL ATRIBUTE RESULTS
             'total_comics_results': total_comics_results,
             'total_characters_results': total_characters_results,
@@ -563,15 +563,15 @@ class StoryView(View):
             creator_page = 1
 
         # GET COMICS, CHARACTERS, SERIES, EVENTS, CREATORS ATRIBUTE, TOTAL RESULTS AND PAGES RANGE
-        comics_atribute, total_comics_results, comic_pages_range = Atributes.get_atribute_data(
+        comics_attribute, total_comics_results, comic_pages_range = Attributes.get_attribute_data(
             story, comic_page, 'comics')
-        characters_atribute, total_characters_results, character_pages_range = Atributes.get_atribute_data(
+        characters_attribute, total_characters_results, character_pages_range = Attributes.get_attribute_data(
             story, character_page, 'characters')
-        series_atribute, total_series_results, serie_pages_range = Atributes.get_atribute_data(
+        series_attribute, total_series_results, serie_pages_range = Attributes.get_attribute_data(
             story, serie_page, 'series')
-        events_atribute, total_events_results, event_pages_range = Atributes.get_atribute_data(
+        events_attribute, total_events_results, event_pages_range = Attributes.get_attribute_data(
             story, event_page, 'events')
-        creators_atribute, total_creators_results, creator_pages_range = Atributes.get_atribute_data(
+        creators_attribute, total_creators_results, creator_pages_range = Attributes.get_attribute_data(
             story, creator_page, 'creators')
 
         context = {
@@ -579,11 +579,11 @@ class StoryView(View):
             'storyId': story_id,
             'story': story,
             # ATRIBUTES
-            'comics_atribute': comics_atribute,
-            'characters_atribute': characters_atribute,
-            'series_atribute': series_atribute,
-            'events_atribute': events_atribute,
-            'creators_atribute': creators_atribute,
+            'comics_attribute': comics_attribute,
+            'characters_attribute': characters_attribute,
+            'series_attribute': series_attribute,
+            'events_attribute': events_attribute,
+            'creators_attribute': creators_attribute,
             # TOTAL ATRIBUTE RESULTS
             'total_comics_results': total_comics_results,
             'total_characters_results': total_characters_results,
@@ -607,21 +607,23 @@ class StoryView(View):
             'total_events_pages': get_all_pages(total_events_results),
             'total_creators_pages': get_all_pages(total_creators_results),
         }
+
+        print(comic_page)
         return render(request, 'storyView.html', context)
 
 
 # GET ATRIBUTES
-class Atributes():
+class Attributes():
 
     # GET DATA OF SPECIFIC ATRIBUTE
-    def get_atribute_data(entity, page, type_atribute):
-        atribute_list = []
-        for atribute in entity:
-            total_entity_results = atribute[type_atribute]['available']
-        atribute_list.append(
-            get_atribute_data(atribute[type_atribute]['collectionURI'], page))
+    def get_attribute_data(entity, page, type_attribute):
+        attribute_list = []
+        for attribute in entity:
+            total_entity_results = attribute[type_attribute]['available']
+        attribute_list.append(
+            get_attribute_data(attribute[type_attribute]['collectionURI'], page))
 
         comic_pages_range = range(
             1, get_all_pages(total_entity_results)+1)
 
-        return atribute_list, total_entity_results, comic_pages_range
+        return attribute_list, total_entity_results, comic_pages_range

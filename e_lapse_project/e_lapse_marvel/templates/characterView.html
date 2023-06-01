@@ -14,15 +14,15 @@
 
     <h2>This character has: {{characterId}} </h2>
 
-    {% for atribute in character %}
-    <h3 class="card-title">{{atribute.name}}</h3>
+    {% for attribute in character %}
+    <h3 class="card-title">{{attribute.name}}</h3>
     <img
-    src="{{atribute.thumbnail.path}}.jpg"
+    src="{{attribute.thumbnail.path}}.jpg"
         width="400"
         height="400"
         class="img-thumbnail"
       />
-    <p class="card-subtitle">Description: {{atribute.description}}</p>
+    <p class="card-subtitle">Description: {{attribute.description}}</p>
     {% endfor %}
   </section>
 
@@ -32,21 +32,21 @@
     <h3>Comics</h3>
     <ul>
       <li class="link">Comics disponibles: {{total_comics_results}} | Total pages: {{total_comics_pages}}</li>
-      <li class="link">{{atribute.comics}}</li>
+      <li class="link">{{attribute.comics}}</li>
 
       <div class="row row-cols-2 row-cols-md-6 g-6">
         <div class="col">
-      {% for comics in comics_atribute %}
-        {% for comics_atribute in comics %}
+      {% for comics in comics_attribute %}
+        {% for comics_attribute in comics %}
 
             <!--EACH COMIC-->
             <div class="card">
-              <img src="{{comics_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+              <img src="{{comics_attribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">
-                  <a class="link-danger" href="{% url 'comic' %}?comic_id={{ comics_atribute.id }}">{{comics_atribute.title}}</a>
+                  <a class="link-danger" href="{% url 'comic' %}?comic_id={{ comics_attribute.id }}">{{comics_attribute.title}}</a>
                 </h5>
-                <p class="card-text">{{comics_atribute.description}}</p>
+                <p class="card-text">{{comics_attribute.description}}</p>
               </div>
             </div>
 
@@ -103,21 +103,21 @@
       <h3>Events</h3>
       <ul>
         <li class="link">Eventos disponibles: {{total_events_results}} | Total pages: {{total_events_pages}}</li>
-        <li class="link">{{atribute.events}}</li>
+        <li class="link">{{attribute.events}}</li>
   
         <div class="row row-cols-2 row-cols-md-6 g-6">
           <div class="row">
-        {% for events in events_atribute %}
-          {% for events_atribute in events %}
+        {% for events in events_attribute %}
+          {% for events_attribute in events %}
   
               <!--EACH EVENT-->
               <div class="card">
-                <img src="{{events_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                <img src="{{events_attribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">
-                    <a class="link-danger" href="{% url 'event' %}?event_id={{ events_atribute.id }}">{{events_atribute.title}}</a>
+                    <a class="link-danger" href="{% url 'event' %}?event_id={{ events_attribute.id }}">{{events_attribute.title}}</a>
                   </h5>
-                  <p class="card-text">{{events_atribute.description}}</p>
+                  <p class="card-text">{{events_attribute.description}}</p>
                 </div>
               </div>
   
@@ -176,23 +176,23 @@
       <h3>Series</h3>
       <ul>
         <li class="link">Series disponibles: {{total_series_results}} | Total pages: {{total_series_pages}}</li>
-        <li class="link">{{atribute.series}}</li>
+        <li class="link">{{attribute.series}}</li>
   
         <div class="row row-cols-2 row-cols-md-6 g-6">
           <div class="col">
-        {% for series in series_atribute %}
-          {% for series_atribute in series %}
+        {% for series in series_attribute %}
+          {% for series_attribute in series %}
   
               <!--EACH SERIE-->
               <div class="card">
-                {% if series_atribute.thumbnail.path %}
-                <img src="{{series_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                {% if series_attribute.thumbnail.path %}
+                <img src="{{series_attribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
                 {% endif %}
                 <div class="card-body">
                   <h5 class="card-title">
-                    <a class="link-danger" href="{% url 'serie' %}?serie_id={{ series_atribute.id }}">{{series_atribute.title}}</a>
+                    <a class="link-danger" href="{% url 'serie' %}?serie_id={{ series_attribute.id }}">{{series_attribute.title}}</a>
                   </h5>
-                  <p class="card-text">{{series_atribute.description}}</p>
+                  <p class="card-text">{{series_attribute.description}}</p>
                 </div>
               </div>
   
@@ -248,23 +248,23 @@
       <h3>Stories</h3>
       <ul class="m-3">
         <li class="link">Stories disponibles: {{total_stories_results}} | Total pages: {{total_stories_pages}}</li>
-        <li class="link">{{atribute.stories}}</li>
+        <li class="link">{{attribute.stories}}</li>
   
         <div class="row row-cols-2 row-cols-md-6 g-6">
           <div class="col">
-        {% for stories in stories_atribute %}
-          {% for stories_atribute in stories %}
+        {% for stories in stories_attribute %}
+          {% for stories_attribute in stories %}
   
               <!--EACH STORY-->
               <div class="card">
-                {% if stories_atribute.thumbnail.path %}
-                <img src="{{stories_atribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
+                {% if stories_attribute.thumbnail.path %}
+                <img src="{{stories_attribute.thumbnail.path}}.jpg" class="card-img-top" alt="...">
                 {% endif %}
                 <div class="card-body">
                   <h5 class="card-title">
-                    <a class="link-danger" href="{% url 'story' %}?story_id={{ stories_atribute.id }}">{{stories_atribute.title}}</a>
+                    <a class="link-danger" href="{% url 'story' %}?story_id={{ stories_attribute.id }}">{{stories_attribute.title}}</a>
                   </h5>
-                  <p class="card-text">{{stories_atribute.description}}</p>
+                  <p class="card-text">{{stories_attribute.description}}</p>
                 </div>
               </div>
   
