@@ -9,6 +9,9 @@ from django.contrib import messages
 from django.urls import reverse
 from .api_services import get_all_pages, get_atribute_data, get_characters_list, get_comic_by_id, get_comics_list, get_character_by_id, get_creator_by_id, get_event_by_id, get_serie_by_id, get_story_by_id
 
+# Author: Pablo Barderas Fernández
+# Description: Views to render for use on html and provide all data to FRONT-END
+
 
 # HOME
 class HomeView(TemplateView):
@@ -266,10 +269,73 @@ class CreatorView(View):
     def get(self, request, *args, **kwargs):
         creator_id = request.GET.get('creator_id')
         creator = get_creator_by_id(creator_id)
+
+        # GET COMIC PAGE
+        comic_page = request.GET.get('comic_page')
+
+        # GET EVENT PAGE
+        event_page = request.GET.get('event_page')
+
+        # GET SERIE PAGE
+        serie_page = request.GET.get('serie_page')
+
+        # GET STORY PAGE
+        story_page = request.GET.get('story_page')
+
+        # Set page to 1 on first search
+        if not comic_page or not event_page or not serie_page or not story_page:
+            return redirect(reverse('creator') + f"?creator_id={creator_id}&comic_page=1&event_page=1&serie_page=1&story_page=1")
+
+        # PARSE PAGES TO INT
+        try:
+            comic_page = int(comic_page)
+            event_page = int(event_page)
+            serie_page = int(serie_page)
+            story_page = int(story_page)
+        except (TypeError, ValueError):
+            # If unable to convert to number, set default page value to 1
+            comic_page = 1
+            event_page = 1
+            serie_page = 1
+            story_page = 1
+
+        # GET COMICS, EVENTS, SERIES, STORIES ATRIBUTE, TOTAL RESULTS AND PAGES RANGE
+        comics_atribute, total_comics_results, comic_pages_range = Atributes.get_atribute_data(
+            creator, comic_page, 'comics')
+        events_atribute, total_events_results, event_pages_range = Atributes.get_atribute_data(
+            creator, event_page, 'events')
+        series_atribute, total_series_results, serie_pages_range = Atributes.get_atribute_data(
+            creator, serie_page, 'series')
+        stories_atribute, total_stories_results, story_pages_range = Atributes.get_atribute_data(
+            creator, 1, 'stories')
+
         context = {
             'title': 'E_Lapse',
             'creatorId': creator_id,
             'creator': creator,
+            # ATRIBUTES
+            'comics_atribute': comics_atribute,
+            'events_atribute': events_atribute,
+            'series_atribute': series_atribute,
+            'stories_atibute': stories_atribute,
+            # TOTAL ATRIBUTE RESULTS
+            'total_comics_results': total_comics_results,
+            'total_events_results': total_events_results,
+            'total_series_results': total_series_results,
+            'total_stories_results': total_stories_results,
+            # ATRIBUTE PAGES
+            'comic_page': comic_page,
+            'event_page': event_page,
+            'serie_page': serie_page,
+            'story_page': story_page,
+            'comic_pages_range': comic_pages_range,
+            'event_pages_range': event_pages_range,
+            'serie_pages_range': serie_pages_range,
+            'story_pages_range': story_pages_range,
+            'total_comics_pages': get_all_pages(total_comics_results),
+            'total_events_pages': get_all_pages(total_events_results),
+            'total_series_pages': get_all_pages(total_series_results),
+            'total_stories_pages': get_all_pages(total_stories_results),
         }
         return render(request, 'creatorView.html', context)
 

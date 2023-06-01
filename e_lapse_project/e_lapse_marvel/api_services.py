@@ -3,6 +3,9 @@ import math
 import requests
 import json
 
+# Author: Pablo Barderas Fernández
+# Description: Services that connect to marvel API and get data to be used in the views
+
 
 # GET JSON DATA OF ATRIBUTES BY URI
 def get_atribute_data(url, page):

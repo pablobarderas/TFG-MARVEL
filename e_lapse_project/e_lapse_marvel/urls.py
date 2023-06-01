@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-from .views import CreatorView, HomeView, SearchView, CharacterView, ComicView, EventView, StoryView, SerieView
+from .views import CreatorView, HomeView, CharacterView, ComicView, EventView, StoryView, SerieView, SearchView
+
+# Author: Pablo Barderas Fernández
+# Description: Connect the endpoints of django with templates
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
