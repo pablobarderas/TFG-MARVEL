@@ -1,0 +1,36 @@
+<nav aria-label="..." class="bg-dark">
+    <ul class="pagination bg-dark">
+      
+      <!-- PREVIOUS PAGE -->
+      {% if character_page > 1 %}
+        <li class="page-item">
+          <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page|add:-1 }}&comic_page={{ comic_page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#characters">Previous</a>
+        </li>
+      {% endif %}
+  
+      <!-- ALL PAGES -->
+      {% if character_page <= character_page|add:5 %}
+      {% for page in character_pages_range %}
+        {% if page >= character_page and page <= character_page|add:4 %}
+          <li class="page-item">
+            {% if page == character_page%}
+              <a class="page-link active" href="?character_name={{ character_name }}&character_page={{ page }}&comic_page={{ comic_page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#characters">{{ page }}</a>
+            {% else %}
+              <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ page }}&comic_page={{ comic_page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#characters">{{ page }}</a>
+            {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  
+      <!-- NEXT PAGE -->
+      {% if character_page < total_characters_pages %}
+      {% if total_characters_results >= 5 %}
+        <li class="page-item">
+          <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page|add:1 }}&comic_page={{ comic_page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#characters">Next</a>
+        </li>
+      {% endif %}
+      {% endif %}
+      <li>Actual page: {{character_page}} Total pages: {{total_characters_pages}} Total results: {{ total_characters_results }}</li>
+    </ul>
+  </nav>
