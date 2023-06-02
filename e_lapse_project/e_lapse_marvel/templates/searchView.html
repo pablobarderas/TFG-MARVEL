@@ -2,6 +2,7 @@
 {% block content %}
 
 <!-- SPINNERS -->
+<!--
 <section id="spinners">
 
 <div class="d-flex justify-content-center">
@@ -17,138 +18,41 @@
 </div>
 
 </section>
+-->
 
+<!-- CHARACTERS INCLUDE -->
 <section id="characters">
-<h1 id="h1per">PERSONAJES</h1>
-<br>
-<div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  {% for character in characters %}
-  <div class="col">
-    <div class="card shadow-sm d-flex flex-column h-100">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="{{ character.thumbnail.path }}.jpg" class="card-img-top" alt="Personaje">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title text-center"><a href="{% url 'character' %}?character_id={{ character.id }}">{{character.name}}</a></h5>
-            <p class="card-text text-center">{{ character.description }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-
-</div>
-<!-- PAGINATOR -->
-<nav aria-label="..." class="bg-dark">
-  <ul class="pagination bg-dark">
-    
-    <!-- PREVIOUS PAGE -->
-    {% if character_page > 1 %}
-      <li class="page-item">
-        <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page|add:-1 }}&comic_page={{ comic_page }}#characters">Previous</a>
-      </li>
-    {% endif %}
-
-    <!-- ALL PAGES -->
-    {% if character_page <= character_page|add:5 %}
-    {% for page in character_pages_range %}
-      {% if page >= character_page and page <= character_page|add:4 %}
-        <li class="page-item">
-          {% if page == character_page%}
-            <a class="page-link active" href="?character_name={{ character_name }}&character_page={{ page }}&comic_page={{ comic_page }}#characters">{{ page }}</a>
-          {% else %}
-            <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ page }}&comic_page={{ comic_page }}#characters">{{ page }}</a>
-          {% endif %}
-        </li>
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-
-    <!-- NEXT PAGE -->
-    {% if character_page < total_characters_pages %}
-    {% if total_characters_results >= 5 %}
-      <li class="page-item">
-        <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page|add:1 }}&comic_page={{ comic_page }}#characters">Next</a>
-      </li>
-    {% endif %}
-    {% endif %}
-    <li>Actual page: {{character_page}} Total pages: {{total_characters_pages}}</li>
-  </ul>
-</nav>
+  {% include 'listTemplates/charactersList.html' with entity='character' entity_list=characters entities='CHARACTERS' %}
+  <!-- CHARACTERS PAGINATOR -->
+  {% include 'paginatorsTemplates/characterListPaginator.html' %}
 </section>
 
+<!-- COMICS INCLUDE -->
 <section id="comics">
-<h1 id="h1per">COMICS</h1>
-<br>
-<div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  {% for comic in comics %}
-  <div class="col">
-    <div class="card shadow-sm d-flex flex-column h-100">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="{{ comic.thumbnail.path }}.jpg" class="card-img-top" alt="Personaje">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title text-center"><a href="{% url 'comic' %}?comic_id={{ comic.id }}">{{comic.title}}</a></h5>
-            <p class="card-text text-center">{{ comic.description }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-</div>
-
-<!-- PAGINATOR -->
-<nav aria-label="...">
-  <ul class="pagination bg-dark">
-    
-    <!-- PREVIOUS PAGE -->
-    {% if comic_page > 1 %}
-      <li class="page-item">
-        <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page|add:-1 }}#comics">Previous</a>
-      </li>
-    {% endif %}
-
-    {% if comic_page <= comic_page|add:5 %}
-    {% for page in comic_pages_range %}
-      {% if page >= comic_page and page <= comic_page|add:4 %}
-        <li class="page-item">
-          {% if page == comic_page %}
-            <a class="page-link active" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ page }}#comics">{{ page }}</a>
-            {% else %}
-            <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ page }}#comics">{{ page }}</a>
-          {% endif %}
-        </li>
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-  
-
-     <!-- NEXT PAGE -->
-     {% if comic_page < total_comics_pages %}
-     {% if total_comics_results >= 5 %}
-       <li class="page-item">
-         <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page|add:1 }}#comics">Next</a>
-       </li>
-     {% endif %}
-     {% endif %}
-     <li>Actual page: {{comic_page}} Total pages: {{total_comics_pages}}</li>
-  </ul>
-</nav>
+  {% include 'listTemplates/baseList.html' with entity='comic' entity_list=comics entities='COMICS' %}
+  <!-- COMICS PAGINATOR -->
+  {% include 'paginatorsTemplates/comicListPaginator.html' %}
 </section>
 
 <!--CREATORS INCLUDE-->
-{% include 'listTemplates/creatorsList.html' with entity='creator' entity_list=creators entities='CREATORS' %}
+<section id="creators"></section>
+  {% include 'listTemplates/creatorsList.html' with entity='creator' entity_list=creators entities='CREATORS' %}
+   <!-- CREATORS PAGINATOR -->
+   {% include 'paginatorsTemplates/creatorsListPaginator.html' %}
+</section>
 
 <!--EVENTS INCLUDE-->
-{% include 'listTemplates/baseList.html' with entity='event' entity_list=events entities='EVENTS' %}
+<section id="events">
+  {% include 'listTemplates/baseList.html' with entity='event' entity_list=events entities='EVENTS' %}
+  <!-- EVENTS PAGINATOR -->
+  {% include 'paginatorsTemplates/eventListPaginator.html' %}
+</section>
 
-<!-- SERIES INCLUDE -->
-{% include 'listTemplates/baseList.html' with entity='serie' entity_list=series entities='SERIES' %}
+<!--SERIES INCLUDE-->
+<section id="series">
+  {% include 'listTemplates/baseList.html' with entity='serie' entity_list=series entities='SERIES' %}
+  <!-- SERIES PAGINATOR -->
+  {% include 'paginatorsTemplates/serieListPaginator.html' %}
+</section>
 
 {% endblock %}

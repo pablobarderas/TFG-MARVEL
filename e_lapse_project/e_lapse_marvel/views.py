@@ -50,25 +50,36 @@ class SearchView(View):
         # GET COMIC PAGE
         comic_page = request.GET.get('comic_page')
 
+        # GET EVENTS PAGE
+        event_page = request.GET.get('event_page')
+
+        # GET CREATORS PAGE
+        creator_page = request.GET.get('creator_page')
+
+        # GET SERIES PAGE
+        serie_page = request.GET.get('serie_page')
+
         if not character_name:
             return HttpResponse('No se proporcionó ningún parámetro de búsqueda.')
 
-         # Set page to 1 on first search
-        if not comic_page:
-            return redirect(reverse('search') + f"?character_name={character_name}&character_page=1&comic_page=1")
-
         # Set page to 1 on first search
-        if not character_page:
-            return redirect(reverse('search') + f"?character_name={character_name}&character_page=1&comic_page=1")
+        if not character_page or not comic_page or not event_page or not creator_page or not serie_page:
+            return redirect(reverse('search') + f"?character_name={character_name}&character_page=1&comic_page=1&event_page=1&creator_page=1&serie_page=1")
 
         # PARSE CHARACTER PAGE TO INT
         try:
             character_page = int(character_page)
             comic_page = int(comic_page)
+            event_page = int(event_page)
+            creator_page = int(creator_page)
+            serie_page = int(serie_page)
         except (TypeError, ValueError):
             # If unable to convert to number, set default page value to 1
             character_page = 1
             comic_page = 1
+            event_page = 1
+            creator_page = 1
+            serie_page = 1
 
         # GET ALL CHARACTERS AND COMICS, AND IT'S TOTAL RESULTS FROM SEARCH
         characters_list, total_characters_results = get_characters_list(
@@ -82,39 +93,65 @@ class SearchView(View):
 
         # TODO PAGESSS
         creators_list, total_creators_results = get_creators_list(
-            character_name, 1)
+            character_name, creator_page)
         if creators_list is None:
             creators_list = []
-        events_list, total_events_results = get_events_list(character_name, 1)
+        events_list, total_events_results = get_events_list(
+            character_name, event_page)
         if events_list is None:
             events_list = []
-        series_list, total_series_results = get_series_list(character_name, 1)
+        series_list, total_series_results = get_series_list(
+            character_name, serie_page)
         if series_list is None:
             series_list = []
 
+        # GET ALL PAGES RANGES
         character_pages_range = range(
             1, get_all_pages(total_characters_results)+1)
 
         comic_pages_range = range(
             1, get_all_pages(total_comics_results)+1)
 
+        event_pages_range = range(
+            1, get_all_pages(total_events_results)+1)
+
+        creator_pages_range = range(
+            1, get_all_pages(total_creators_results)+1)
+
+        serie_pages_range = range(
+            1, get_all_pages(total_series_results)+1)
+
         # CONTEXT TO FRONT-END
         context = {
             'title': 'E_Lapse',
+            # RESULTS LIST
             'characters': characters_list,
             'character_name': character_name,
             'comics': comics_list,
-            'creators': creators_list,
             'events': events_list,
+            'creators': creators_list,
             'series': series_list,
+            # LISTS PAGES
             'character_page': character_page,
             'comic_page': comic_page,
+            'event_page': event_page,
+            'creator_page': creator_page,
+            'serie_page': serie_page,
             'total_characters_results': total_characters_results,
             'total_comics_results': total_comics_results,
+            'total_events_results': total_events_results,
+            'total_creators_results': total_creators_results,
+            'total_series_results': total_series_results,
             'character_pages_range': character_pages_range,
             'comic_pages_range': comic_pages_range,
+            'event_pages_range': event_pages_range,
+            'creator_pages_range': creator_pages_range,
+            'serie_pages_range': serie_pages_range,
             'total_comics_pages': get_all_pages(total_comics_results),
             'total_characters_pages': get_all_pages(total_characters_results),
+            'total_events_pages': get_all_pages(total_events_results),
+            'total_creators_pages': get_all_pages(total_creators_results),
+            'total_series_pages': get_all_pages(total_series_results)
         }
         return render(request, 'searchView.html', context)
 
