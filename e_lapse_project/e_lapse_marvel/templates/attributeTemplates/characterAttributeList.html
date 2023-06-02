@@ -31,7 +31,7 @@
       <!-- PREVIOUS PAGE -->
       {% if character_page > 1 %}
         <li class="page-item">
-          <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page|add:-1 }}&comic_page={{ comic_page }}#characters">Previous</a>
+          <a class="page-link bg-dark" href="?character_id={{ character_id }}&character_page={{ character_page|add:-1 }}&comic_page={{ comic_page }}#characters">Previous</a>
         </li>
       {% endif %}
   
@@ -41,9 +41,9 @@
         {% if page >= character_page and page <= character_page|add:4 %}
           <li class="page-item">
             {% if page == character_page%}
-              <a class="page-link active" href="?character_name={{ character_name }}&character_page={{ page }}&comic_page={{ comic_page }}#characters">{{ page }}</a>
+              <a class="page-link active" href="?character_id={{ character_id }}&character_page={{ page }}&comic_page={{ comic_page }}#characters">{{ page }}</a>
             {% else %}
-              <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ page }}&comic_page={{ comic_page }}#characters">{{ page }}</a>
+              <a class="page-link bg-dark" href="?character_id={{ character_id }}&character_page={{ page }}&comic_page={{ comic_page }}#characters">{{ page }}</a>
             {% endif %}
           </li>
         {% endif %}
@@ -54,7 +54,7 @@
       {% if character_page < total_characters_pages %}
       {% if total_characters_results >= 5 %}
         <li class="page-item">
-          <a class="page-link" href="?character_name={{ character_name }}&character_page={{ character_page|add:1 }}&comic_page={{ comic_page }}#characters">Next</a>
+          <a class="page-link" href="?character_id={{ character_id }}&character_page={{ character_page|add:1 }}&comic_page={{ comic_page }}#characters">Next</a>
         </li>
       {% endif %}
       {% endif %}
