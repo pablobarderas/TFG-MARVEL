@@ -1,5 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
+<nav class="navbar bg-gradient">
+  <div class="container-fluid justify-content-center bg-opacity-100">
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#character">Personajes</a>
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#comics">Comics</a>
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#series">Series</a>
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#stories">Stories</a>
+  </div>
+</nav>
+
 {% for attribute in event %}
 <section class="row featurette" id="event_info">
   <div class="col-md-7">
@@ -29,6 +38,14 @@
 
 {% include 'attributeTemplates/comicAttributeList.html' %}
 
+<!-- SERIES OF CHARACTER -->
+
+{% include 'attributeTemplates/serieAttributeList.html' %}
+
+
+<!-- STORIES OF CHARACTER -->
+
+{% include 'attributeTemplates/storiesAttributeList.html' %}
 
 {% endfor %}
 {% endblock %}
