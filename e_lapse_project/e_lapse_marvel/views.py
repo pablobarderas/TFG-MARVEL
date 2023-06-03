@@ -660,7 +660,6 @@ class StoryView(View):
             'total_creators_pages': get_all_pages(total_creators_results),
         }
 
-        print(comic_page)
         return render(request, 'storyView.html', context)
 
 
