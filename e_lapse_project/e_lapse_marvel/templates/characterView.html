@@ -31,7 +31,7 @@
 
 
     <!-- COMICS OF CHARACTER -->
-    {% include 'attributeTemplates/comicAttributeList.html' with entity='character' %}
+    {% include 'attributeTemplates/comicAttributeList.html' with entity='comicN' %}
     <!--COMICS PAGINATOR-->
     <nav aria-label="comics paginator" class="m-3">
   <ul class="pagination bg-dark">
@@ -152,10 +152,6 @@
 
     <!-- STORIES OF CHARACTER -->
     {% include 'attributeTemplates/storiesAttributeList.html' with entity='storiesN' %}
-
-    <!-- CREATORS OF CHARACTER -->
-
-    {% include 'attributeTemplates/creatorAttributeList.html' with entity='creatorN' %}
     <nav aria-label="stories paginator">
       <ul class="pagination bg-dark">
         
@@ -192,6 +188,7 @@
          <li>Actual page: {{story_page}} Total pages: {{total_stories_pages}}</li>
       </ul>
     </nav>
+
 
   {% endfor %}
 {% endblock %}

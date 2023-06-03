@@ -12,7 +12,6 @@
 </nav>
 
 
-
 {% for attribute in comic %}
 <!-- CHARACTER WITH IMAGE AND DESCRIPTION -->
 <section class="row featurette" id="character_info">
@@ -33,22 +32,163 @@
 
 
 <!-- CHARACTER OF COMIC -->
+{% include 'attributeTemplates/characterAttributeList.html' with entity='comicT' %}
+<nav aria-label="characters paginator" class="m-3">
+  <ul class="pagination bg-dark">
+    
+    <!-- PREVIOUS PAGE -->
+    {% if character_page > 1 %}
+      <li class="page-item">
+          <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page|add:-1 }}&event_page={{ event_page }}&creator_page={{ creator_page }}&story_page={{ story_page }}#characters">Previous</a>
+      </li>
+    {% endif %}
 
-{% include 'attributeTemplates/characterAttributeList.html' with entity='comic' %}
+    {% if character_page <= character_page|add:5 %}
+    {% for page in character_pages_range %}
+      {% if page >= character_page and page <= character_page|add:4 %}
+        <li class="page-item">
+          {% if page == character_page %}
+            <a class="page-link active" href="?comic_id={{ attribute.id }}&character_page={{ page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&story_page={{ story_page }}#characters">{{ page }}</a>
+            {% else %}
+            <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&story_page={{ story_page }}#characters">{{ page }}</a>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
 
-<!--EVENTS OF CHARACTER-->
+     <!-- NEXT PAGE -->
+     {% if character_page < total_characters_pages %}
+     {% if total_characters_results >= 5 %}
+       <li class="page-item">
+         <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page|add:1 }}&event_page={{ event_page }}&creator_page={{ creator_page }}&story_page={{ story_page }}#characters">Next</a>
+       </li>
+     {% endif %}
+     {% endif %}
+     <li>Actual page: {{character_page}} Total pages: {{total_characters_pages}}</li>
+  </ul>
+</nav>
 
-{% include 'attributeTemplates/eventAttributeList.html' %}
 
-<!-- SERIES OF CHARACTER -->
+<!--EVENTS OF COMIC-->
+{% include 'attributeTemplates/eventAttributeList.html' with entity='eventT' %}
+<nav aria-label="events paginator" class="m-3">
+  <ul class="pagination bg-dark">
+    
+    <!-- PREVIOUS PAGE -->
+    {% if event_page > 1 %}
+      <li class="page-item">
+          <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ event_page|add:-1 }}&creator_page={{ creator_page }}&story_page={{ story_page }}#events">Previous</a>
+      </li>
+    {% endif %}
 
-{% include 'attributeTemplates/serieAttributeList.html' %}
+    {% if event_page <= event_page|add:5 %}
+    {% for page in event_pages_range %}
+      {% if page >= event_page and page <= event_page|add:4 %}
+        <li class="page-item">
+          {% if page == event_page %}
+            <a class="page-link active" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ page }}&creator_page={{ creator_page }}&story_page={{ story_page }}#events">{{ page }}</a>
+            {% else %}
+            <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ page }}&creator_page={{ creator_page }}&story_page={{ story_page }}#events">{{ page }}</a>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+
+     <!-- NEXT PAGE -->
+     {% if event_page < total_events_pages %}
+     {% if total_events_results >= 5 %}
+       <li class="page-item">
+         <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ event_page|add:1 }}&creator_page={{ creator_page }}&story_page={{ story_page }}#events">Next</a>
+       </li>
+     {% endif %}
+     {% endif %}
+     <li>Actual page: {{event_page}} Total pages: {{total_events_pages}}</li>
+  </ul>
+</nav>
 
 
-<!-- STORIES OF CHARACTER -->
+<!-- STORIES OF COMIC -->
+{% include 'attributeTemplates/storiesAttributeList.html' with entity='storyT' %}
+<nav aria-label="stories paginator" class="m-3">
+  <ul class="pagination bg-dark">
+    
+    <!-- PREVIOUS PAGE -->
+    {% if story_page > 1 %}
+      <li class="page-item">
+          <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&story_page={{ story_page|add:-1 }}#stories">Previous</a>
+      </li>
+    {% endif %}
 
-{% include 'attributeTemplates/storiesAttributeList.html' %}
+    {% if story_page <= story_page|add:5 %}
+    {% for page in story_pages_range %}
+      {% if page >= story_page and page <= story_page|add:4 %}
+        <li class="page-item">
+          {% if page == story_page %}
+            <a class="page-link active" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&story_page={{ page }}#stories">{{ page }}</a>
+            {% else %}
+            <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&story_page={{ page }}#stories">{{ page }}</a>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
 
+     <!-- NEXT PAGE -->
+     {% if story_page < total_stories_pages %}
+     {% if total_stories_results >= 5 %}
+       <li class="page-item">
+         <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ event_page }}&creator_page={{ creator_page }}&story_page={{ story_page|add:1 }}#stories">Next</a>
+       </li>
+     {% endif %}
+     {% endif %}
+     <li>Actual page: {{story_page}} Total pages: {{total_stories_pages}}</li>
+  </ul>
+</nav>
+
+
+<!-- CREATORS OF COMIC -->
+{% include 'attributeTemplates/creatorAttributeList.html' with entity='creatorT' %}
+<nav aria-label="creators paginator" class="m-3">
+      <ul class="pagination bg-dark">
+        
+        <!-- PREVIOUS PAGE -->
+        {% if creator_page > 1 %}
+          <li class="page-item">
+              <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ event_page }}&creator_page={{ creator_page|add:-1 }}&story_page={{ story_page }}#stories">Previous</a>
+          </li>
+        {% endif %}
+    
+        {% if creator_page <= creator_page|add:5 %}
+        {% for page in creator_pages_range %}
+          {% if page >= creator_page and page <= creator_page|add:4 %}
+            <li class="page-item">
+              {% if page == creator_page %}
+                <a class="page-link active" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ page }}&creator_page={{ creator_page }}&story_page={{ page }}#stories">{{ page }}</a>
+                {% else %}
+                <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ event_page }}&creator_page={{ page }}&story_page={{ story_page }}#creators">{{ page }}</a>
+              {% endif %}
+            </li>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      
+    
+         <!-- NEXT PAGE -->
+         {% if creator_page < total_stories_pages %}
+         {% if total_stories_results >= 5 %}
+           <li class="page-item">
+             <a class="page-link bg-dark" href="?comic_id={{ attribute.id }}&character_page={{ character_page }}&event_page={{ event_page }}&creator_page={{ creator_page|add:1 }}&story_page={{ story_page }}#creators">Next</a>
+           </li>
+         {% endif %}
+         {% endif %}
+         <li>Actual page: {{creator_page}} Total pages: {{total_creators_pages}}</li>
+      </ul>
+</nav>
 
 {% endfor %}
 {% endblock %}
