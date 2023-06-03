@@ -5,6 +5,10 @@
 
 }
 
+.dark-bg {
+  background-color: #333; /* Cambia el color a tu elección */
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -108,7 +112,7 @@
 
   #h1per{
     color:#e23636;
-    background-color: white;
+    background-color: #313030;
     text-align: center;
     margin-left: 40%;
     margin-right: 40%;
@@ -128,7 +132,7 @@
   }
 
   #per{
-    background-color: darkgrey;
+    background-color: #313030;
   }
 
 
