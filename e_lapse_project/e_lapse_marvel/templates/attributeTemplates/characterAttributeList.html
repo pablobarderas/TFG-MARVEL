@@ -1,6 +1,14 @@
 <section id="character" class="container marketing">
     <h2 class="featurette-heading alig" style="margin-bottom: 40px;text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
-     'Trebuchet MS', sans-serif;">Personajes que salen en {{attribute_entity}}</h2>
+     'Trebuchet MS', sans-serif;">
+     
+     <!-- {% if entity == "character" %}
+     Personajes que salen en {{attribute.name}}</h2>
+      {% elif entity == "event" %}
+     Eventos que salen en {{attribute.title}}</h2>
+    {% else %}
+     Otra condición que deseas evaluar
+   {% endif %} -->
      <ul>
         <li>Actual page: {{character_page}} Total pages: {{total_characters_pages}}</li>
      </ul>
