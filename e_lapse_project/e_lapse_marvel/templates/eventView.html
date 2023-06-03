@@ -6,6 +6,7 @@
     <a class="btn me-2 btn-outline-danger btn-lg" href="#comics">Comics</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#series">Series</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#stories">Stories</a>
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#creators">Creators</a>
   </div>
 </nav>
 
@@ -16,7 +17,7 @@
     'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: bold;">{{attribute.title}}</h2>
     <h4 class=" alig" style="margin-bottom: 20px;text-align: center;font-family: 'Lucida Sans', 'Lucida Sans Regular', 
     'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: bold;">Start: {{attribute.start}} - End: {{attribute.end}} </h4>
-    <hr>
+    <hr style="margin-left: 20px;">
     <p class="lead" style="text-align: left; font-size: 28px;margin-left: 20px;">{{attribute.description}}</p>
   </div>
   <div class="col-md-5 d-flex justify-content-end">
@@ -29,23 +30,34 @@
 </section>
 
 
-<!-- CHARACTER OF EVENTS -->
-
-{% include 'attributeTemplates/characterAttributeList.html' with entity="event" %}
-
-
-<!-- COMICS OF EVENTS -->
-
-{% include 'attributeTemplates/comicAttributeList.html' %}
-
-<!-- SERIES OF CHARACTER -->
-
-{% include 'attributeTemplates/serieAttributeList.html' %}
+<!-- CHARACTER OF EVENT -->
+<section id="characters" class="container marketing">
+  {% include 'attributeTemplates/characterAttributeList.html' %}
+</section>
 
 
-<!-- STORIES OF CHARACTER -->
+<!-- COMICS OF EVENT -->
+<section id="comics" class="container marketing">
+  {% include 'attributeTemplates/comicAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/storiesAttributeList.html' %}
+
+<!-- SERIES OF EVENT -->
+<section id="series" class="container marketing">
+  {% include 'attributeTemplates/serieAttributeList.html' %}
+</section>
+
+
+<!-- STORIES OF EVENT -->
+<section id="stories" class="container marketing">
+  {% include 'attributeTemplates/storiesAttributeList.html' %}
+</section>
+
+<!-- CREATORS OF EVENT -->
+<section id="creators" class="container marketing">
+  {% include 'attributeTemplates/creatorAttributeList.html' %}
+</section>
+
 
 {% endfor %}
 {% endblock %}

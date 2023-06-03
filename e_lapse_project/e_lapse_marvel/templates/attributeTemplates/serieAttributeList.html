@@ -1,6 +1,5 @@
-<section id="series" class="container marketing">
     <h2 class="featurette-heading alig" style="margin-bottom: 40px;text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
-     'Trebuchet MS', sans-serif;">Series de {{attribute_entity}}</h2>
+     'Trebuchet MS', sans-serif;">SERIES</h2>
      <ul>
         <li class="link">Series disponibles: {{total_series_results}} | Total pages: {{total_series_pages}}</li>
      </ul>
@@ -24,41 +23,4 @@
           </div>
         {% endfor %}
       {% endfor %}
-     <!-- SERIES PAGINATOR-->
-  <nav aria-label="series paginator" class="m-3">
-    <ul class="pagination bg-dark">
-      
-      <!-- PREVIOUS PAGE -->
-      {% if serie_page > 1 %}
-        <li class="page-item">
-          <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ serie_page|add:-1 }}&story_page={{ story_page }}#series">Previous</a>
-        </li>
-      {% endif %}
-  
-      {% if serie_page <= serie_page|add:5 %}
-      {% for page in serie_pages_range %}
-        {% if page >= serie_page and page <= serie_page|add:4 %}
-          <li class="page-item">
-            {% if page == serie_page %}
-              <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ page }}&story_page={{ story_page }}#series">{{ page }}</a>
-              {% else %}
-              <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ page }}&story_page={{ story_page }}#series">{{ page }}</a>
-            {% endif %}
-          </li>
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-    
-  
-       <!-- NEXT PAGE -->
-       {% if serie_page < total_series_pages %}
-       {% if total_series_results >= 5 %}
-         <li class="page-item">
-           <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page }}&serie_page={{ serie_page|add:1 }}&story_page={{ story_page }}#series">Next</a>
-         </li>
-       {% endif %}
-       {% endif %}
-       <li>Actual page: {{serie_page}} Total pages: {{total_series_pages}}</li>
-    </ul>
-  </nav>
-</section>
+

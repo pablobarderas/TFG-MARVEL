@@ -6,6 +6,7 @@
     <a class="btn me-2 btn-outline-danger btn-lg" href="#comics">Comics</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#events">Eventos</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#stories">Stories</a>
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#creators">Creators</a>
   </div>
 </nav>
 
@@ -16,7 +17,7 @@
     'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: bold;">{{attribute.title}}</h2>
     <h4 class=" alig" style="margin-bottom: 20px;text-align: center;font-family: 'Lucida Sans', 'Lucida Sans Regular', 
     'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: bold;">Start: {{attribute.startYear}} - End: {{attribute.endYear}} </h4>
-    <hr>
+    <hr style="margin-left: 20px;">
     <p class="lead" style="text-align: left; font-size: 28px;margin-left: 20px;">{{attribute.description}}</p>
   </div>
   <div class="col-md-5 d-flex justify-content-end">
@@ -28,23 +29,35 @@
   </img>
 </section>
 
-<!-- CHARACTER OF SERIES -->
 
-{% include 'attributeTemplates/characterAttributeList.html' %}
+<!-- CHARACTERS OF SERIE -->
+<section id="characters" class="container marketing">
+  {% include 'attributeTemplates/characterAttributeList.html' %}
+</section>
 
 
-<!-- COMICS OF SERIES -->
+<!-- COMICS OF SERIE -->
+<section id="comics" class="container marketing">
+  {% include 'attributeTemplates/comicAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/comicAttributeList.html' %}
 
-<!--EVENTS OF SERIES-->
+<!--EVENTS OF SERIE-->
+<section id="events" class="container marketing">
+  {% include 'attributeTemplates/eventAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/eventAttributeList.html' %}
 
-<!-- STORIES OF SERIES -->
+<!-- STORIES OF SERIE -->
+<section id="stories" class="container marketing">
+  {% include 'attributeTemplates/storiesAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/storiesAttributeList.html' %}
 
+<!-- CREATORS OF SERIE -->
+<section id="creators" class="container marketing">
+  {% include 'attributeTemplates/creatorAttributeList.html' %}
+</section>
 
 {% endfor %}
 {% endblock %}
