@@ -30,10 +30,11 @@
   </section>
 
 
-    <!-- COMICS OF CHARACTER -->
-    {% include 'attributeTemplates/comicAttributeList.html' with entity='comicN' %}
+  <!-- COMICS OF CHARACTER -->
+  <section id="comics" class="container marketing">
+    {% include 'attributeTemplates/comicAttributeList.html' %}
     <!--COMICS PAGINATOR-->
-    <nav aria-label="comics paginator" class="m-3">
+    <nav aria-label="comics paginator" class="w-100">
   <ul class="pagination bg-dark">
     
     <!-- PREVIOUS PAGE -->
@@ -69,12 +70,13 @@
      <li>Actual page: {{comic_page}} Total pages: {{total_comics_pages}}</li>
   </ul>
     </nav>
+  </section>
 
-
-    <!--EVENTS OF CHARACTER -->
-    {% include 'attributeTemplates/eventAttributeList.html' with entity='eventN' %}
+  <!--EVENTS OF CHARACTER -->
+  <section id="events" class="container marketing">
+    {% include 'attributeTemplates/eventAttributeList.html' %}
     <!-- EVENTS PAGINATOR -->
-    <nav aria-label="events paginator">
+    <nav aria-label="events paginator" class="w-100">
       <ul class="pagination bg-dark">
         
         <!-- PREVIOUS PAGE -->
@@ -110,10 +112,13 @@
          <li>Actual page: {{event_page}} Total pages: {{total_events_pages}}</li>
       </ul>
     </nav>
+  </section>
 
-    <!-- SERIES OF CHARACTER -->
-    {% include 'attributeTemplates/serieAttributeList.html' with entity='seriesN' %}
-    <nav aria-label="series paginator">
+  <!-- SERIES OF CHARACTER -->
+  <section id="series" class="container marketing">
+    {% include 'attributeTemplates/serieAttributeList.html' %}
+    <!-- SERIES PAGINATOR -->
+    <nav aria-label="series paginator" class="w-100">
       <ul class="pagination bg-dark">
         
         <!-- PREVIOUS PAGE -->
@@ -149,10 +154,14 @@
          <li>Actual page: {{serie_page}} Total pages: {{total_series_pages}}</li>
       </ul>
     </nav>
+  </section>
 
-    <!-- STORIES OF CHARACTER -->
-    {% include 'attributeTemplates/storiesAttributeList.html' with entity='storiesN' %}
-    <nav aria-label="stories paginator">
+
+  <!-- STORIES OF CHARACTER -->
+  <section id="stories" class="container marketing">
+    {% include 'attributeTemplates/storiesAttributeList.html' %}
+    <!-- STORIES PAGINATOR -->
+    <nav aria-label="stories paginator" class="w-100">
       <ul class="pagination bg-dark">
         
         <!-- PREVIOUS PAGE -->
@@ -188,6 +197,7 @@
          <li>Actual page: {{story_page}} Total pages: {{total_stories_pages}}</li>
       </ul>
     </nav>
+  </section>
 
 
   {% endfor %}

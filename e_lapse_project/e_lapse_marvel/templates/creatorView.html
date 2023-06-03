@@ -29,10 +29,15 @@
 
 
 
+<!-- CHARACTER OF CREATOR -->
+<section id="characters" class="container marketing">
+  {% include 'attributeTemplates/characterAttributeList.html' %}
+</section>
 
 <!-- COMICS OF CREATOR -->
-{% include 'attributeTemplates/comicAttributeList.html' with entity='creator' %}
-<nav aria-label="comics paginator" class="m-3">
+<section id="comics" class="container marketing">
+  {% include 'attributeTemplates/comicAttributeList.html' %}
+  <nav aria-label="comics paginator" class="m-3">
   <ul class="pagination bg-dark">
     
     <!-- PREVIOUS PAGE -->
@@ -67,23 +72,27 @@
      {% endif %}
      <li>Actual page: {{comic_page}} Total pages: {{total_comics_pages}}</li>
   </ul>
-    </nav>
+  </nav>
+</section>
+
 
 <!--EVENTS OF CREATOR-->
+<section id="events" class="container marketing">
+  {% include 'attributeTemplates/eventAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/eventAttributeList.html' %}
 
 <!-- SERIES OF CREATOR -->
+<section id="series" class="container marketing">
+  {% include 'attributeTemplates/serieAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/serieAttributeList.html' %}
 
 <!-- STORIES OF CREATOR -->
+<section id="stories" class="container marketing">
+  {% include 'attributeTemplates/storiesAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/storiesAttributeList.html' %}
-
-<!-- CHARACTER OF CREATOR -->
-
-{% include 'attributeTemplates/characterAttributeList.html' %}
 
 
 {% endfor %}

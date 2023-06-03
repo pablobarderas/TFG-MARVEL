@@ -30,23 +30,34 @@
 </section>
 
 
-<!-- CHARACTER OF EVENTS -->
-
-{% include 'attributeTemplates/characterAttributeList.html' with entity="characterT" %}
-
-
-<!-- COMICS OF EVENTS -->
-
-{% include 'attributeTemplates/comicAttributeList.html' %}
-
-<!-- SERIES OF CHARACTER -->
-
-{% include 'attributeTemplates/serieAttributeList.html' %}
+<!-- CHARACTER OF EVENT -->
+<section id="characters" class="container marketing">
+  {% include 'attributeTemplates/characterAttributeList.html' %}
+</section>
 
 
-<!-- STORIES OF CHARACTER -->
+<!-- COMICS OF EVENT -->
+<section id="comics" class="container marketing">
+  {% include 'attributeTemplates/comicAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/storiesAttributeList.html' %}
+
+<!-- SERIES OF EVENT -->
+<section id="series" class="container marketing">
+  {% include 'attributeTemplates/serieAttributeList.html' %}
+</section>
+
+
+<!-- STORIES OF EVENT -->
+<section id="stories" class="container marketing">
+  {% include 'attributeTemplates/storiesAttributeList.html' %}
+</section>
+
+<!-- CREATORS OF EVENT -->
+<section id="creators" class="container marketing">
+  {% include 'attributeTemplates/creatorAttributeList.html' %}
+</section>
+
 
 {% endfor %}
 {% endblock %}

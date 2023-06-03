@@ -30,24 +30,34 @@
 </section>
 
 
-<!-- CHARACTER OF SERIES -->
-
-{% include 'attributeTemplates/characterAttributeList.html' %}
-
-
-<!-- COMICS OF SERIES -->
-
-{% include 'attributeTemplates/comicAttributeList.html' %}
-
-<!--EVENTS OF SERIES-->
-
-{% include 'attributeTemplates/eventAttributeList.html' %}
+<!-- CHARACTERS OF SERIE -->
+<section id="characters" class="container marketing">
+  {% include 'attributeTemplates/characterAttributeList.html' %}
+</section>
 
 
-<!-- STORIES OF SERIES -->
+<!-- COMICS OF SERIE -->
+<section id="comics" class="container marketing">
+  {% include 'attributeTemplates/comicAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/storiesAttributeList.html' %}
 
+<!--EVENTS OF SERIE-->
+<section id="events" class="container marketing">
+  {% include 'attributeTemplates/eventAttributeList.html' %}
+</section>
+
+
+<!-- STORIES OF SERIE -->
+<section id="stories" class="container marketing">
+  {% include 'attributeTemplates/storiesAttributeList.html' %}
+</section>
+
+
+<!-- CREATORS OF SERIE -->
+<section id="creators" class="container marketing">
+  {% include 'attributeTemplates/creatorAttributeList.html' %}
+</section>
 
 {% endfor %}
 {% endblock %}

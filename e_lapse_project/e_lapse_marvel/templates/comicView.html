@@ -31,9 +31,11 @@
 </section>
 
 
-<!-- CHARACTER OF COMIC -->
-{% include 'attributeTemplates/characterAttributeList.html' with entity='comicT' %}
-<nav aria-label="characters paginator" class="m-3">
+<!-- CHARACTERS OF COMIC -->
+<section id="characters" class="container marketing">
+  {% include 'attributeTemplates/characterAttributeList.html' %}
+  <!-- CHARACTERS PAGINATOR -->
+  <nav aria-label="characters paginator" class="m-3">
   <ul class="pagination bg-dark">
     
     <!-- PREVIOUS PAGE -->
@@ -68,12 +70,15 @@
      {% endif %}
      <li>Actual page: {{character_page}} Total pages: {{total_characters_pages}}</li>
   </ul>
-</nav>
+  </nav>
+</section>
 
 
 <!--EVENTS OF COMIC-->
-{% include 'attributeTemplates/eventAttributeList.html' with entity='eventT' %}
-<nav aria-label="events paginator" class="m-3">
+<section id="comics" class="container marketing">
+  {% include 'attributeTemplates/eventAttributeList.html' %}
+  <!-- EVENTS PAGINATOR -->
+  <nav aria-label="events paginator" class="m-3">
   <ul class="pagination bg-dark">
     
     <!-- PREVIOUS PAGE -->
@@ -108,12 +113,15 @@
      {% endif %}
      <li>Actual page: {{event_page}} Total pages: {{total_events_pages}}</li>
   </ul>
-</nav>
+  </nav>
+</section>
 
 
 <!-- STORIES OF COMIC -->
-{% include 'attributeTemplates/storiesAttributeList.html' with entity='storyT' %}
-<nav aria-label="stories paginator" class="m-3">
+<section id="stories" class="container marketing">
+  {% include 'attributeTemplates/storiesAttributeList.html' %}
+  <!-- STORIES PAGINATOR -->
+  <nav aria-label="stories paginator" class="m-3">
   <ul class="pagination bg-dark">
     
     <!-- PREVIOUS PAGE -->
@@ -148,12 +156,15 @@
      {% endif %}
      <li>Actual page: {{story_page}} Total pages: {{total_stories_pages}}</li>
   </ul>
-</nav>
+  </nav>
+</section>
 
 
 <!-- CREATORS OF COMIC -->
-{% include 'attributeTemplates/creatorAttributeList.html' with entity='creatorT' %}
-<nav aria-label="creators paginator" class="m-3">
+<section id="creators" class="container marketing">
+  {% include 'attributeTemplates/creatorAttributeList.html' %}
+  <!-- CREATORS PAGINATOR -->
+  <nav aria-label="creators paginator" class="m-3">
       <ul class="pagination bg-dark">
         
         <!-- PREVIOUS PAGE -->
@@ -188,7 +199,8 @@
          {% endif %}
          <li>Actual page: {{creator_page}} Total pages: {{total_creators_pages}}</li>
       </ul>
-</nav>
+  </nav>
+</section>
 
 {% endfor %}
 {% endblock %}

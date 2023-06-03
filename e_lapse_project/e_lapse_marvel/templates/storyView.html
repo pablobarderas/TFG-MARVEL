@@ -10,7 +10,7 @@
   </div>
 </nav>
 
-{% for attribute in story %}
+
 {% for attribute in story %}
 <section class="row featurette" id="event_info">
   <div class="col-md-7">
@@ -30,21 +30,32 @@
 
 
 <!-- CHARACTER OF STORIES -->
-
-{% include 'attributeTemplates/characterAttributeList.html' %}
+<section id="characters" class="container marketing">
+  {% include 'attributeTemplates/characterAttributeList.html' %}
+</section>
 
 
 <!-- COMICS OF STORIES -->
+<section id="comics" class="container marketing">
+  {% include 'attributeTemplates/comicAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/comicAttributeList.html' %}
 
 <!--EVENTS OF STORIES-->
-
-{% include 'attributeTemplates/eventAttributeList.html' %}
+<section id="events" class="container marketing">
+  {% include 'attributeTemplates/eventAttributeList.html' %}
+</section>
 
 
 <!-- SERIES OF STORIES -->
+<section id="series" class="container marketing">
+  {% include 'attributeTemplates/serieAttributeList.html' %}
+</section>
 
-{% include 'attributeTemplates/serieAttributeList.html' %}
+<!-- CREATORS OF STORY -->
+<section id="creators" class="container marketing">
+  {% include 'attributeTemplates/creatorAttributeList.html' %}
+</section>
+
 {% endfor %}
 {% endblock %}
