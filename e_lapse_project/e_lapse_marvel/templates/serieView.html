@@ -33,6 +33,7 @@
 <!-- CHARACTERS OF SERIE -->
 <section id="characters" class="container marketing">
   {% include 'attributeTemplates/characterAttributeList.html' %}
+  <!-- CHARACTERS PAGINATOR -->
   <nav aria-label="characters paginator" class="m-3 w-100">
     <ul class="pagination bg-dark">
       
@@ -75,6 +76,7 @@
 <!-- COMICS OF SERIE -->
 <section id="comics" class="container marketing">
   {% include 'attributeTemplates/comicAttributeList.html' %}
+  <!-- COMICS PAGINATOR -->
   <nav aria-label="comics paginator" class="m-3 w-100">
     <ul class="pagination bg-dark">
       
@@ -117,6 +119,7 @@
 <!--EVENTS OF SERIE-->
 <section id="events" class="container marketing">
   {% include 'attributeTemplates/eventAttributeList.html' %}
+  <!-- EVENTS PAGINATOR -->
   <nav aria-label="events paginator" class="m-3 w-100">
     <ul class="pagination bg-dark">
       
@@ -159,6 +162,7 @@
 <!-- STORIES OF SERIE -->
 <section id="stories" class="container marketing">
   {% include 'attributeTemplates/storiesAttributeList.html' %}
+  <!-- STORIES PAGINATOR -->
   <nav aria-label="stories paginator" class="m-3 w-100">
     <ul class="pagination bg-dark">
       
@@ -201,6 +205,7 @@
 <!-- CREATORS OF SERIE -->
 <section id="creators" class="container marketing">
   {% include 'attributeTemplates/creatorAttributeList.html' %}
+  <!-- CREATORS PAGINATOR -->
   <nav aria-label="creators paginator" class="m-3 w-100">
     <ul class="pagination bg-dark">
       
@@ -230,7 +235,7 @@
        {% if creator_page < total_creators_pages %}
        {% if total_creators_results >= 5 %}
          <li class="page-item">
-           <a class="page-link bg-dark" href="?serieW_id={{ attribute.id }}&comic_page={{ comic_page }}&character_page={{ character_page }}&creator_page={{ creator_page|add:1 }}&event_page={{ event_page }}&story_page={{ story_page }}#creators">Next</a>
+           <a class="page-link bg-dark" href="?serie_id={{ attribute.id }}&comic_page={{ comic_page }}&character_page={{ character_page }}&creator_page={{ creator_page|add:1 }}&event_page={{ event_page }}&story_page={{ story_page }}#creators">Next</a>
          </li>
        {% endif %}
        {% endif %}
