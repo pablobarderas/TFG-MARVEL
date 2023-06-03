@@ -22,37 +22,37 @@
 
 <!-- CHARACTERS INCLUDE -->
 <section id="characters">
-  {% include 'listTemplates/charactersList.html' with entity='character' entity_list=characters entities='CHARACTERS' %}
+  {% include 'searchListTemplates/charactersList.html' with entity='character' entity_list=characters entities='CHARACTERS' %}
   <!-- CHARACTERS PAGINATOR -->
-  {% include 'paginatorsTemplates/characterListPaginator.html' %}
+  {% include 'paginatorsTemplates/searchListPaginators/characterListPaginator.html' %}
 </section>
 
 <!-- COMICS INCLUDE -->
 <section id="comics">
-  {% include 'listTemplates/baseList.html' with entity='comic' entity_list=comics entities='COMICS' %}
+  {% include 'searchListTemplates/baseList.html' with entity='comic' entity_list=comics entities='COMICS' %}
   <!-- COMICS PAGINATOR -->
-  {% include 'paginatorsTemplates/comicListPaginator.html' %}
+  {% include 'paginatorsTemplates/searchListPaginators/comicListPaginator.html' %}
 </section>
 
 <!--CREATORS INCLUDE-->
 <section id="creators"></section>
-  {% include 'listTemplates/creatorsList.html' with entity='creator' entity_list=creators entities='CREATORS' %}
+  {% include 'searchListTemplates/creatorsList.html' with entity='creator' entity_list=creators entities='CREATORS' %}
    <!-- CREATORS PAGINATOR -->
-   {% include 'paginatorsTemplates/creatorsListPaginator.html' %}
+   {% include 'paginatorsTemplates/searchListPaginators/creatorsListPaginator.html' %}
 </section>
 
 <!--EVENTS INCLUDE-->
 <section id="events">
-  {% include 'listTemplates/baseList.html' with entity='event' entity_list=events entities='EVENTS' %}
+  {% include 'searchListTemplates/baseList.html' with entity='event' entity_list=events entities='EVENTS' %}
   <!-- EVENTS PAGINATOR -->
-  {% include 'paginatorsTemplates/eventListPaginator.html' %}
+  {% include 'paginatorsTemplates/searchListPaginators/eventListPaginator.html' %}
 </section>
 
 <!--SERIES INCLUDE-->
 <section id="series">
-  {% include 'listTemplates/baseList.html' with entity='serie' entity_list=series entities='SERIES' %}
+  {% include 'searchListTemplates/baseList.html' with entity='serie' entity_list=series entities='SERIES' %}
   <!-- SERIES PAGINATOR -->
-  {% include 'paginatorsTemplates/serieListPaginator.html' %}
+  {% include 'paginatorsTemplates/searchListPaginators/serieListPaginator.html' %}
 </section>
 
 {% endblock %}
