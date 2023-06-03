@@ -6,6 +6,7 @@
     <a class="btn me-2 btn-outline-danger btn-lg" href="#comics">Comics</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#series">Series</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#stories">Stories</a>
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#creators">Creators</a>
   </div>
 </nav>
 
@@ -31,21 +32,25 @@
 
 <!-- CHARACTER OF EVENTS -->
 
-{% include 'attributeTemplates/characterAttributeList.html' with entity="event" %}
+{% include 'attributeTemplates/characterAttributeList.html' with entity="characterT" %}
 
 
 <!-- COMICS OF EVENTS -->
 
-{% include 'attributeTemplates/comicAttributeList.html' %}
+{% include 'attributeTemplates/comicAttributeList.html' with entity="comicT" %}
 
-<!-- SERIES OF CHARACTER -->
+<!-- SERIES OF EVENTS -->
 
-{% include 'attributeTemplates/serieAttributeList.html' %}
+{% include 'attributeTemplates/serieAttributeList.html' with entity='seriesT' %}
 
 
-<!-- STORIES OF CHARACTER -->
+<!-- STORIES OF EVENTS -->
 
-{% include 'attributeTemplates/storiesAttributeList.html' %}
+{% include 'attributeTemplates/storiesAttributeList.html' with entity='storiesT' %}
+
+<!-- CREATORS OF EVENTS -->
+
+{% include 'attributeTemplates/creatorAttributeList.html' with entity='creator' %}
 
 {% endfor %}
 {% endblock %}
