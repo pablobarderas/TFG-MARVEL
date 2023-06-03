@@ -61,7 +61,7 @@
      {% if comic_page < total_comics_pages %}
      {% if total_comics_results >= 5 %}
        <li class="page-item">
-         <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page|add:1 }}&event_page={{ event_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">Next</a>
+         <a class="page-link bg-dark" href="?character_id={{ attribute.id }}&comic_page={{ comic_page|add:1 }}&event_page={{ event_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">Next</a>
        </li>
      {% endif %}
      {% endif %}
@@ -73,7 +73,7 @@
     <!--EVENTS OF CHARACTER -->
     {% include 'attributeTemplates/eventAttributeList.html' %}
     <!-- EVENTS PAGINATOR -->
-    <nav aria-label="...">
+    <nav aria-label="events paginator">
       <ul class="pagination bg-dark">
         
         <!-- PREVIOUS PAGE -->
@@ -112,7 +112,7 @@
 
     <!-- SERIES OF CHARACTER -->
     {% include 'attributeTemplates/serieAttributeList.html' %}
-    <nav aria-label="...">
+    <nav aria-label="series paginator">
       <ul class="pagination bg-dark">
         
         <!-- PREVIOUS PAGE -->
@@ -151,7 +151,7 @@
 
     <!-- STORIES OF CHARACTER -->
     {% include 'attributeTemplates/storiesAttributeList.html' %}
-    <nav aria-label="...">
+    <nav aria-label="stories paginator">
       <ul class="pagination bg-dark">
         
         <!-- PREVIOUS PAGE -->
