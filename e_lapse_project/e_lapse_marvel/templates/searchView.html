@@ -34,13 +34,6 @@
   {% include 'paginatorsTemplates/searchListPaginators/comicListPaginator.html' %}
 </section>
 
-<!--CREATORS INCLUDE-->
-<section id="creators"></section>
-  {% include 'searchListTemplates/creatorsList.html' with entity='creator' entity_list=creators entities='CREATORS' %}
-   <!-- CREATORS PAGINATOR -->
-   {% include 'paginatorsTemplates/searchListPaginators/creatorsListPaginator.html' %}
-</section>
-
 <!--EVENTS INCLUDE-->
 <section id="events">
   {% include 'searchListTemplates/baseList.html' with entity='event' entity_list=events entities='EVENTS' %}
@@ -53,6 +46,13 @@
   {% include 'searchListTemplates/baseList.html' with entity='serie' entity_list=series entities='SERIES' %}
   <!-- SERIES PAGINATOR -->
   {% include 'paginatorsTemplates/searchListPaginators/serieListPaginator.html' %}
+</section>
+
+<!--CREATORS INCLUDE-->
+<section id="creators"></section>
+  {% include 'searchListTemplates/creatorsList.html' with entity='creator' entity_list=creators entities='CREATORS' %}
+   <!-- CREATORS PAGINATOR -->
+   {% include 'paginatorsTemplates/searchListPaginators/creatorsListPaginator.html' %}
 </section>
 
 {% endblock %}

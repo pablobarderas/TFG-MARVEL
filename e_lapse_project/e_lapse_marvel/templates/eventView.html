@@ -37,14 +37,49 @@
 <!-- COMICS OF EVENTS -->
 
 {% include 'attributeTemplates/comicAttributeList.html' %}
+<nav aria-label="comics paginator" class="m-3">
+  <ul class="pagination bg-dark">
+    
+    <!-- PREVIOUS PAGE -->
+    {% if comic_page > 1 %}
+      <li class="page-item">
+          <a class="page-link bg-dark" href="?event_id={{ attribute.id }}&comic_page={{ comic_page|add:-1 }}&character_page={{ character_page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">Previous</a>
+      </li>
+    {% endif %}
+
+    {% if comic_page <= comic_page|add:5 %}
+    {% for page in comic_pages_range %}
+      {% if page >= comic_page and page <= comic_page|add:4 %}
+        <li class="page-item">
+          {% if page == comic_page %}
+            <a class="page-link active" href="?event_id={{ attribute.id }}&comic_page={{ page }}&character_page={{ character_page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">{{ page }}</a>
+            {% else %}
+            <a class="page-link bg-dark" href="?event_id={{ attribute.id }}&comic_page={{ page }}&character_page={{ character_page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">{{ page }}</a>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+
+     <!-- NEXT PAGE -->
+     {% if comic_page < total_comics_pages %}
+     {% if total_comics_results >= 5 %}
+       <li class="page-item">
+         <a class="page-link bg-dark" href="?event_id={{ attribute.id }}&comic_page={{ comic_page|add:1 }}&character_page={{ character_page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#comics">Next</a>
+       </li>
+     {% endif %}
+     {% endif %}
+     <li>Actual page: {{comic_page}} Total pages: {{total_comics_pages}}</li>
+  </ul>
+    </nav>
+
 
 <!-- SERIES OF CHARACTER -->
-
 {% include 'attributeTemplates/serieAttributeList.html' %}
 
 
 <!-- STORIES OF CHARACTER -->
-
 {% include 'attributeTemplates/storiesAttributeList.html' %}
 
 {% endfor %}

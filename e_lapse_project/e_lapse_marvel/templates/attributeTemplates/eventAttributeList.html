@@ -24,41 +24,5 @@
           </div>
         {% endfor %}
       {% endfor %}
-           <!--EVENTS PAGINATOR-->
-<nav aria-label="events paginator" class="m-3">
-    <ul class="pagination bg-dark">
-      
-      <!-- PREVIOUS PAGE -->
-      {% if event_page > 1 %}
-        <li class="page-item">
-          <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page|add:-1 }}&serie_page={{ serie_page }}&story_page={{ story_page }}#events">Previous</a>
-        </li>
-      {% endif %}
-  
-      {% if event_page <= event_page|add:5 %}
-      {% for page in event_pages_range %}
-        {% if page >= event_page and page <= event_page|add:4 %}
-          <li class="page-item">
-            {% if page == event_page %}
-              <a class="page-link active" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#events">{{ page }}</a>
-              {% else %}
-              <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ page }}&serie_page={{ serie_page }}&story_page={{ story_page }}#events">{{ page }}</a>
-            {% endif %}
-          </li>
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-    
-  
-       <!-- NEXT PAGE -->
-       {% if event_page < total_events_pages %}
-       {% if total_events_results >= 5 %}
-         <li class="page-item">
-           <a class="page-link bg-dark" href="?character_id={{ character_id }}&comic_page={{ comic_page }}&event_page={{ event_page|add:1 }}&serie_page={{ serie_page }}&story_page={{ story_page }}#events">Next</a>
-         </li>
-       {% endif %}
-       {% endif %}
-       <li>Actual page: {{event_page}} Total pages: {{total_events_pages}}</li>
-    </ul>
-  </nav>
+           
     </section>
