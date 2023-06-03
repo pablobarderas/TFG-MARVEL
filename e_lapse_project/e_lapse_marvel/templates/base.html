@@ -20,7 +20,10 @@
   <header>
       <nav class="navbar navbar-expand-md navbar-dark text-center">
         <div class="container-fluid">
-          <img class="img-thumbnail thumbnail-border-radius:3px logo-img "  src="{% static 'img/logo.jpg' %}">
+          <a href="{% url 'home' %}" class="m-3">
+            <img class="img-thumbnail thumbnail-border-radius:3px logo-img"  src="{% static 'img/logo.jpg' %}">
+          </a>
+          
           <div class="container-fluid" id="navbarCollapse">
             <form class="d-flex justify-content-end " method="get" action="{% url 'search' %}">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="character_name">
