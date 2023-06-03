@@ -6,17 +6,18 @@
     <a class="btn me-2 btn-outline-danger btn-lg" href="#events">Eventos</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#series">Series</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#stories">Stories</a>
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#creators">Creators</a>
   </div>
 </nav>
 
 
   {% for attribute in character %}
   <!-- CHARACTER WITH IMAGE AND DESCRIPTION -->
-  <section class="row featurette" id="character_info">
+<section class="row featurette" id="character_info" style="width: 100%;">
     <div class="col-md-7">
       <h2 class="featurette-heading alig" style="margin-bottom: 40px;text-align: center;font-family: 'Lucida Sans', 'Lucida Sans Regular', 
       'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: bold;">{{attribute.name}} </h2>
-      <hr>
+      <hr style="margin-left: 20px;">
       <p class="lead" style="text-align: left; font-size: 28px;margin-left: 20px;">{{attribute.description}}</p>
     </div>
     <div class="col-md-5 d-flex justify-content-end">
@@ -71,7 +72,7 @@
 
 
     <!--EVENTS OF CHARACTER -->
-    {% include 'attributeTemplates/eventAttributeList.html' %}
+    {% include 'attributeTemplates/eventAttributeList.html' with entity='eventN' %}
     <!-- EVENTS PAGINATOR -->
     <nav aria-label="events paginator">
       <ul class="pagination bg-dark">
@@ -111,7 +112,7 @@
     </nav>
 
     <!-- SERIES OF CHARACTER -->
-    {% include 'attributeTemplates/serieAttributeList.html' %}
+    {% include 'attributeTemplates/serieAttributeList.html' with entity='seriesN' %}
     <nav aria-label="series paginator">
       <ul class="pagination bg-dark">
         
@@ -150,7 +151,11 @@
     </nav>
 
     <!-- STORIES OF CHARACTER -->
-    {% include 'attributeTemplates/storiesAttributeList.html' %}
+    {% include 'attributeTemplates/storiesAttributeList.html' with entity='storiesN' %}
+
+    <!-- CREATORS OF CHARACTER -->
+
+    {% include 'attributeTemplates/creatorAttributeList.html' with entity='creatorN' %}
     <nav aria-label="stories paginator">
       <ul class="pagination bg-dark">
         
