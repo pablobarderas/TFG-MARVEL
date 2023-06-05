@@ -28,26 +28,6 @@
   </div>
 </nav>
 
-
-<!-- SPINNERS -->
-
-<section id="spinners">
-
-<div class="d-flex justify-content-center">
-  <div class="spinner-grow text-danger" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-  <div class="spinner-grow text-danger" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-  <div class="spinner-grow text-danger" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
-
-</section>
-
-
 <!-- CHARACTERS INCLUDE -->
 <section id="characters">
   {% include 'searchListTemplates/charactersList.html' with entity='character' entity_list=characters entities='CHARACTERS' %}
@@ -83,28 +63,5 @@
    {% include 'paginatorsTemplates/searchListPaginators/creatorsListPaginator.html' %}
 </section>
 
-
-<!-- SPINNER TESTS -->
-<script>
-  console.log("holass");
-  const spinner = document.getElementById('spinners');
-  const characters = document.getElementById('characters');
-
-  $.ajax({
-    type: 'GET',
-    url: '/home/search',
-    success: function(res){
-
-      setTimeout(()=>{
-        spinner.classList.add("visually-hidden");
-      }, 400)
-
-      
-    },
-    error:function(error){
-      console.log("error");
-    },
-  })
-</script>
 
 {% endblock %}
