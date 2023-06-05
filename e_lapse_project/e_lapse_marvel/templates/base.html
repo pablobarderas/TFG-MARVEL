@@ -29,24 +29,41 @@
           <div class="container-fluid" id="navbarCollapse">
             <form class="d-flex justify-content-end " method="get" action="{% url 'search' %}">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="character_name">
-              <button class="btn btn-danger" type="submit">Search</button>
+              <button class="btn btn-danger" type="submit" id="btn-search">Search</button>
             </form>
           </div>
         </div>
       </nav>
+
+
+      <!-- SPINNERS -->
+<section id="spinners"  class="visually-hidden m-2">
+
+  <div class="d-flex justify-content-center">
+    <div class="spinner-grow text-danger" role="status"></div>
+    <div class="spinner-grow text-danger" role="status"></div>
+    <div class="spinner-grow text-danger" role="status"></div>
+  </div>
+  
+  </section>
     </header>
 
-  
 
+<section id="block-content">
   {% block content %}
 
   {% endblock %}
+</section>
+
   <hr style="margin-left: 20px; margin-right: 20px;"> 
   <!-- FOOTER -->
   <footer  class="container text-center" >
     <p>&copy; 2023 E-LAPSE. Todos los derechos reservados.</p>
     <p><i>Un gran poder conlleva una gran responsabilidad. -Stan Lee-</i></p>
   </footer>
-  <!-- <script type="text/javascript" src="{% static 'js/base.js' %}"></script> -->
+
+  
+  <script type="text/javascript" src="{% static 'js/base.js' %}"></script> 
+
 </body>
 </html>
