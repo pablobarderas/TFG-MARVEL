@@ -1,10 +1,11 @@
-<nav aria-label="...">
+<li class="text-end m-4" style="list-style-type: none;">Actual page: {{event_page}} Total pages: {{total_events_pages}}</li>
+<nav aria-label="..." class="w-100 d-flex justify-content-center">
     <ul class="pagination bg-dark">
       
       <!-- PREVIOUS PAGE -->
       {% if event_page > 1 %}
         <li class="page-item">
-          <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}&event_page={{ event_page|add:-1 }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#events">Previous</a>
+          <a class="page-link bg-danger text-white" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}&event_page={{ event_page|add:-1 }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#events">Previous</a>
         </li>
       {% endif %}
   
@@ -13,9 +14,9 @@
         {% if page >= event_page and page <= event_page|add:4 %}
           <li class="page-item">
             {% if page == event_page %}
-              <a class="page-link active" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}&event_page={{ page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#events">{{ page }}</a>
+              <a class="page-link active bg-danger text-white" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}&event_page={{ page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#events">{{ page }}</a>
               {% else %}
-              <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}&event_page={{ page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#events">{{ page }}</a>
+              <a class="page-link bg-danger text-white" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}&event_page={{ page }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#events">{{ page }}</a>
             {% endif %}
           </li>
         {% endif %}
@@ -27,10 +28,9 @@
        {% if event_page < total_events_pages %}
        {% if total_events_results >= 5 %}
          <li class="page-item">
-           <a class="page-link bg-dark" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}&event_page={{ event_page|add:1 }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#events">Next</a>
+           <a class="page-link bg-danger text-white" href="?character_name={{ character_name }}&character_page={{ character_page }}&comic_page={{ comic_page }}&event_page={{ event_page|add:1 }}&creator_page={{ creator_page }}&serie_page={{ serie_page }}#events">Next</a>
          </li>
        {% endif %}
        {% endif %}
-       <li>Actual page: {{event_page}} Total pages: {{total_events_pages}}</li>
     </ul>
   </nav>
