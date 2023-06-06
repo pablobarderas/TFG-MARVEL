@@ -83,21 +83,6 @@ $(document).ready(function() {
         });
     });
 
-    // SERIE CLICK
-    $('#series a').click( function() {
-
-        // SHOW SPINNER
-        blockContent.classList.add('visually-hidden');
-        $('#spinners').removeClass('visually-hidden');
-
-        // GET SERIE
-        $.get("{% url 'serie' %}", function() {
-            // Ocultar el spinner cuando se obtienen los datos
-            $('#spinners').addClass('visually-hidden');
-            blockContent.removeClass('visually-hidden');
-        });
-    });
-
 
     // CREATOR CLICK
     $('#creators a').click( function() {
