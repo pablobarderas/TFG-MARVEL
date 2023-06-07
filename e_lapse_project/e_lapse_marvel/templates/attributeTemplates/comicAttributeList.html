@@ -1,8 +1,8 @@
     <h2 class="featurette-heading alig" style="margin-bottom: 40px;text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
      'Trebuchet MS', sans-serif;">COMICS</h2>
      <ul>
-        <li class="link">Comics disponibles: {{total_comics_results}} | Total pages: {{total_comics_pages}}</li>
-     </ul>
+      <li class="link text-end mb-2" style="list-style-type: none;">Comics disponibles: {{total_comics_results}}</li>
+  </ul>  
      <div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {% for comics in comics_attribute %}
         {% for comics_attribute in comics %}
