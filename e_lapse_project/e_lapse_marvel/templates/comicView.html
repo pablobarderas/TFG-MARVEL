@@ -3,8 +3,8 @@
 
 <nav class="navbar">
   <div class="container-fluid justify-content-center bg-opacity-100">
-    <a class="btn me-2 btn-outline-danger btn-lg" href="#character">Personajes</a>
-    <a class="btn me-2 btn-outline-danger btn-lg" href="#events">Eventos</a>
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#characters">Characters</a>
+    <a class="btn me-2 btn-outline-danger btn-lg" href="#events">Events</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#creators">Series</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#stories">Stories</a>
     <a class="btn me-2 btn-outline-danger btn-lg" href="#creators">Creators</a>
@@ -36,8 +36,7 @@
   {% include 'attributeTemplates/characterAttributeList.html' %}
 
   <!-- LI ACTUAL PAGE -->
-  <li class="text-right mb-2" style="list-style-type: none;">Actual page: {{character_page}} Total pages: {{total_characters_pages}}</li>
-
+  <li class="text-right mb-2" style="list-style-type: none;">Actual page: {{character_page}} Total pages: {{total_characters_pages}}</li>  
 
   <!-- CHARACTERS PAGINATOR -->
   <nav aria-label="characters paginator" class="w-100 d-flex justify-content-center">
@@ -76,6 +75,7 @@
   </ul>
   </nav>
 </section>
+
 
 
 <!--EVENTS OF COMIC-->
