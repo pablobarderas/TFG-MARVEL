@@ -1,8 +1,15 @@
+{% load static %}
     <h2 class="featurette-heading alig" style="margin-bottom: 40px;text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
      'Trebuchet MS', sans-serif;">COMICS</h2>
      <ul>
       <li class="link text-end mb-2" style="list-style-type: none;">Available comics: {{total_comics_results}}</li>
-  </ul>  
+  </ul>
+  {% if total_comics_results == 0 %}
+    <div class="text-center">
+      <img src="{% static 'img/dontfound.gif' %}" alt="No se han encontrado resultados" class="img-fluid mx-auto" style="max-width: 300px;">
+      <h2 class="mt-3">No results found</h2> 
+    </div>
+  {% endif %}
      <div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {% for comics in comics_attribute %}
         {% for comics_attribute in comics %}
