@@ -1,13 +1,13 @@
     <h2 class="featurette-heading alig" style="margin-bottom: 40px;text-align: center;font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
      'Trebuchet MS', sans-serif;">EVENTS</h2>
      <ul>
-        <li class="link text-end mb-2" style="list-style-type: none;">Eventos disponibles: {{total_events_results}}</li>
+        <li class="link text-end mb-2" style="list-style-type: none;">Available events: {{total_events_results}}</li>
      </ul>
      <div id="per" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for events in events_attribute %}
           {% for events_attribute in events %}
           <div class="col">
-            <div class="d-flex flex-column h-100" style="border: 2px solid white">
+            <div class="d-flex flex-column h-100" style="border: 2px solid white; border-radius: 4px;">
               <div class="row g-0">
                 <div class="col-md-4">
                   <img src="{{events_attribute.thumbnail.path}}.jpg" class="card-img-top" alt="Personaje">
