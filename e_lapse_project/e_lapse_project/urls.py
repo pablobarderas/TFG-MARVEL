@@ -20,5 +20,5 @@ from e_lapse_marvel.views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', include('e_lapse_marvel.urls'))
+    path('', include('e_lapse_marvel.urls'))
 ]
